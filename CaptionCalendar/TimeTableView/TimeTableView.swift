@@ -51,7 +51,7 @@ struct TimeTableView: View {
                                             .stroke(Color("TextColor").opacity(0.2), lineWidth: 0.5)
                                     )
                                 VStack {
-                                    Text("\(dayofweek[index])2")
+                                    Text("\(dayofweek[index])\(j+1)")
                                         .foregroundColor(Color("TextColor"))
                                         .opacity(0.2)
                                 }

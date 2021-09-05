@@ -159,7 +159,7 @@ struct StudentSecondRegistrationView: View {
                         }
                     }
                     .fullScreenCover(isPresented: self.$isShowingLogin) {
-                        ValidLoginView(mailAddress: $mailAddress, password: $password)
+                        ValidLoginView(mailAddress: $mailAddress, password: $password, isShowingLogin: $isShowingLogin)
                     }
                 
                 Text("登録完了までに数秒かかることがあります")
@@ -200,8 +200,6 @@ struct StudentSecondRegistrationView: View {
         }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
-        }.fullScreenCover(isPresented: $isShowingLogin) {
-           
         }
     }
     

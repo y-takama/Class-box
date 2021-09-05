@@ -67,8 +67,9 @@ struct ConversationsView: View {
                 }
             }
             .navigationTitle("Chat")
-            .navigationBarItems(leading: menuButton)
-            .navigationBarItems(trailing: ChatSettingButton)
+            .navigationBarItems(leading: menuButton, trailing: ChatSettingButton)
+//            .navigationBarItems(leading: menuButton)
+//            .navigationBarItems(trailing: ChatSettingButton)
         }
         .onAppear {
             viewModel.fetchRecentMessages()

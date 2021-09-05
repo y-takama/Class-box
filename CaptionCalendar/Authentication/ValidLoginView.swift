@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ValidLoginView: View {
     @Binding var mailAddress: String
     @Binding var password: String
+    @Binding  var isShowingLogin: Bool
     @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -17,7 +19,9 @@ struct ValidLoginView: View {
             
             VStack {
                 Button(action: {
-                    viewModel.login(withEmail: mailAddress, password: password)
+                    self.signIn()
+                    isShowingLogin = false
+//                    viewModel.login(withEmail: mailAddress, password: password)
                 }, label: {
                     Text("LOG IN !!")
                         .font(.system(size: 14, weight: .semibold))
@@ -37,6 +41,11 @@ struct ValidLoginView: View {
             
             
         }
-        
     }
+    
+    private func signIn() {
+            Auth.auth().signIn(withEmail: self.mailAddress, password: self.password) { authResult, error in
+                viewModel.signin(result: authResult)
+            }
+        }
 }

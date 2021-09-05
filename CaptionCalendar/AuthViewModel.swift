@@ -66,9 +66,9 @@ class AuthViewModel: ObservableObject {
                     "userStats": "student",
                     "profileImageUrl": ""]
         Firestore.firestore().collection("users").document(user.uid).setData(data) { _ in
-            self.userSession = user
-            self.fetchUser()
-//            print("DEBUG1\(String(describing: self.userSession))")
+//            self.userSession = user
+//            self.fetchUser()
+            print("DEBUG1\(String(describing: self.userSession))")
         }
     }
     

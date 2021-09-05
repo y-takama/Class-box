@@ -17,11 +17,11 @@ struct dataType : Identifiable {
 }
 
 class getData: ObservableObject {
+    @Binding var sources: String
     @Published var datas = [dataType]()
-    init() {
-        let source =
-        "https://newsapi.org/v2/top-headlines?language=jp&pageSize=10&apiKey=abfe104cee2347df94840c79e686e74d"
-        let url = URL(string: source)!
+    init(source: Binding<String>) {
+        self._sources = source
+        let url = URL(string: sources)!
         let session = URLSession(configuration: .default)
         session.dataTask(with: url) { (data, _, err) in
             if err != nil {

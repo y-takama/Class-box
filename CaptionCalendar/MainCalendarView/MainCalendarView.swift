@@ -46,21 +46,6 @@ struct MainCalendarView: View {
                     }.frame(height: 20)
                     Divider()
                     TabView {
-//                        ForEach(1..<4) { num in
-////                            var tag = num-1
-//                            CalendarView(year: self.month-num <= 0 ? self.year-1 : self.year,
-//                                         month: self.month-num <= 0 ? 12 : self.month-4+num,
-//                                         data: $data,
-//                                         week: CalendarModel().GetWeekNumber(year: self.month-num <= 0 ? self.year-1 : self.year,
-//                                                                             month: self.month-num <= 0 ? 12 : self.month-4+num),
-//                                         start: CalendarModel().DayofWeekCalc(year: self.month-num <= 0 ? self.year-1 : self.year,
-//                                                                              month: self.month-num <= 0 ? 12 : self.month-4+num,
-//                                                                              day: 1),
-//                                         days: CalendarModel().DayNumber(year: self.month-num <= 0 ? self.year-1 : self.year,
-//                                                                         month: self.month-num <= 0 ? 12 : self.month-4+num))
-//                                .tag(num)
-//                        }
-                        
                         CalendarView(year: year,
                                      month: month, data: $data,
                                      week: CalendarModel().GetWeekNumber(year: self.year,
@@ -88,7 +73,6 @@ struct MainCalendarView: View {
                     .frame(minHeight: 670)
                     .padding(.top, -8)
                     .padding(.bottom, 10)
-                    
                     
                     if eventsRepository.events?.isEmpty ?? true {
                         Text("No events available for this calendar selection")
@@ -130,13 +114,7 @@ struct MainCalendarView: View {
                 }
                 .padding(10)
             }
-            
-            .navigationBarItems(trailing: HStack{
-//                LastMonthButton
-//                NextMonthButton
-                CalendarSettingButton
-            })
-            .navigationBarItems(leading: menuButton)
+            .navigationBarItems(leading: menuButton, trailing: CalendarSettingButton)
         }
         .sheet(isPresented: $showingSheet) {
             CalendarChooser(calendars: self.$eventsRepository.selectedCalendars, eventStore: self.eventsRepository.eventStore)
@@ -165,11 +143,7 @@ struct MainCalendarView: View {
                 Image(systemName: "plus")
             }
             Button(action: {}) {
-                Text("学年歴を追加")
-                Image(systemName: "calendar.badge.exclamationmark")
-            }
-            Button(action: {}) {
-                Text("就活カレンダーを追加")
+                Text("カレンダーを登録する")
                 Image(systemName: "calendar.badge.exclamationmark")
             }
             Button(action: {}) {

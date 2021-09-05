@@ -20,8 +20,10 @@ struct CalendarView: View {
     let width = UIScreen.main.bounds.width
     let dt = Date()
     @ObservedObject var eventsRepository = EventsRepository.shared
+    @State private var activeSheet: ActiveSheet = .calendarChooser
     @State private var selectedEvent: EKEvent?
     var showingSheet = false
+    @State private var showingEditSheet = false
     init(year: Int, month: Int, data: Binding<Int>, week: Int, start: Int, days: Int){
         self.year = year
         self.month = month
@@ -225,8 +227,18 @@ struct CalendarView: View {
                 ForEach(eventsRepository.events ?? [], id: \.self) { event in
                     let selectedData = String(format: "%04d",self.year)+String(format: "%02d",self.month)+String(format: "%02d",self.data)
                     if CalendarView.longDateFormatter.string(from: event.startDate) == selectedData || (CalendarView.longDateFormatter.string(from: event.startDate) < selectedData && CalendarView.longDateFormatter.string(from: event.endDate) >= selectedData) {
+                        
                         CalendarRowView(event: event)
                             .padding(.horizontal, 10)
+                            .onTapGesture {
+    //                                    showingEditSheet = true
+                                
+                                self.showEditFor(event)
+                            }
+                            .sheet(isPresented: $showingEditSheet) {
+                                EventEditView(eventStore: self.eventsRepository.eventStore, event: self.selectedEvent)
+                                    .ignoresSafeArea()
+                            }
                     }
                 }
                 Spacer()
@@ -248,6 +260,16 @@ struct CalendarView: View {
         formatter.dateFormat = "YYYYMMdd"
         return formatter
     }()
+    
+    func showEditFor(_ event: EKEvent) {
+        self.activeSheet = .calendarEdit
+        selectedEvent = event
+        showingEditSheet = true
+    }
+    enum ActiveSheet {
+        case calendarChooser
+        case calendarEdit
+    }
     
 //    private static var dateFormatter: DateFormatter = {
 //        let formatter = DateFormatter()

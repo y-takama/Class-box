@@ -125,7 +125,7 @@ struct RegistrationView: View {
                         }
                     }
                     .fullScreenCover(isPresented: self.$isShowingLogin) {
-                        ValidLoginView(mailAddress: $mailAddress, password: $password)
+                        ValidLoginView(mailAddress: $mailAddress, password: $password, isShowingLogin: $isShowingLogin)
                     }
                 
                 Text("登録完了までに数秒かかることがあります")

@@ -23,7 +23,7 @@
 		FB722E3126DA901E00667D74 /* ClassUserNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB722E3026DA901E00667D74 /* ClassUserNote.swift */; };
 		FB722E3326DAB00400667D74 /* ClassChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB722E3226DAB00400667D74 /* ClassChatViewModel.swift */; };
 		FB722E3626DBAFAA00667D74 /* getData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB722E3526DBAFAA00667D74 /* getData.swift */; };
-		FB722E3A26DBB0E800667D74 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB722E3926DBB0E800667D74 /* NewsView.swift */; };
+		FB722E3A26DBB0E800667D74 /* NewsTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB722E3926DBB0E800667D74 /* NewsTopView.swift */; };
 		FB722E4026DD325900667D74 /* ClassboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB722E3F26DD325900667D74 /* ClassboxView.swift */; };
 		FB767BEB26BE39A80011C32E /* EventLongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB767BEA26BE39A80011C32E /* EventLongView.swift */; };
 		FB767BEE26BEED690011C32E /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB767BED26BEED690011C32E /* ChartView.swift */; };
@@ -119,6 +119,7 @@
 		FBC7C65326E1F7DE0021C70D /* TimeTableTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C65226E1F7DE0021C70D /* TimeTableTopView.swift */; };
 		FBC7C65526E1F7FC0021C70D /* TimeTableBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C65426E1F7FC0021C70D /* TimeTableBottomView.swift */; };
 		FBC7C65926E2CE760021C70D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBC7C65826E2CE760021C70D /* GoogleService-Info.plist */; };
+		FBC7C65D26E3C4D20021C70D /* NewsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C65C26E3C4D20021C70D /* NewsMainView.swift */; };
 		FBE3D9B526BC021B000BE655 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE3D9B426BC021B000BE655 /* CalendarView.swift */; };
 		FBE3D9BB26BC33E5000BE655 /* CalendarRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE3D9BA26BC33E5000BE655 /* CalendarRowView.swift */; };
 		FBE3D9BD26BCC44D000BE655 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE3D9BC26BCC44D000BE655 /* EventView.swift */; };
@@ -137,7 +138,7 @@
 		FB722E3026DA901E00667D74 /* ClassUserNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassUserNote.swift; sourceTree = "<group>"; };
 		FB722E3226DAB00400667D74 /* ClassChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassChatViewModel.swift; sourceTree = "<group>"; };
 		FB722E3526DBAFAA00667D74 /* getData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getData.swift; sourceTree = "<group>"; };
-		FB722E3926DBB0E800667D74 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
+		FB722E3926DBB0E800667D74 /* NewsTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTopView.swift; sourceTree = "<group>"; };
 		FB722E3F26DD325900667D74 /* ClassboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassboxView.swift; sourceTree = "<group>"; };
 		FB767BEA26BE39A80011C32E /* EventLongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLongView.swift; sourceTree = "<group>"; };
 		FB767BED26BEED690011C32E /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -235,6 +236,7 @@
 		FBC7C65226E1F7DE0021C70D /* TimeTableTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableTopView.swift; sourceTree = "<group>"; };
 		FBC7C65426E1F7FC0021C70D /* TimeTableBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableBottomView.swift; sourceTree = "<group>"; };
 		FBC7C65826E2CE760021C70D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../takama/Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FBC7C65C26E3C4D20021C70D /* NewsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsMainView.swift; sourceTree = "<group>"; };
 		FBE3D9B426BC021B000BE655 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		FBE3D9BA26BC33E5000BE655 /* CalendarRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRowView.swift; sourceTree = "<group>"; };
 		FBE3D9BC26BCC44D000BE655 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -284,8 +286,9 @@
 		FB722E3426DBAF7000667D74 /* NewsView */ = {
 			isa = PBXGroup;
 			children = (
+				FBC7C65C26E3C4D20021C70D /* NewsMainView.swift */,
+				FB722E3926DBB0E800667D74 /* NewsTopView.swift */,
 				FB722E3526DBAFAA00667D74 /* getData.swift */,
-				FB722E3926DBB0E800667D74 /* NewsView.swift */,
 			);
 			path = NewsView;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				A2A219F726BBEAF100236A43 /* CalendarModel.swift in Sources */,
 				FBB38D2726ADB665005BE209 /* CalendarChooser.swift in Sources */,
 				FBB38D1326ADB4F1005BE209 /* MainCalendarView.swift in Sources */,
+				FBC7C65D26E3C4D20021C70D /* NewsMainView.swift in Sources */,
 				FBB249AF26D6220E00AC40E8 /* ClassDetailViewModel.swift in Sources */,
 				FBB38D2426ADB649005BE209 /* SecondaryCaptionTextStyle.swift in Sources */,
 				FB7AF49726D4D1A20066A0AA /* ConversationsViewModel.swift in Sources */,
@@ -819,7 +823,7 @@
 				FB8E5E7626DA0DCB00E832C0 /* AttendanceListViewModel.swift in Sources */,
 				FB99D9B126CD22EC0059850E /* TimeTable.swift in Sources */,
 				FB767BEE26BEED690011C32E /* ChartView.swift in Sources */,
-				FB722E3A26DBB0E800667D74 /* NewsView.swift in Sources */,
+				FB722E3A26DBB0E800667D74 /* NewsTopView.swift in Sources */,
 				FB99D9CE26CDF1530059850E /* CalendarSettingViewModel.swift in Sources */,
 				FB99D9CB26CDEFAE0059850E /* SettingSheetView.swift in Sources */,
 				FB99D9B326CD25320059850E /* AuthViewModel.swift in Sources */,

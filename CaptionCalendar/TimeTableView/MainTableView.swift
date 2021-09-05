@@ -23,8 +23,9 @@ struct MainTableView: View {
                     .padding(.top, 80)
             }
             .navigationTitle("TimeTable")
-            .navigationBarItems(trailing: CalendarSettingButton)
-            .navigationBarItems(leading: menuButton)
+            .navigationBarItems(leading: menuButton, trailing: CalendarSettingButton)
+//            .navigationBarItems(trailing: CalendarSettingButton)
+//            .navigationBarItems(leading: menuButton)
         }
     }
     

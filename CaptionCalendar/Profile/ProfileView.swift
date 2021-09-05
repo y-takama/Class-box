@@ -112,50 +112,52 @@ struct ProfileView: View {
                     HStack(spacing: 9) {
                         HStack {
                             Image(systemName: "shippingbox")
-                                .font(.system(size: 18))
+                                .font(.system(size: 16))
                             Text("Plans")
                                 .font(.system(size: 14))
                                 .bold()
                             Spacer()
                         }.frame(width: width*2/5)
                         Text("Student")
+                            .font(.system(size: 14))
                             .bold()
                         Spacer()
                         Image(systemName: "exclamationmark.circle")
+                            .font(.system(size: 12))
                     }
                     
                     HStack(spacing: 9) {
                         HStack {
                             Image(systemName: "graduationcap")
-                                .font(.system(size: 18))
-                                
+                                .font(.system(size: 16))
                             Text("大学名")
                                 .font(.system(size: 14))
                                 .bold()
                             Spacer()
                         }.frame(width: width*2/5)
                         Text(user.university!)
+                            .font(.system(size: 14))
                             .bold()
                     }
                     
                     HStack(spacing: 9) {
                         HStack {
                             Image(systemName: "location.viewfinder")
-                                .font(.system(size: 18))
-                                
+                                .font(.system(size: 16))
                             Text("キャンパス")
                                 .font(.system(size: 14))
                                 .bold()
                             Spacer()
                         }.frame(width: width*2/5)
                         Text(user.campus!)
+                            .font(.system(size: 14))
                             .bold()
                     }
                     
                     HStack(spacing: 9) {
                         HStack {
                             Image(systemName: "envelope")
-                                .font(.system(size: 18))
+                                .font(.system(size: 16))
                              
                             
                             Text("メールアドレス")
@@ -166,6 +168,7 @@ struct ProfileView: View {
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             Text(user.email)
+                                .font(.system(size: 14))
                                 .bold()
                         }
                         

@@ -52,7 +52,7 @@ struct MainTabView: View {
                         Text("Chat")
                     }
                 }
-            NewsView()
+            NewsMainView()
 //            SettingView()
                 .tabItem {
                     VStack {

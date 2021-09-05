@@ -52,8 +52,9 @@ struct CalendarListView: View {
                 }.padding(.horizontal)
             }
             .navigationTitle("CalendarList")
-            .navigationBarItems(trailing: CalendarListSettingButton)
-            .navigationBarItems(leading: menuButton)
+            .navigationBarItems(leading: menuButton, trailing: CalendarListSettingButton)
+//            .navigationBarItems(trailing: CalendarListSettingButton)
+//            .navigationBarItems(leading: menuButton)
         }
         .sheet(isPresented: $showingSheet) {
             CalendarChooser(calendars: self.$eventsRepository.selectedCalendars, eventStore: self.eventsRepository.eventStore)
@@ -82,11 +83,7 @@ struct CalendarListView: View {
                 Image(systemName: "plus")
             }
             Button(action: {}) {
-                Text("学年歴を追加")
-                Image(systemName: "calendar.badge.exclamationmark")
-            }
-            Button(action: {}) {
-                Text("就活カレンダーを追加")
+                Text("カレンダーを登録する")
                 Image(systemName: "calendar.badge.exclamationmark")
             }
             Button(action: {}) {
