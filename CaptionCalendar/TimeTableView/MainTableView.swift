@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainTableView: View {
+    @Binding var showTimeTableSheet: Bool
     let width = UIScreen.main.bounds.width
     let user: User
     @State private var showingSetting: Bool = false
@@ -23,7 +24,11 @@ struct MainTableView: View {
                     .padding(.top, 80)
             }
             .navigationTitle("TimeTable")
-            .navigationBarItems(leading: menuButton, trailing: CalendarSettingButton)
+            .navigationBarItems(trailing: HStack(spacing: 20) {
+                CalendarSettingButton
+                menuButton
+            })
+            .navigationBarTitleDisplayMode(.inline)
 //            .navigationBarItems(trailing: CalendarSettingButton)
 //            .navigationBarItems(leading: menuButton)
         }
@@ -53,31 +58,18 @@ struct MainTableView: View {
             }
         } label: {
             Image(systemName: "ellipsis")
+                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
         }
     }
     
     var menuButton: some View {
         Button(action: {
-            showingMenu.toggle()
+            showTimeTableSheet.toggle()
         }, label: {
-            Image(systemName: "text.alignleft")
+            Image(systemName: "text.alignright")
+                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
-        }).sheet(isPresented: $showingMenu) {
-            SettingTimeTableView(user: user)
-        }
-//            .halfSheet(showSheet: $showingMenu) {
-//                SettingTimeTableView(user: user)
-//            }
+        })
     }
 }
-
-//extension View {
-//    func halfSheet<SheetView: View>(showSheet: Binding<Bool>, @ViewBuilder sheetView: @escaping ()->SheetView)->some View {
-//        
-//        return self
-//            .background(
-//                HalfSheetHelper(sheetView: sheetView(), showingSetting: showSheet)
-//                )
-//    }
-//}

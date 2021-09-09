@@ -36,14 +36,22 @@ struct TimeTable: Identifiable, Decodable, Hashable {
     var attendanceEverytime: Int?
     var attendanceReport: Int?
     var attendanceNotClear: Int?
+    var beforeattendanceNone: Int?
+    var beforeattendanceSometimes: Int?
+    var beforeattendanceEverytime: Int?
+    var beforeattendanceReport: Int?
+    var beforeattendanceNotClear: Int?
     var unit1: Int?
     var unit2: Int?
     var unit3: Int?
     var unit4: Int?
     var unit5: Int?
-    
+    var beforeunit1: Int?
+    var beforeunit2: Int?
+    var beforeunit3: Int?
+    var beforeunit4: Int?
+    var beforeunit5: Int?
     let timestamp: Timestamp
-    
     
     init(dictionary: [String: Any]) {
         self.id = dictionary["uid"] as? String ?? ""
@@ -74,13 +82,24 @@ struct TimeTable: Identifiable, Decodable, Hashable {
         self.attendanceEverytime = dictionary["attendanceEverytime"] as? Int ?? 0
         self.attendanceReport = dictionary["attendanceReport"] as? Int ?? 0
         self.attendanceNotClear = dictionary["attendanceNotClear"] as? Int ?? 0
+        self.beforeattendanceNone = dictionary["beforeattendanceNone"] as? Int ?? 0
+        self.beforeattendanceSometimes = dictionary["beforeattendanceSometimes"] as? Int ?? 0
+        self.beforeattendanceEverytime = dictionary["beforeattendanceEverytime"] as? Int ?? 0
+        self.beforeattendanceReport = dictionary["beforeattendanceReport"] as? Int ?? 0
+        self.beforeattendanceNotClear = dictionary["beforeattendanceNotClear"] as? Int ?? 0
         self.unit1 = dictionary["unit1"] as? Int ?? 0
         self.unit2 = dictionary["unit2"] as? Int ?? 0
         self.unit3 = dictionary["unit3"] as? Int ?? 0
         self.unit4 = dictionary["unit4"] as? Int ?? 0
         self.unit5 = dictionary["unit5"] as? Int ?? 0
+        self.beforeunit1 = dictionary["beforeunit1"] as? Int ?? 0
+        self.beforeunit2 = dictionary["beforeunit2"] as? Int ?? 0
+        self.beforeunit3 = dictionary["beforeunit3"] as? Int ?? 0
+        self.beforeunit4 = dictionary["beforeunit4"] as? Int ?? 0
+        self.beforeunit5 = dictionary["beforeunit5"] as? Int ?? 0
         self.timestamp = dictionary["timestamp"] as? Timestamp ?? Timestamp(date: Date())
     }
+    
     var TimestampString: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd"

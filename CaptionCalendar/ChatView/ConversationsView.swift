@@ -9,12 +9,12 @@ import SwiftUI
 //import KingfisherSwiftUI
 
 struct ConversationsView: View {
-    @State private var showingSetting: Bool = false
+    @Binding var showChatSheet: Bool
     @State private var showingMenu: Bool = false
     @State var isShowingNewMessageView = false
     @State var showChat = false
     @State var user: User?
-//    let users: User
+    let users: User
 //    @State private var showingMenu = false
     @ObservedObject var viewModel = ConversationsViewModel()
     
@@ -67,7 +67,11 @@ struct ConversationsView: View {
                 }
             }
             .navigationTitle("Chat")
-            .navigationBarItems(leading: menuButton, trailing: ChatSettingButton)
+            .navigationBarItems(trailing: HStack(spacing: 20) {
+                ChatSettingButton
+                menuButton
+            })
+            .navigationBarTitleDisplayMode(.inline)
 //            .navigationBarItems(leading: menuButton)
 //            .navigationBarItems(trailing: ChatSettingButton)
         }
@@ -84,43 +88,23 @@ struct ConversationsView: View {
     
     var menuButton: some View {
         Button(action: {
-            showingMenu.toggle()
+            showChatSheet.toggle()
         }, label: {
-            Image(systemName: "text.alignleft")
+            Image(systemName: "text.alignright")
+                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
-        }).sheet(isPresented: $showingMenu) {
-            SettingTimeTableView(user: user!)
-        }
-//            .halfSheet(showSheet: $showingMenu) {
-//                SettingTimeTableView(user: )
-//            }
+        })
     }
     
     var ChatSettingButton: some View {
         Menu {
             Button(action: {}) {
-                Text("カレンダーを追加")
-                Image(systemName: "calendar.badge.plus")
-            }
-            
-            Button(action: {}) {
-                Text("予定を追加")
-                Image(systemName: "plus")
-            }
-            Button(action: {}) {
-                Text("学年歴を追加")
-                Image(systemName: "calendar.badge.exclamationmark")
-            }
-            Button(action: {}) {
-                Text("就活カレンダーを追加")
-                Image(systemName: "calendar.badge.exclamationmark")
-            }
-            Button(action: {}) {
-                Text("TimeTableの使い方を見る")
+                Text("Chatの使い方を見る")
                 Image(systemName: "doc")
             }
         } label: {
             Image(systemName: "ellipsis")
+                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
         }
     }

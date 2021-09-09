@@ -22,7 +22,7 @@ class AttendanceListViewModel: ObservableObject {
         //        guard let user = AuthViewModel.shared.currentUser else { return }
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
         let ClassId = classInfo.classId
-        let dogRef = COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId).collection("AttendanceList")
+        let dogRef = COLLECTION_USERS.document(uid).collection("LH").document(ClassId).collection("AttendanceList")
         dogRef.getDocuments { snapshot, _ in
             guard let documents = snapshot?.documents else { return }
             self.attendanceList = documents.map({ TimeTable(dictionary: $0.data())})
@@ -35,7 +35,7 @@ class AttendanceListViewModel: ObservableObject {
     func fetchClass() {
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
         let ClassId = classInfo.classId
-        COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId).getDocument { snapshot, _ in
+        COLLECTION_USERS.document(uid).collection("LH").document(ClassId).getDocument { snapshot, _ in
             let classinfo = snapshot.map({ TimeTable(dictionary: $0.data()!)})
             self.classinfo = classinfo!
         }

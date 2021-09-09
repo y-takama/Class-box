@@ -29,7 +29,7 @@ struct SearchClassView: View {
                                         classes: classinfo,
                                         user: user,
                                         viewModels: ClassDetailViewModel(classId: classinfo,
-                                                                         classInfo: classinfo))
+                                                                         classInfo: classinfo, editClass: classinfo))
                         //                                    .navigationBarHidden(true)
                     , label: {
                         ClassCell(classes: classinfo)
@@ -48,6 +48,7 @@ struct SearchClassView: View {
             isCreatingNewTimeTable.toggle()
         }, label: {
             Image(systemName: "plus")
+                .font(.title3)
                 .foregroundColor(Color("TextColor"))
         }).fullScreenCover(isPresented: $isCreatingNewTimeTable){
             CreateNewClassView(isPresented:$isCreatingNewTimeTable,

@@ -61,26 +61,26 @@ struct TimeTableView: View {
                             let timetablecell = dayofweek[index] + "1"
                             if classes.timetables! == timetablecell {
                                 NavigationLink(destination:
-                                    SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes), classes: classes, user: user)
-                                , label: {
-                                    ZStack {
-                                        ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes))
-                                        VStack {
-                                            Spacer()
-                                            Text(classes.courseName)
-                                                .bold()
-                                                .font(.system(size: 14))
-                                                .frame(width: width/6-10,
-                                                       height: 40)
-                                            
-                                            Text(classes.roomLocation!)
-                                                .bold()
-                                                .font(.system(size: 11))
-                                                .frame(width: width/6-10,
-                                                       height: 20)
-                                        }.foregroundColor(Color("TextColor"))
-                                    }
-                                })
+                                                SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes), classes: classes, user: user)
+                                               , label: {
+                                                ZStack {
+                                                    ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes))
+                                                    VStack {
+                                                        Spacer()
+                                                        Text(classes.courseName)
+                                                            .bold()
+                                                            .font(.system(size: 14))
+                                                            .frame(width: width/6-10,
+                                                                   height: 40)
+                                                        
+                                                        Text(classes.roomLocation!)
+                                                            .bold()
+                                                            .font(.system(size: 11))
+                                                            .frame(width: width/6-10,
+                                                                   height: 30)
+                                                    }.foregroundColor(Color("TextColor"))
+                                                }
+                                               })
                             } else {
                             }
                         }
@@ -120,26 +120,26 @@ struct TimeTableView: View {
                             let timetablecell = dayofweek[index] + "\(j+1)"
                             if classes.timetables! == timetablecell {
                                 NavigationLink(destination:
-                                    SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes), classes: classes, user: user)
-                                , label: {
-                                    ZStack {
-                                        ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes))
-                                        VStack {
-                                            Spacer()
-                                            Text(classes.courseName)
-                                                .bold()
-                                                .font(.system(size: 14))
-                                                .frame(width: width/6-10,
-                                                       height: 40)
-                                            
-                                            Text(classes.roomLocation!)
-                                                .bold()
-                                                .font(.system(size: 11))
-                                                .frame(width: width/6-10,
-                                                       height: 20)
-                                        }.foregroundColor(Color("TextColor"))
-                                    }
-                                })
+                                                SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes), classes: classes, user: user)
+                                               , label: {
+                                                ZStack {
+                                                    ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes))
+                                                    VStack {
+                                                        Spacer()
+                                                        Text(classes.courseName)
+                                                            .bold()
+                                                            .font(.system(size: 14))
+                                                            .frame(width: width/6-10,
+                                                                   height: 40)
+                                                        
+                                                        Text(classes.roomLocation!)
+                                                            .bold()
+                                                            .font(.system(size: 11))
+                                                            .frame(width: width/6-10,
+                                                                   height: 30)
+                                                    }.foregroundColor(Color("TextColor"))
+                                                }
+                                               })
                             } else {
                             }
                         }
@@ -178,26 +178,26 @@ struct TimeTableView: View {
                             let timetablecell = dayofweek[index] + "\(j+1)"
                             if classes.timetables! == timetablecell {
                                 NavigationLink(destination:
-                                    SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes), classes: classes, user: user)
-                                , label: {
-                                    ZStack {
-                                        ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes))
-                                        VStack {
-                                            Spacer()
-                                            Text(classes.courseName)
-                                                .bold()
-                                                .font(.system(size: 14))
-                                                .frame(width: width/6-10,
-                                                       height: 40)
-                                            
-                                            Text(classes.roomLocation!)
-                                                .bold()
-                                                .font(.system(size: 11))
-                                                .frame(width: width/6-10,
-                                                       height: 20)
-                                        }.foregroundColor(Color("TextColor"))
-                                    }
-                                })
+                                                SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes), classes: classes, user: user)
+                                               , label: {
+                                                ZStack {
+                                                    ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes))
+                                                    VStack {
+                                                        Spacer()
+                                                        Text(classes.courseName)
+                                                            .bold()
+                                                            .font(.system(size: 14))
+                                                            .frame(width: width/6-10,
+                                                                   height: 40)
+                                                        
+                                                        Text(classes.roomLocation!)
+                                                            .bold()
+                                                            .font(.system(size: 11))
+                                                            .frame(width: width/6-10,
+                                                                   height: 30)
+                                                    }.foregroundColor(Color("TextColor"))
+                                                }
+                                               })
                             } else {
                             }
                         }
@@ -236,26 +236,26 @@ struct TimeTableView: View {
                             let timetablecell = dayofweek[index] + "\(j+1)"
                             if classes.timetables! == timetablecell {
                                 NavigationLink(destination:
-                                    SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes), classes: classes, user: user)
-                                , label: {
-                                    ZStack {
-                                        ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes))
-                                        VStack {
-                                            Spacer()
-                                            Text(classes.courseName)
-                                                .bold()
-                                                .font(.system(size: 14))
-                                                .frame(width: width/6-10,
-                                                       height: 40)
-                                            
-                                            Text(classes.roomLocation!)
-                                                .bold()
-                                                .font(.system(size: 11))
-                                                .frame(width: width/6-10,
-                                                       height: 20)
-                                        }.foregroundColor(Color("TextColor"))
-                                    }
-                                })
+                                                SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes), classes: classes, user: user)
+                                               , label: {
+                                                ZStack {
+                                                    ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes))
+                                                    VStack {
+                                                        Spacer()
+                                                        Text(classes.courseName)
+                                                            .bold()
+                                                            .font(.system(size: 14))
+                                                            .frame(width: width/6-10,
+                                                                   height: 40)
+                                                        
+                                                        Text(classes.roomLocation!)
+                                                            .bold()
+                                                            .font(.system(size: 11))
+                                                            .frame(width: width/6-10,
+                                                                   height: 30)
+                                                    }.foregroundColor(Color("TextColor"))
+                                                }
+                                               })
                             } else {
                             }
                         }
@@ -293,26 +293,26 @@ struct TimeTableView: View {
                             let timetablecell = dayofweek[index] + "\(j+1)"
                             if classes.timetables! == timetablecell {
                                 NavigationLink(destination:
-                                    SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes), classes: classes, user: user)
-                                , label: {
-                                    ZStack {
-                                        ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes))
-                                        VStack {
-                                            Spacer()
-                                            Text(classes.courseName)
-                                                .bold()
-                                                .font(.system(size: 14))
-                                                .frame(width: width/6-10,
-                                                       height: 40)
-                                            
-                                            Text(classes.roomLocation!)
-                                                .bold()
-                                                .font(.system(size: 11))
-                                                .frame(width: width/6-10,
-                                                       height: 20)
-                                        }.foregroundColor(Color("TextColor"))
-                                    }
-                                })
+                                                SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes), classes: classes, user: user)
+                                               , label: {
+                                                ZStack {
+                                                    ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes))
+                                                    VStack {
+                                                        Spacer()
+                                                        Text(classes.courseName)
+                                                            .bold()
+                                                            .font(.system(size: 14))
+                                                            .frame(width: width/6-10,
+                                                                   height: 40)
+                                                        
+                                                        Text(classes.roomLocation!)
+                                                            .bold()
+                                                            .font(.system(size: 11))
+                                                            .frame(width: width/6-10,
+                                                                   height: 30)
+                                                    }.foregroundColor(Color("TextColor"))
+                                                }
+                                               })
                             } else {
                             }
                         }
@@ -350,27 +350,27 @@ struct TimeTableView: View {
                         ForEach(viewModel.timeTable, id: \.self) { classes in
                             let timetablecell = dayofweek[index] + "\(j+1)"
                             if classes.timetables! == timetablecell {
-                                    NavigationLink(destination:
-                                        SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes), classes: classes, user: user)
-                                , label: {
-                                    ZStack {
-                                        ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes))
-                                        VStack {
-                                            Spacer()
-                                            Text(classes.courseName)
-                                                .bold()
-                                                .font(.system(size: 14))
-                                                .frame(width: width/6-10,
-                                                       height: 40)
-                                            
-                                            Text(classes.roomLocation!)
-                                                .bold()
-                                                .font(.system(size: 11))
-                                                .frame(width: width/6-10,
-                                                       height: 20)
-                                        }.foregroundColor(Color("TextColor"))
-                                    }
-                                })
+                                NavigationLink(destination:
+                                                SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes), classes: classes, user: user)
+                                               , label: {
+                                                ZStack {
+                                                    ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes))
+                                                    VStack {
+                                                        Spacer()
+                                                        Text(classes.courseName)
+                                                            .bold()
+                                                            .font(.system(size: 14))
+                                                            .frame(width: width/6-10,
+                                                                   height: 40)
+                                                        
+                                                        Text(classes.roomLocation!)
+                                                            .bold()
+                                                            .font(.system(size: 11))
+                                                            .frame(width: width/6-10,
+                                                                   height: 30)
+                                                    }.foregroundColor(Color("TextColor"))
+                                                }
+                                               })
                             } else {
                             }
                         }

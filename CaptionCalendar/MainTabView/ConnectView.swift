@@ -9,20 +9,22 @@ import SwiftUI
 
 struct ConnectView: View {
     @EnvironmentObject var viewModel: AuthViewModel
-    //    @State var isShowingNewCaptionView = false
-    //    @State private var showingMenu = false
+    let coloredNavAppearance = UINavigationBarAppearance()
+    init() {
+        coloredNavAppearance.configureWithOpaqueBackground()
+        coloredNavAppearance.backgroundColor = UIColor.init(Color("TintColor"))
+        coloredNavAppearance.shadowColor = .clear
+        UINavigationBar.appearance().standardAppearance = coloredNavAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
+        
+    }
     
     var body: some View {
         Group {
             if viewModel.userSession == nil {
                 InitialScreenView()
             } else {
-                
-//                let user = viewModel.currentUser
-//                Text(user)
-//                MainTabView()
                 if let user = viewModel.currentUser {
-                    
                     MainTabView(user: user)
                 }
             }

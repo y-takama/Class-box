@@ -8,14 +8,13 @@
 import SwiftUI
 struct SettingView: View {
     @State private var showingAlert = false
-//    @EnvironmentObject var viewModel: AuthViewModel
-//    @ObservedObject var viewModels = AuthViewModel()
-//    @State var user: User?
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+
     var body: some View {
-        ZStack(alignment: .top) {
+        
+        NavigationView {
             ScrollView {
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 5) {
                     ForEach(CalendarSettingViewModel.allCases, id: \.self) { option in
                         if option == .profile {
 //                            NavigationLink(
@@ -27,35 +26,39 @@ struct SettingView: View {
                             NavigationLink(
                                 destination: SettingView(),
                                 label: {
-                                    SettingSheetView(option: option)
+                                    SettingSheetCell(option: option)
                                 })
                         } else if option == .announce {
                             NavigationLink(
                                 destination: SettingView(),
                                 label: {
-                                    SettingSheetView(option: option)
+                                    SettingSheetCell(option: option)
                                 })
                         } else if option == .security {
                             NavigationLink(
                                 destination: SettingView(),
                                 label: {
-                                    SettingSheetView(option: option)
+                                    SettingSheetCell(option: option)
                                 })
                         } else if option == .privacyPolicy {
                             NavigationLink(
                                 destination: SettingView(),
                                 label: {
-                                    SettingSheetView(option: option)
+                                    SettingSheetCell(option: option)
                                 })
                         } else if option == .termsOfService {
                             NavigationLink(
                                 destination: SettingView(),
                                 label: {
-                                    SettingSheetView(option: option)
+                                    SettingSheetCell(option: option)
                                 })
                         } else if option == .logout {
-                            Button(action: { AuthViewModel.shared.signOut() }) {
-                                SettingSheetView(option: option)
+                            Button(action: {
+                                AuthViewModel.shared.signOut()
+                                
+                                
+                            }) {
+                                SettingSheetCell(option: option)
                             }
                         }
                     }
@@ -65,18 +68,17 @@ struct SettingView: View {
                        alignment: .top)
                 
             }
-            .padding(.top, 40)
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .fill(Color("TintColor"))
-                    .frame(width:UIScreen.main.bounds.width, height: 40)
-                Button(action: { mode.wrappedValue.dismiss() }, label: {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 20))
-                        .foregroundColor(Color("TextColor"))
-                        .padding(.leading, 25)
-                })
-            }
-        }.navigationBarHidden(true)
+            .navigationBarItems(trailing: backButton)
+            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+    var backButton: some View {
+        Button(action: {
+            mode.wrappedValue.dismiss()
+        }, label: {
+            Image(systemName: "chevron.down")
+                .font(.title3)
+                .foregroundColor(Color("TextColor"))
+        })
     }
 }

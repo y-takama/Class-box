@@ -201,7 +201,7 @@ struct ClassDetailView: View {
             .padding()
         }
         .navigationTitle(classes.courseName)
-        NavigationLink(destination: MainTableView(user: user).navigationBarHidden(true), isActive: $showingTimeTable) {
+        NavigationLink(destination: MainTableView(showTimeTableSheet: $showingTimeTable, user: user).navigationBarHidden(true), isActive: $showingTimeTable) {
             
         }
     }

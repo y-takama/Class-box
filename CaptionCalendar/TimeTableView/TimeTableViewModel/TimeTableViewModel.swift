@@ -26,7 +26,7 @@ class TimeTableViewModel: ObservableObject {
                          dayOfWeek: String,
                          timePeriod: String) {
         guard let user = AuthViewModel.shared.currentUser else { return }
-        let docRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document()
+        let docRef = COLLECTION_TIMETABLE.document(user.university!).collection("LH").document()
         let docID = docRef.documentID
         let data: [String: Any] = ["university": user.university as Any,
                                    "courseName": courseName,

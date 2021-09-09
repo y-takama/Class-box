@@ -49,10 +49,10 @@ struct TimeTableTopView: View {
                             let timetablecell = dayofweek[index] + "2"
                             if classes.timetables! == timetablecell {
                                 NavigationLink(destination:
-                                    SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes), classes: classes, user: user)
+                                                SelectedClasDetailView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes), classes: classes, user: user)
                                 , label: {
                                     ZStack {
-                                        ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes))
+                                        ClassColorView(viewModel: ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes))
                                         VStack {
                                             Spacer()
                                             Text(classes.courseName)

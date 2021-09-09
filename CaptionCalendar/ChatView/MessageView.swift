@@ -47,12 +47,10 @@ struct MessageView: View {
                     Text(message.text)
                         .font(.system(size: 13))
                         .padding(14)
-                        .frame(minWidth: 25)
+                        .frame(minWidth: 40)
                         .background(Color(.systemGray5))
                         .clipShape(ChatBubble(isFromCurrentUser: false))
                         .foregroundColor(Color("TextColor"))
-                        
-//                        .background(Color.red)
                     
                     Text(message.detailedTimestampString)
                         .foregroundColor(Color(.systemGray))

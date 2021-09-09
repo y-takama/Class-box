@@ -1,107 +1,81 @@
 //
 //  StudentFirstRegistrationView.swift
-//  StudentFirstRegistrationView
+//  CaptionCalendar
 //
-//  Created by 髙間洋平 on 2021/08/21.
+//  Created by 髙間洋平 on 2021/09/07.
 //
 
 import SwiftUI
-import FirebaseAuth
-import Firebase
 
 struct StudentFirstRegistrationView: View {
-    @State private var selectionValue = University.Ritumeikan
-    @State private var selectionUniversityValue = "立命館大学"
-    @State private var selectionCampusValue = "未設定"
-    @State private var Universityname = ""
-    @State private var password = ""
-    @State private var passwordConfirm = ""
-    @State private var isShowAlert = false
-    @State private var isError = false
-    @State private var errorMessage = ""
-//    @State private var universityname = ""
-    @State private var campusname = ""
-    @EnvironmentObject var viewModel: AuthViewModel
-    let universityname = ["立命館大学","同志社大学","関西大学","関西学院大学"]
+    let location = ["北海道","東北","関東","中部","近畿","中国","四国","九州"]
+    @State private var selectedlocation = "近畿"
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
+    init() {
+        let foregroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
+//        let backgroundColor = UIColor(white: 1, alpha: 0.5)
+        UISegmentedControl.appearance().selectedSegmentTintColor = foregroundColor
+        UISegmentedControl.appearance().backgroundColor = .white
+        UISegmentedControl.appearance().setTitleTextAttributes([
+            .foregroundColor: foregroundColor,
+        ], for: .normal)
+        UISegmentedControl.appearance().setTitleTextAttributes([
+            .foregroundColor: UIColor.white,
+        ], for: .selected)
+    }
     var body: some View {
-        ZStack(alignment: .top) {
+        
+        ZStack(alignment: .topLeading) {
             Color.white.edgesIgnoringSafeArea(.all)
-            VStack(spacing: 5) {
+            VStack {
                 Spacer()
-                HStack{
-                    Text("大学名")
-                    Text("必須")
-                        .font(.system(size: 10, weight: .semibold))
-                        .frame(width: 30, height: 14)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.black, lineWidth: 0.5)
-                        )
-                    Spacer()
-                }
-                Picker(selection: $selectionUniversityValue, label: Text("大学名")) {
-                    ForEach(universityname, id: \.self) { option in
-                        Text(option)
-                            .foregroundColor(.black)
-                    }
-                }
-                .pickerStyle(WheelPickerStyle())
-//                Text("\(selectionValue.rawValue)")
-                HStack{
-                    Text("キャンパス")
-                    Text("必須")
-                        .font(.system(size: 10, weight: .semibold))
-                        .frame(width: 30, height: 14)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.black, lineWidth: 0.5)
-                        )
-                    Spacer()
-                }.foregroundColor(.black)
-                
-                Picker("",selection: $selectionCampusValue) {
-                    ForEach(University.allCases, id: \.self) { option in
-                        if option.name == selectionUniversityValue {
-                            let campus = option.description
-                            ForEach(campus , id: \.self) { i in
-                                Text(i).foregroundColor(.black)
-                            }
+                VStack {
+                    Picker(selection: $selectedlocation, label: Text("地方区分")) {
+                        ForEach(location, id: \.self) { units in
+                            Text(units)
+                                .foregroundColor(.black)
                         }
                     }
-                }.pickerStyle(WheelPickerStyle())
-                Spacer()
-//                Text("\(selectionCampusValue)")
-                
+                }.padding()
+                .pickerStyle(SegmentedPickerStyle())
                 NavigationLink(
                     destination:
-                        StudentSecondRegistrationView(universityName: $selectionUniversityValue,
-                                                      campusName:$selectionCampusValue).navigationBarHidden(true),
+                        StudentSecondRegistrationView(location: $selectedlocation).navigationBarHidden(true),
                     label: {
                         VStack {
-                            Text("進む")
+                            Text("Next!")
                                 .font(.system(size: 14, weight: .semibold))
-                                .foregroundColor(Color.white)
+                                .foregroundColor(.black)
                                 .frame(width: 300, height: 50)
-                                .background(Color(red: 104/255, green: 171/255, blue: 121/255))
-                                .clipShape(Capsule())
-                                .padding()
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(Color.black, lineWidth: 0.5)
+                                )
+                                .cornerRadius(25)
+        //                                    .background(
+        //                                        .white.opacity(1)
+        //                                        ,in: Capsule()
+        //                                    )
+                                .padding(.horizontal)
+                                .padding(.bottom, 50)
                         }
                     })
-                
-                Spacer()
-                
-                NavigationLink(destination: InitialScreenView().navigationBarHidden(true), label: {
-                    Text("Back")
-                        .font(.system(size: 14, weight: .semibold))
-                })
             }
-            .padding(.horizontal, 25)
-            .foregroundColor(.black)
-//            .background(Color.red)
+            Button(action: {
+                mode.wrappedValue.dismiss()
+            }, label: {
+                Image(systemName: "chevron.backward.circle.fill")
+                    .font(.system(size: 26))
+                    .padding()
+                    .foregroundColor(Color.black)
+            })
         }
-        .onTapGesture {
-            UIApplication.shared.closeKeyboard()
-        }
+    }
+}
+
+struct StudentFirstRegistrationView_Previews: PreviewProvider {
+    static var previews: some View {
+        StudentFirstRegistrationView()
     }
 }

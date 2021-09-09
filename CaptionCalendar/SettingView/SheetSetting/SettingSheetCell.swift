@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingSheetView: View {
+struct SettingSheetCell: View {
     let option: CalendarSettingViewModel
     var body: some View {
         HStack(spacing: 16) {
@@ -15,10 +15,12 @@ struct SettingSheetView: View {
                 .font(.system(size: 20))
             Text(option.description)
                 .font(.system(size: 15))
+                .bold()
             Spacer()
         }
-        .frame(width: UIScreen.main.bounds.width-40,height: 45)
+        .frame(width: UIScreen.main.bounds.width-50,height: 45)
         .foregroundColor(Color("TextColor"))
 //        .background(Color.red)
     }
 }
+

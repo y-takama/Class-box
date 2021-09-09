@@ -12,18 +12,21 @@ class ClassDetailViewModel: ObservableObject {
     @Published var classmember = [User]()
     @Published var classId: TimeTable
     @Published var classInfo: TimeTable
+    @Published var editClass: TimeTable
     
     
-    init(classId: TimeTable, classInfo: TimeTable) {
+    init(classId: TimeTable, classInfo: TimeTable, editClass: TimeTable) {
         self.classId = classId
         self.classInfo = classInfo
+        self.editClass = editClass
         fetchClassUser()
         fetchClass()
+        fetchEditClass()
     }
     
     func fetchClassUser() {
         guard let user = AuthViewModel.shared.currentUser else { return }
-        let docRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document(classId.classId).collection("registeredUser")
+        let docRef = COLLECTION_TIMETABLE.document(user.university!).collection("LH").document(classId.classId).collection("registeredUser")
         docRef.getDocuments { snapshot, _ in
             guard let classList = snapshot?.documents.map({ $0.documentID }) else { return }
             if classList.isEmpty == false {
@@ -41,13 +44,13 @@ class ClassDetailViewModel: ObservableObject {
         guard let user = AuthViewModel.shared.currentUser else { return }
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
         let ClassId = classId.classId
-        let docRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document(ClassId).collection("registeredUser")
+        let docRef = COLLECTION_TIMETABLE.document(user.university!).collection("LH").document(ClassId).collection("registeredUser")
         docRef.getDocuments { snapshot, _ in
             guard let classList = snapshot?.documents.map({ $0.documentID }) else { return }
             if classList.isEmpty == false {
                 classList.forEach { classes in
                     if classes == uid {
-                        COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId).getDocument { snapshot, _ in
+                        COLLECTION_USERS.document(uid).collection("LH").document(ClassId).getDocument { snapshot, _ in
                             let classInfo = snapshot.map({ TimeTable(dictionary: $0.data()!)})
                             self.classInfo = classInfo!
                         }
@@ -56,12 +59,20 @@ class ClassDetailViewModel: ObservableObject {
             }
         }
     }
+    func fetchEditClass() {
+        guard let user = AuthViewModel.shared.currentUser else { return }
+        let ClassId = classId.classId
+        COLLECTION_TIMETABLE.document(user.university!).collection("LH").document(ClassId).getDocument { snapshot, _ in
+            let editclass = snapshot.map({ TimeTable(dictionary: $0.data()!)})
+            self.editClass = editclass!
+        }
+    }
     
     func fetchAttendance() {
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
         let ClassId = classId.classId
-        let docRef = COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId).collection("AttendanceList").document()
-        let DocRef = COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId)
+        let docRef = COLLECTION_USERS.document(uid).collection("LH").document(ClassId).collection("AttendanceList").document()
+        let DocRef = COLLECTION_USERS.document(uid).collection("LH").document(ClassId)
         let docID = docRef.documentID
         let DocID = DocRef.documentID
         let data = ["status": "出席",
@@ -70,15 +81,15 @@ class ClassDetailViewModel: ObservableObject {
                     "timestamp": Timestamp(date: Date())] as [String: Any]
         docRef.setData(data) { _ in
         }
-        COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId).updateData(["attendance": self.classInfo.attendance! + 1]) { _ in
+        COLLECTION_USERS.document(uid).collection("LH").document(ClassId).updateData(["attendance": self.classInfo.attendance! + 1]) { _ in
         }
     }
     
     func fetchBehindtime() {
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
         let ClassId = classId.classId
-        let docRef = COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId).collection("AttendanceList").document()
-        let DocRef = COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId)
+        let docRef = COLLECTION_USERS.document(uid).collection("LH").document(ClassId).collection("AttendanceList").document()
+        let DocRef = COLLECTION_USERS.document(uid).collection("LH").document(ClassId)
         let docID = docRef.documentID
         let DocID = DocRef.documentID
         let data = ["status": "遅刻",
@@ -87,15 +98,15 @@ class ClassDetailViewModel: ObservableObject {
                     "timestamp": Timestamp(date: Date())] as [String: Any]
         docRef.setData(data) { _ in
         }
-        COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId).updateData(["behindtime": self.classInfo.behindtime! + 1]) { _ in
+        COLLECTION_USERS.document(uid).collection("LH").document(ClassId).updateData(["behindtime": self.classInfo.behindtime! + 1]) { _ in
         }
     }
     
     func fetchAbsence() {
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
         let ClassId = classId.classId
-        let docRef = COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId).collection("AttendanceList").document()
-        let DocRef = COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId)
+        let docRef = COLLECTION_USERS.document(uid).collection("LH").document(ClassId).collection("AttendanceList").document()
+        let DocRef = COLLECTION_USERS.document(uid).collection("LH").document(ClassId)
         let docID = docRef.documentID
         let DocID = DocRef.documentID
         let data = ["status": "欠席",
@@ -104,7 +115,7 @@ class ClassDetailViewModel: ObservableObject {
                     "timestamp": Timestamp(date: Date())] as [String: Any]
         docRef.setData(data) { _ in
         }
-        COLLECTION_USERS.document(uid).collection("2021LH").document(ClassId).updateData(["absence": self.classInfo.absence! + 1]) { _ in
+        COLLECTION_USERS.document(uid).collection("LH").document(ClassId).updateData(["absence": self.classInfo.absence! + 1]) { _ in
         }
     }
 }

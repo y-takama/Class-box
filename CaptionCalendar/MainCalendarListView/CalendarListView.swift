@@ -52,7 +52,8 @@ struct CalendarListView: View {
                 }.padding(.horizontal)
             }
             .navigationTitle("CalendarList")
-            .navigationBarItems(leading: menuButton, trailing: CalendarListSettingButton)
+            .navigationBarItems(trailing: CalendarListSettingButton)
+            .navigationBarTitleDisplayMode(.inline)
 //            .navigationBarItems(trailing: CalendarListSettingButton)
 //            .navigationBarItems(leading: menuButton)
         }
@@ -92,22 +93,7 @@ struct CalendarListView: View {
             }
         } label: {
             Image(systemName: "ellipsis")
+                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
         }
-    }
-    
-    var menuButton: some View {
-        Button(action: {
-            showingMenu.toggle()
-        }, label: {
-            Image(systemName: "text.alignleft")
-                .foregroundColor(Color("TextColor"))
-        }).sheet(isPresented: $showingMenu) {
-            SettingTimeTableView(user: user)
-        }
-//        iOS15
-//            .halfSheet(showSheet: $showingMenu) {
-//                SettingTimeTableView(user: user)
-//            }
-    }
-}
+    }}

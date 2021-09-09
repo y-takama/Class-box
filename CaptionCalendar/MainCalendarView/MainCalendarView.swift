@@ -11,6 +11,8 @@ import EventKitUI
 import GoogleMobileAds
 
 struct MainCalendarView: View {
+    @Binding var showMenu: Bool
+    @Binding var showCalendarSheet: Bool
     enum ActiveSheet {
         case calendarChooser
         case calendarEdit
@@ -56,7 +58,7 @@ struct MainCalendarView: View {
                                      days: CalendarModel().DayNumber(year: self.year, month: self.month))
                         
                         ForEach(1..<10) { num in
-//                            var tag = num+4
+                            //                            var tag = num+4
                             CalendarView(year: self.month+num >= 13 ? self.year+1 : self.year,
                                          month: self.month+num >= 13 ? self.month+num-12 : self.month+num,
                                          data: $data,
@@ -84,12 +86,6 @@ struct MainCalendarView: View {
                         .frame(width: UIScreen.main.bounds.width,
                                height: UIScreen.main.bounds.width*5/16)
                         .padding(.top, 80)
-                    
-                    
-//                    SelectedCalendarsList(selectedCalendars: Array(eventsRepository.selectedCalendars ?? []))
-//                        .padding(.bottom, 5)
-//                        .padding(.leading, 7)
-//                        .padding(.trailing, 75)
                 }
                 
                 VStack {
@@ -105,25 +101,48 @@ struct MainCalendarView: View {
                             .frame(width: 22, height: 22)
                             .padding(15)
                     })
-                        .background(Color("CaptionColor"))
-                        .cornerRadius(26)
-                        .sheet(isPresented: $showingEditSheet, content: {
-                            EventEditView(eventStore: self.eventsRepository.eventStore, event: self.selectedEvent)
-                                .ignoresSafeArea()
-                        })
+                    .background(Color("CaptionColor"))
+                    .cornerRadius(26)
+                    .padding()
+                    .sheet(isPresented: $showingEditSheet, content: {
+                        EventEditView(eventStore: self.eventsRepository.eventStore, event: self.selectedEvent)
+                            .ignoresSafeArea()
+                    })
                 }
-                .padding(10)
+                
             }
-            .navigationBarItems(leading: menuButton, trailing: CalendarSettingButton)
+            .navigationBarItems(leading: sideMenuButon, trailing:
+                                    HStack(spacing: 20) {
+                                        CalendarSettingButton
+                                        menuButton
+                                    }
+            )
+            .navigationBarTitleDisplayMode(.inline)
         }
         .sheet(isPresented: $showingSheet) {
             CalendarChooser(calendars: self.$eventsRepository.selectedCalendars, eventStore: self.eventsRepository.eventStore)
                 .ignoresSafeArea()
         }
-        
+    }
+    var sideMenuButon: some View {
+        Button(action: {
+            showMenu.toggle()
+        }, label: {
+            let username = user.fullname
+            let start = String(username!.prefix(2))
+            Text(start)
+                .font(.system(size: 15, weight: .semibold))
+                .frame(width: 28, height: 28)
+                .padding(5)
+                .clipShape(Circle())
+                .overlay(
+                    RoundedRectangle(cornerRadius: 19)
+                        .stroke(Color.gray, lineWidth: 0.3)
+                )
+                .foregroundColor(Color("TextColor"))
+        })
     }
     var CalendarSettingButton: some View {
-        
         Menu {
             Button(action:{
                 self.activeSheet = .calendarChooser
@@ -152,45 +171,22 @@ struct MainCalendarView: View {
             }
         } label: {
             Image(systemName: "ellipsis")
+                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
         }
-    }
-    var NextMonthButton: some View {
-        Button(action: {
-            if self.month != 12{
-                self.month += 1
-            }else if self.month == 12{
-                self.year += 1
-                self.month = 1
-            }
-        }, label: {
-            Image(systemName: "arrowtriangle.forward")
-                .foregroundColor(Color("TextColor"))
-        })
-    }
-    var LastMonthButton: some View {
-        Button(action: {
-            if self.month != 1{
-                self.month -= 1
-            }else if self.month == 1{
-                self.year -= 1
-                self.month = 12
-            }
-        }, label: {
-            Image(systemName: "arrowtriangle.backward")
-                .foregroundColor(Color("TextColor"))
-        })
     }
     
     var menuButton: some View {
         Button(action: {
-            showingMenu.toggle()
+            showCalendarSheet.toggle()
         }, label: {
-            Image(systemName: "text.alignleft")
+            Image(systemName: "text.alignright")
+                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
-        }).sheet(isPresented: $showingMenu) {
-            SettingCalendarSheetView(user: user)
-        }
+        })
+//        .sheet(isPresented: $showingMenu) {
+//            SettingCalendarSheetView()
+//        }
 //            .halfSheet(showSheet: $showingMenu) {
 //                SettingCalendarSheetView(user: user)
 //            }

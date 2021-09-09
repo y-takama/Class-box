@@ -1,31 +1,29 @@
 //
-//  SettingCalendaeSheetView.swift
-//  SettingCalendaeSheetView
+//  SettingChatView.swift
+//  CaptionCalendar
 //
-//  Created by 髙間洋平 on 2021/08/19.
+//  Created by 髙間洋平 on 2021/09/09.
 //
 
 import SwiftUI
 
-
-
-struct SettingCalendarSheetView: View {
+struct SettingChatView: View {
     @State private var isShowAlert = false
     @State private var showSettingView = false
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             ForEach(CalendarSettingViewModel.allCases, id: \.self) { option in
                 if option == .profile {
-//                            NavigationLink(
-//                                destination: ProfileView(user: user),
-//                                label: {
-//                                    SettingSheetView(option: option)
-//                                })
+                    //                            NavigationLink(
+                    //                                destination: ProfileView(user: user),
+                    //                                label: {
+                    //                                    SettingSheetView(option: option)
+                    //                                })
                 } else if option == .setting {
                     Button(action: { showSettingView.toggle() } ) {
                         SideMenuOptionHeaderCell(option: option)
                     }
-                } else if option == .calendarSetting {
+                } else if option == .timetableSetting {
                     NavigationLink(
                         destination: SettingCalendar(),
                         label: {

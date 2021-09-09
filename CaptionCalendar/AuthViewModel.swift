@@ -19,6 +19,11 @@ class AuthViewModel: ObservableObject {
     init() {
         userSession = Auth.auth().currentUser
         fetchUser()
+//        UINavigationBarAppearance().configureWithOpaqueBackground()
+//        UINavigationBarAppearance().backgroundColor = UIColor.init(Color("TintColor"))
+//        UINavigationBar.appearance().standardAppearance = UINavigationBarAppearance()
+//        UINavigationBar.appearance().scrollEdgeAppearance = UINavigationBarAppearance()
+        
     }
     
     func login(withEmail email: String, password: String) {

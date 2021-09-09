@@ -90,7 +90,7 @@ struct CreateNewClassView: View {
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    Text("選択値：\(selection)")
+//                    Text("選択値：\(selection)")
                     Spacer()
                     
                     Button(action: {
@@ -113,12 +113,14 @@ struct CreateNewClassView: View {
                                 .cornerRadius(10)
                             Spacer()
                         }
-                    })
-                    Spacer()
+                    }).padding(.bottom, 50)
+//                    Spacer()
                 }
                 .navigationBarItems(trailing: backButton)
                 .padding()
                 .navigationBarTitle("\(dayOfWeek)曜\(timePeriod)時限")
+            }.onTapGesture {
+                UIApplication.shared.closeKeyboard()
             }
         }
     }
@@ -127,6 +129,7 @@ struct CreateNewClassView: View {
             isPresented.toggle()
         }, label: {
             Image(systemName: "multiply.circle.fill")
+                .font(.title3)
                 .foregroundColor(Color("TextColor"))
         })
     }

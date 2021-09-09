@@ -11,12 +11,15 @@ struct SelectedClasDetailView: View {
     @State var chartname1: String = "出席"
     @State var chartname2: String = "単位"
     @State var isPresentedColorChooser = false
+    @State var showTomeTable = false
     @State private var showingAlertRemoveClass = false
+    @State private var showingEditClass = false
     @State private var showingTimeTable = false
     @ObservedObject var viewModel: ClassDetailViewModel
     let classes: TimeTable
     let user: User
     let width = UIScreen.main.bounds.width
+    
     var body: some View {
         ScrollView {
             HStack {
@@ -46,6 +49,7 @@ struct SelectedClasDetailView: View {
                                 .font(.system(size: 14, weight: .semibold))
                                 
                         }
+                        .foregroundColor(Color("TextColor"))
                         .frame(width: (width-120)/3, height: 38)
                         .overlay(
                             RoundedRectangle(cornerRadius: 20)
@@ -68,6 +72,7 @@ struct SelectedClasDetailView: View {
                                 .font(.system(size: 14, weight: .semibold))
                                 
                         }
+                        .foregroundColor(Color("TextColor"))
                         .frame(width: (width-120)/3, height: 38)
                         .overlay(
                             RoundedRectangle(cornerRadius: 20)
@@ -88,6 +93,7 @@ struct SelectedClasDetailView: View {
                                 .font(.system(size: 14, weight: .semibold))
                                 
                         }
+                        .foregroundColor(Color("TextColor"))
                         .frame(width: (width-120)/3, height: 38)
                         .overlay(
                             RoundedRectangle(cornerRadius: 20)
@@ -104,7 +110,7 @@ struct SelectedClasDetailView: View {
                             .foregroundColor(Color("TextColor"))
                             .padding(.trailing)
                     })
-                }
+                }.padding(.top, 7)
             }
             .padding()
             
@@ -306,6 +312,9 @@ struct SelectedClasDetailView: View {
                 }
             }
         }
+        .sheet(isPresented: $showingEditClass) {
+            ClassEditView(classes: $viewModel.editClass)
+        }
         .alert(isPresented: $showingAlertRemoveClass) {
             Alert(title: Text("TimeTableから外す"),
                   message: Text("出席情報も削除されますがよろしいてすか？"),
@@ -314,7 +323,7 @@ struct SelectedClasDetailView: View {
                                                 action: removeClass)
             )
         }
-        NavigationLink(destination: MainTableView(user: user).navigationBarHidden(true), isActive: $showingTimeTable) {
+        NavigationLink(destination: MainTableView(showTimeTableSheet: $showTomeTable, user: user).navigationBarHidden(true), isActive: $showingTimeTable) {
         }
     }
     
@@ -326,7 +335,9 @@ struct SelectedClasDetailView: View {
                 Text("カラーを変更する")
                 Image(systemName: "paintbrush")
             }
-            Button(action: {}) {
+            Button(action: {
+                showingEditClass.toggle()
+            }) {
                 Text("編集する")
                 Image(systemName: "square.and.pencil")
             }
@@ -342,6 +353,7 @@ struct SelectedClasDetailView: View {
             })
         } label: {
             Image(systemName: "ellipsis")
+                .font(.title3)
                 .foregroundColor(Color("TextColor"))
         }
     }
@@ -350,8 +362,8 @@ struct SelectedClasDetailView: View {
     func removeClass() {
         guard let user = AuthViewModel.shared.currentUser else { return }
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
-        let userRef = COLLECTION_USERS.document(uid).collection("2021LH").document(classes.classId)
-        let timetableRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document(classes.classId).collection("registeredUser").document(uid)
+        let userRef = COLLECTION_USERS.document(uid).collection("LH").document(classes.classId)
+        let timetableRef = COLLECTION_TIMETABLE.document(user.university!).collection("LH").document(classes.classId).collection("registeredUser").document(uid)
         timetableRef.delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
@@ -367,7 +379,7 @@ struct SelectedClasDetailView: View {
     }
     func registrationColor(color: String) {
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
-        COLLECTION_USERS.document(uid).collection("2021LH").document(classes.classId).updateData(["color": color]) { _ in
+        COLLECTION_USERS.document(uid).collection("LH").document(classes.classId).updateData(["color": color]) { _ in
             isPresentedColorChooser = false
             showingTimeTable = true
         }

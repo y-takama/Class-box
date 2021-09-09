@@ -11,15 +11,6 @@
 		CFAC7E1D0F7F4D195B1984A8 /* Pods_CaptionCalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E435E263036A9378B67F37E /* Pods_CaptionCalendar.framework */; };
 		FB03AF6326C28DC000CCF20E /* DetailDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03AF6226C28DC000CCF20E /* DetailDayView.swift */; };
 		FB0D56F026C2A2A30097CE09 /* CalendarDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0D56EF26C2A2A30097CE09 /* CalendarDetailRowView.swift */; };
-		FB5EA0DC26E004CE00289BBE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FB5EA0DB26E004CE00289BBE /* FirebaseFirestore */; };
-		FB5EA0DE26E004CE00289BBE /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = FB5EA0DD26E004CE00289BBE /* FirebaseDatabase */; };
-		FB5EA0E026E004CE00289BBE /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = FB5EA0DF26E004CE00289BBE /* FirebaseFirestoreSwift-Beta */; };
-		FB5EA0E226E004CE00289BBE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FB5EA0E126E004CE00289BBE /* FirebaseStorage */; };
-		FB5EA0E426E004CE00289BBE /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = FB5EA0E326E004CE00289BBE /* FirebaseFunctions */; };
-		FB5EA0E626E004CE00289BBE /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = FB5EA0E526E004CE00289BBE /* FirebaseMessaging */; };
-		FB5EA0E826E004CE00289BBE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FB5EA0E726E004CE00289BBE /* FirebaseAuth */; };
-		FB5EA0EB26E0090100289BBE /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = FB5EA0EA26E0090100289BBE /* SwiftyJSON */; };
-		FB5EA0EE26E0096000289BBE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FB5EA0ED26E0096000289BBE /* SDWebImageSwiftUI */; };
 		FB722E3126DA901E00667D74 /* ClassUserNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB722E3026DA901E00667D74 /* ClassUserNote.swift */; };
 		FB722E3326DAB00400667D74 /* ClassChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB722E3226DAB00400667D74 /* ClassChatViewModel.swift */; };
 		FB722E3626DBAFAA00667D74 /* getData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB722E3526DBAFAA00667D74 /* getData.swift */; };
@@ -30,10 +21,9 @@
 		FB767BF026BF75500011C32E /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB767BEF26BF75500011C32E /* SafariView.swift */; };
 		FB7AF46A26CEDA5A0066A0AA /* SelectedOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF46926CEDA5A0066A0AA /* SelectedOptionViewModel.swift */; };
 		FB7AF46E26CFA94F0066A0AA /* SelectedScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF46D26CFA94F0066A0AA /* SelectedScreenView.swift */; };
-		FB7AF47026CFB68E0066A0AA /* StudentSecondRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF46F26CFB68E0066A0AA /* StudentSecondRegistrationView.swift */; };
+		FB7AF47026CFB68E0066A0AA /* StudentThirdRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF46F26CFB68E0066A0AA /* StudentThirdRegistrationView.swift */; };
 		FB7AF47226CFDDBC0066A0AA /* CustomCreateClassTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF47126CFDDBC0066A0AA /* CustomCreateClassTextField.swift */; };
 		FB7AF47426CFF8BA0066A0AA /* EventListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF47326CFF8BA0066A0AA /* EventListRepository.swift */; };
-		FB7AF47626D00E580066A0AA /* StudentFirstRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF47526D00E580066A0AA /* StudentFirstRegistrationView.swift */; };
 		FB7AF47826D00F740066A0AA /* University.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF47726D00F740066A0AA /* University.swift */; };
 		FB7AF47A26D0B3000066A0AA /* SearchClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF47926D0B3000066A0AA /* SearchClassView.swift */; };
 		FB7AF47C26D0B3800066A0AA /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7AF47B26D0B3800066A0AA /* SearchBar.swift */; };
@@ -79,7 +69,7 @@
 		FB99D9C526CD37A50059850E /* InitialScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB99D9C426CD37A50059850E /* InitialScreenView.swift */; };
 		FB99D9C726CD3F430059850E /* TextAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB99D9C626CD3F430059850E /* TextAnimation.swift */; };
 		FB99D9C926CD55260059850E /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB99D9C826CD55260059850E /* RegistrationView.swift */; };
-		FB99D9CB26CDEFAE0059850E /* SettingSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB99D9CA26CDEFAE0059850E /* SettingSheetView.swift */; };
+		FB99D9CB26CDEFAE0059850E /* SettingSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB99D9CA26CDEFAE0059850E /* SettingSheetCell.swift */; };
 		FB99D9CE26CDF1530059850E /* CalendarSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB99D9CD26CDF1530059850E /* CalendarSettingViewModel.swift */; };
 		FB99D9D026CDF78E0059850E /* SettingCalendarSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB99D9CF26CDF78E0059850E /* SettingCalendarSheetView.swift */; };
 		FB99D9D326CDFCA30059850E /* SettingTimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB99D9D226CDFCA30059850E /* SettingTimeTableView.swift */; };
@@ -120,6 +110,32 @@
 		FBC7C65526E1F7FC0021C70D /* TimeTableBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C65426E1F7FC0021C70D /* TimeTableBottomView.swift */; };
 		FBC7C65926E2CE760021C70D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBC7C65826E2CE760021C70D /* GoogleService-Info.plist */; };
 		FBC7C65D26E3C4D20021C70D /* NewsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C65C26E3C4D20021C70D /* NewsMainView.swift */; };
+		FBC7C65F26E488EF0021C70D /* ClassEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C65E26E488EF0021C70D /* ClassEditView.swift */; };
+		FBC7C66226E4BAA70021C70D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FBC7C66126E4BAA70021C70D /* FirebaseFirestore */; };
+		FBC7C66426E4BAA70021C70D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = FBC7C66326E4BAA70021C70D /* FirebaseDatabase */; };
+		FBC7C66626E4BAA70021C70D /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = FBC7C66526E4BAA70021C70D /* FirebaseFirestoreSwift-Beta */; };
+		FBC7C66826E4BAA70021C70D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FBC7C66726E4BAA70021C70D /* FirebaseAnalytics */; };
+		FBC7C66A26E4BAA70021C70D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FBC7C66926E4BAA70021C70D /* FirebaseStorage */; };
+		FBC7C66C26E4BAA70021C70D /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = FBC7C66B26E4BAA70021C70D /* FirebaseFunctions */; };
+		FBC7C66E26E4BAA70021C70D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = FBC7C66D26E4BAA70021C70D /* FirebaseMessaging */; };
+		FBC7C67026E4BAA70021C70D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FBC7C66F26E4BAA70021C70D /* FirebaseAuth */; };
+		FBC7C67326E4BB890021C70D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FBC7C67226E4BB890021C70D /* SDWebImageSwiftUI */; };
+		FBC7C67626E4BBF10021C70D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = FBC7C67526E4BBF10021C70D /* SwiftyJSON */; };
+		FBC7C67826E685370021C70D /* StudentSecondRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C67726E685370021C70D /* StudentSecondRegistrationView.swift */; };
+		FBC7C67A26E686290021C70D /* StudentFirstRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C67926E686290021C70D /* StudentFirstRegistrationView.swift */; };
+		FBC7C67D26E8866A0021C70D /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C67C26E8866A0021C70D /* SideMenu.swift */; };
+		FBC7C67F26E8A3360021C70D /* SideMenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C67E26E8A3360021C70D /* SideMenuOption.swift */; };
+		FBC7C68126E8A52C0021C70D /* SideMenuOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C68026E8A52C0021C70D /* SideMenuOptionCell.swift */; };
+		FBC7C68326E8AEDE0021C70D /* SideMenuTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C68226E8AEDE0021C70D /* SideMenuTabView.swift */; };
+		FBC7C68526E8AF130021C70D /* SideMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C68426E8AF130021C70D /* SideMenuHeaderView.swift */; };
+		FBC7C68926E8D75F0021C70D /* SideMenuButtomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C68826E8D75F0021C70D /* SideMenuButtomView.swift */; };
+		FBC7C68C26E8F2F70021C70D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C68B26E8F2F70021C70D /* HelpView.swift */; };
+		FBC7C68E26E908460021C70D /* InquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C68D26E908460021C70D /* InquiryView.swift */; };
+		FBC7C69026E9086E0021C70D /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C68F26E9086E0021C70D /* ReportView.swift */; };
+		FBC7C69226E92D690021C70D /* SideMenuOptionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C69126E92D690021C70D /* SideMenuOptionHeaderCell.swift */; };
+		FBC7C69426E937740021C70D /* SettingChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C69326E937740021C70D /* SettingChatView.swift */; };
+		FBC7C69626E99A470021C70D /* UnfinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C69526E99A470021C70D /* UnfinishedView.swift */; };
+		FBC7C69826E9ACD00021C70D /* ReportHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C69726E9ACD00021C70D /* ReportHeaderView.swift */; };
 		FBE3D9B526BC021B000BE655 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE3D9B426BC021B000BE655 /* CalendarView.swift */; };
 		FBE3D9BB26BC33E5000BE655 /* CalendarRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE3D9BA26BC33E5000BE655 /* CalendarRowView.swift */; };
 		FBE3D9BD26BCC44D000BE655 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE3D9BC26BCC44D000BE655 /* EventView.swift */; };
@@ -145,10 +161,9 @@
 		FB767BEF26BF75500011C32E /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		FB7AF46926CEDA5A0066A0AA /* SelectedOptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedOptionViewModel.swift; sourceTree = "<group>"; };
 		FB7AF46D26CFA94F0066A0AA /* SelectedScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedScreenView.swift; sourceTree = "<group>"; };
-		FB7AF46F26CFB68E0066A0AA /* StudentSecondRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSecondRegistrationView.swift; sourceTree = "<group>"; };
+		FB7AF46F26CFB68E0066A0AA /* StudentThirdRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentThirdRegistrationView.swift; sourceTree = "<group>"; };
 		FB7AF47126CFDDBC0066A0AA /* CustomCreateClassTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCreateClassTextField.swift; sourceTree = "<group>"; };
 		FB7AF47326CFF8BA0066A0AA /* EventListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListRepository.swift; sourceTree = "<group>"; };
-		FB7AF47526D00E580066A0AA /* StudentFirstRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentFirstRegistrationView.swift; sourceTree = "<group>"; };
 		FB7AF47726D00F740066A0AA /* University.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = University.swift; sourceTree = "<group>"; };
 		FB7AF47926D0B3000066A0AA /* SearchClassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchClassView.swift; sourceTree = "<group>"; };
 		FB7AF47B26D0B3800066A0AA /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -194,7 +209,7 @@
 		FB99D9C426CD37A50059850E /* InitialScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScreenView.swift; sourceTree = "<group>"; };
 		FB99D9C626CD3F430059850E /* TextAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAnimation.swift; sourceTree = "<group>"; };
 		FB99D9C826CD55260059850E /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		FB99D9CA26CDEFAE0059850E /* SettingSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSheetView.swift; sourceTree = "<group>"; };
+		FB99D9CA26CDEFAE0059850E /* SettingSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSheetCell.swift; sourceTree = "<group>"; };
 		FB99D9CD26CDF1530059850E /* CalendarSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSettingViewModel.swift; sourceTree = "<group>"; };
 		FB99D9CF26CDF78E0059850E /* SettingCalendarSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCalendarSheetView.swift; sourceTree = "<group>"; };
 		FB99D9D226CDFCA30059850E /* SettingTimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimeTableView.swift; sourceTree = "<group>"; };
@@ -237,6 +252,22 @@
 		FBC7C65426E1F7FC0021C70D /* TimeTableBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableBottomView.swift; sourceTree = "<group>"; };
 		FBC7C65826E2CE760021C70D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../takama/Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FBC7C65C26E3C4D20021C70D /* NewsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsMainView.swift; sourceTree = "<group>"; };
+		FBC7C65E26E488EF0021C70D /* ClassEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassEditView.swift; sourceTree = "<group>"; };
+		FBC7C67726E685370021C70D /* StudentSecondRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSecondRegistrationView.swift; sourceTree = "<group>"; };
+		FBC7C67926E686290021C70D /* StudentFirstRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentFirstRegistrationView.swift; sourceTree = "<group>"; };
+		FBC7C67C26E8866A0021C70D /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
+		FBC7C67E26E8A3360021C70D /* SideMenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOption.swift; sourceTree = "<group>"; };
+		FBC7C68026E8A52C0021C70D /* SideMenuOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptionCell.swift; sourceTree = "<group>"; };
+		FBC7C68226E8AEDE0021C70D /* SideMenuTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTabView.swift; sourceTree = "<group>"; };
+		FBC7C68426E8AF130021C70D /* SideMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuHeaderView.swift; sourceTree = "<group>"; };
+		FBC7C68826E8D75F0021C70D /* SideMenuButtomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuButtomView.swift; sourceTree = "<group>"; };
+		FBC7C68B26E8F2F70021C70D /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		FBC7C68D26E908460021C70D /* InquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryView.swift; sourceTree = "<group>"; };
+		FBC7C68F26E9086E0021C70D /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		FBC7C69126E92D690021C70D /* SideMenuOptionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptionHeaderCell.swift; sourceTree = "<group>"; };
+		FBC7C69326E937740021C70D /* SettingChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingChatView.swift; sourceTree = "<group>"; };
+		FBC7C69526E99A470021C70D /* UnfinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfinishedView.swift; sourceTree = "<group>"; };
+		FBC7C69726E9ACD00021C70D /* ReportHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHeaderView.swift; sourceTree = "<group>"; };
 		FBE3D9B426BC021B000BE655 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		FBE3D9BA26BC33E5000BE655 /* CalendarRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRowView.swift; sourceTree = "<group>"; };
 		FBE3D9BC26BCC44D000BE655 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -248,16 +279,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB5EA0EE26E0096000289BBE /* SDWebImageSwiftUI in Frameworks */,
-				FB5EA0EB26E0090100289BBE /* SwiftyJSON in Frameworks */,
-				FB5EA0DE26E004CE00289BBE /* FirebaseDatabase in Frameworks */,
-				FB5EA0E026E004CE00289BBE /* FirebaseFirestoreSwift-Beta in Frameworks */,
-				FB5EA0E626E004CE00289BBE /* FirebaseMessaging in Frameworks */,
+				FBC7C66826E4BAA70021C70D /* FirebaseAnalytics in Frameworks */,
+				FBC7C66426E4BAA70021C70D /* FirebaseDatabase in Frameworks */,
+				FBC7C66E26E4BAA70021C70D /* FirebaseMessaging in Frameworks */,
+				FBC7C66C26E4BAA70021C70D /* FirebaseFunctions in Frameworks */,
+				FBC7C67626E4BBF10021C70D /* SwiftyJSON in Frameworks */,
+				FBC7C66226E4BAA70021C70D /* FirebaseFirestore in Frameworks */,
+				FBC7C66626E4BAA70021C70D /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				FBC7C67026E4BAA70021C70D /* FirebaseAuth in Frameworks */,
+				FBC7C66A26E4BAA70021C70D /* FirebaseStorage in Frameworks */,
+				FBC7C67326E4BB890021C70D /* SDWebImageSwiftUI in Frameworks */,
 				CFAC7E1D0F7F4D195B1984A8 /* Pods_CaptionCalendar.framework in Frameworks */,
-				FB5EA0E426E004CE00289BBE /* FirebaseFunctions in Frameworks */,
-				FB5EA0E226E004CE00289BBE /* FirebaseStorage in Frameworks */,
-				FB5EA0DC26E004CE00289BBE /* FirebaseFirestore in Frameworks */,
-				FB5EA0E826E004CE00289BBE /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,10 +428,11 @@
 				FB7AF46D26CFA94F0066A0AA /* SelectedScreenView.swift */,
 				FB99D9C626CD3F430059850E /* TextAnimation.swift */,
 				FB99D9BA26CD2EEF0059850E /* LoginView.swift */,
-				FB7AF47D26D110AF0066A0AA /* ValidLoginView.swift */,
 				FB99D9C826CD55260059850E /* RegistrationView.swift */,
-				FB7AF47526D00E580066A0AA /* StudentFirstRegistrationView.swift */,
-				FB7AF46F26CFB68E0066A0AA /* StudentSecondRegistrationView.swift */,
+				FBC7C67926E686290021C70D /* StudentFirstRegistrationView.swift */,
+				FBC7C67726E685370021C70D /* StudentSecondRegistrationView.swift */,
+				FB7AF46F26CFB68E0066A0AA /* StudentThirdRegistrationView.swift */,
+				FB7AF47D26D110AF0066A0AA /* ValidLoginView.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -416,9 +449,10 @@
 		FB99D9D126CDFA000059850E /* SheetSetting */ = {
 			isa = PBXGroup;
 			children = (
-				FB99D9CA26CDEFAE0059850E /* SettingSheetView.swift */,
+				FB99D9CA26CDEFAE0059850E /* SettingSheetCell.swift */,
 				FB99D9CF26CDF78E0059850E /* SettingCalendarSheetView.swift */,
 				FB99D9D226CDFCA30059850E /* SettingTimeTableView.swift */,
+				FBC7C69326E937740021C70D /* SettingChatView.swift */,
 			);
 			path = SheetSetting;
 			sourceTree = "<group>";
@@ -444,6 +478,7 @@
 				FB8E5E6F26D9C54400E832C0 /* ClassColorView.swift */,
 				FB8E5E7326DA0D7000E832C0 /* AttendanceListView.swift */,
 				FB722E3026DA901E00667D74 /* ClassUserNote.swift */,
+				FBC7C65E26E488EF0021C70D /* ClassEditView.swift */,
 			);
 			path = ClassView;
 			sourceTree = "<group>";
@@ -498,6 +533,7 @@
 		FBB38CC726ADAEF1005BE209 /* CaptionCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				FBC7C67B26E886430021C70D /* SideMenu */,
 				FB99D9A126CD1C8C0059850E /* Model */,
 				FB99D9B926CD2EDD0059850E /* Authentication */,
 				FBB38D1B26ADB58E005BE209 /* MainTabView */,
@@ -528,6 +564,7 @@
 				FB7AF47726D00F740066A0AA /* University.swift */,
 				FB7AF48126D287740066A0AA /* LazyView.swift */,
 				FBB249AC26D5505F00AC40E8 /* RefreshableScrollView.swift */,
+				FBC7C69526E99A470021C70D /* UnfinishedView.swift */,
 			);
 			path = CaptionCalendar;
 			sourceTree = "<group>";
@@ -600,6 +637,32 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		FBC7C67B26E886430021C70D /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				FBC7C67C26E8866A0021C70D /* SideMenu.swift */,
+				FBC7C67E26E8A3360021C70D /* SideMenuOption.swift */,
+				FBC7C68026E8A52C0021C70D /* SideMenuOptionCell.swift */,
+				FBC7C69126E92D690021C70D /* SideMenuOptionHeaderCell.swift */,
+				FBC7C68426E8AF130021C70D /* SideMenuHeaderView.swift */,
+				FBC7C68226E8AEDE0021C70D /* SideMenuTabView.swift */,
+				FBC7C68826E8D75F0021C70D /* SideMenuButtomView.swift */,
+				FBC7C68A26E8F2D40021C70D /* SideMenuOptionView */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		FBC7C68A26E8F2D40021C70D /* SideMenuOptionView */ = {
+			isa = PBXGroup;
+			children = (
+				FBC7C68B26E8F2F70021C70D /* HelpView.swift */,
+				FBC7C68D26E908460021C70D /* InquiryView.swift */,
+				FBC7C68F26E9086E0021C70D /* ReportView.swift */,
+				FBC7C69726E9ACD00021C70D /* ReportHeaderView.swift */,
+			);
+			path = SideMenuOptionView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -619,15 +682,16 @@
 			);
 			name = CaptionCalendar;
 			packageProductDependencies = (
-				FB5EA0DB26E004CE00289BBE /* FirebaseFirestore */,
-				FB5EA0DD26E004CE00289BBE /* FirebaseDatabase */,
-				FB5EA0DF26E004CE00289BBE /* FirebaseFirestoreSwift-Beta */,
-				FB5EA0E126E004CE00289BBE /* FirebaseStorage */,
-				FB5EA0E326E004CE00289BBE /* FirebaseFunctions */,
-				FB5EA0E526E004CE00289BBE /* FirebaseMessaging */,
-				FB5EA0E726E004CE00289BBE /* FirebaseAuth */,
-				FB5EA0EA26E0090100289BBE /* SwiftyJSON */,
-				FB5EA0ED26E0096000289BBE /* SDWebImageSwiftUI */,
+				FBC7C66126E4BAA70021C70D /* FirebaseFirestore */,
+				FBC7C66326E4BAA70021C70D /* FirebaseDatabase */,
+				FBC7C66526E4BAA70021C70D /* FirebaseFirestoreSwift-Beta */,
+				FBC7C66726E4BAA70021C70D /* FirebaseAnalytics */,
+				FBC7C66926E4BAA70021C70D /* FirebaseStorage */,
+				FBC7C66B26E4BAA70021C70D /* FirebaseFunctions */,
+				FBC7C66D26E4BAA70021C70D /* FirebaseMessaging */,
+				FBC7C66F26E4BAA70021C70D /* FirebaseAuth */,
+				FBC7C67226E4BB890021C70D /* SDWebImageSwiftUI */,
+				FBC7C67526E4BBF10021C70D /* SwiftyJSON */,
 			);
 			productName = CaptionCalendar;
 			productReference = FBB38CC526ADAEF1005BE209 /* CaptionCalendar.app */;
@@ -657,9 +721,9 @@
 			);
 			mainGroup = FBB38CBC26ADAEF0005BE209;
 			packageReferences = (
-				FB5EA0DA26E004CE00289BBE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				FB5EA0E926E0090100289BBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				FB5EA0EC26E0095F00289BBE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				FBC7C66026E4BAA70021C70D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				FBC7C67126E4BB890021C70D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				FBC7C67426E4BBF00021C70D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = FBB38CC626ADAEF1005BE209 /* Products */;
 			projectDirPath = "";
@@ -738,7 +802,7 @@
 				FBC3F3E626C05B8500E64122 /* weeknumber6View.swift in Sources */,
 				FB9DB0C026ADC1350043B6C0 /* BannerView.swift in Sources */,
 				FBC3F3E826C05F8300E64122 /* weeknumber4View.swift in Sources */,
-				FB7AF47026CFB68E0066A0AA /* StudentSecondRegistrationView.swift in Sources */,
+				FB7AF47026CFB68E0066A0AA /* StudentThirdRegistrationView.swift in Sources */,
 				FBB38D0E26ADB475005BE209 /* TimeInterval-Extension.swift in Sources */,
 				FB7AF47426CFF8BA0066A0AA /* EventListRepository.swift in Sources */,
 				FB7AF48026D2861D0066A0AA /* ProfileViewModel.swift in Sources */,
@@ -747,7 +811,9 @@
 				FB8E5E7026D9C54400E832C0 /* ClassColorView.swift in Sources */,
 				FB767BF026BF75500011C32E /* SafariView.swift in Sources */,
 				FB99D97E26CB6DB00059850E /* SettingView.swift in Sources */,
+				FBC7C69026E9086E0021C70D /* ReportView.swift in Sources */,
 				FB7AF49B26D4D1E40066A0AA /* MessageViewModel.swift in Sources */,
+				FBC7C68326E8AEDE0021C70D /* SideMenuTabView.swift in Sources */,
 				FBB249A426D4D76500AC40E8 /* UserCell.swift in Sources */,
 				FB7AF4A726D4D2D50066A0AA /* ChatView.swift in Sources */,
 				FBE3D9BB26BC33E5000BE655 /* CalendarRowView.swift in Sources */,
@@ -766,6 +832,7 @@
 				FBB38D1A26ADB582005BE209 /* CalendarListView.swift in Sources */,
 				FB0D56F026C2A2A30097CE09 /* CalendarDetailRowView.swift in Sources */,
 				FB99D9DC26CECB310059850E /* TimeTableViewModel.swift in Sources */,
+				FBC7C68526E8AF130021C70D /* SideMenuHeaderView.swift in Sources */,
 				FB7AF47826D00F740066A0AA /* University.swift in Sources */,
 				FBB249AB26D516F600AC40E8 /* ClassEvaluationBarView.swift in Sources */,
 				FBB249A226D4D6F800AC40E8 /* SearchViewModel.swift in Sources */,
@@ -774,13 +841,16 @@
 				FB7AF47A26D0B3000066A0AA /* SearchClassView.swift in Sources */,
 				FB99D9AF26CD22B30059850E /* User.swift in Sources */,
 				FB99D9C726CD3F430059850E /* TextAnimation.swift in Sources */,
+				FBC7C68C26E8F2F70021C70D /* HelpView.swift in Sources */,
 				FB7AF49926D4D1C90066A0AA /* ChatViewModel.swift in Sources */,
 				FBB38D0526ADB3B5005BE209 /* EventsRepository.swift in Sources */,
 				FB99D98D26CD040F0059850E /* HalfSheetHelper.swift in Sources */,
 				A2A219F726BBEAF100236A43 /* CalendarModel.swift in Sources */,
+				FBC7C65F26E488EF0021C70D /* ClassEditView.swift in Sources */,
 				FBB38D2726ADB665005BE209 /* CalendarChooser.swift in Sources */,
 				FBB38D1326ADB4F1005BE209 /* MainCalendarView.swift in Sources */,
 				FBC7C65D26E3C4D20021C70D /* NewsMainView.swift in Sources */,
+				FBC7C69426E937740021C70D /* SettingChatView.swift in Sources */,
 				FBB249AF26D6220E00AC40E8 /* ClassDetailViewModel.swift in Sources */,
 				FBB38D2426ADB649005BE209 /* SecondaryCaptionTextStyle.swift in Sources */,
 				FB7AF49726D4D1A20066A0AA /* ConversationsViewModel.swift in Sources */,
@@ -789,18 +859,21 @@
 				FB99D9D626CDFF880059850E /* ProfileView.swift in Sources */,
 				FB722E4026DD325900667D74 /* ClassboxView.swift in Sources */,
 				FB7AF4A526D4D2BA0066A0AA /* MessageView.swift in Sources */,
+				FBC7C67A26E686290021C70D /* StudentFirstRegistrationView.swift in Sources */,
 				FB722E3126DA901E00667D74 /* ClassUserNote.swift in Sources */,
 				FB99D9D026CDF78E0059850E /* SettingCalendarSheetView.swift in Sources */,
 				FB99D9D326CDFCA30059850E /* SettingTimeTableView.swift in Sources */,
 				FB99D98926CCE45E0059850E /* TimeTableView.swift in Sources */,
 				FB7AF46A26CEDA5A0066A0AA /* SelectedOptionViewModel.swift in Sources */,
-				FB7AF47626D00E580066A0AA /* StudentFirstRegistrationView.swift in Sources */,
 				FBB38D1D26ADB5AC005BE209 /* MainTabView.swift in Sources */,
 				FBB38D2226ADB62F005BE209 /* PrimaryButtonStyle.swift in Sources */,
+				FBC7C68926E8D75F0021C70D /* SideMenuButtomView.swift in Sources */,
 				FB7AF47E26D110AF0066A0AA /* ValidLoginView.swift in Sources */,
 				FB99D98026CB716C0059850E /* SettingTabView1.swift in Sources */,
 				FBB38D0A26ADB445005BE209 /* Event-Extension.swift in Sources */,
+				FBC7C69626E99A470021C70D /* UnfinishedView.swift in Sources */,
 				FBC7C65326E1F7DE0021C70D /* TimeTableTopView.swift in Sources */,
+				FBC7C67F26E8A3360021C70D /* SideMenuOption.swift in Sources */,
 				FB99D9BB26CD2EEF0059850E /* LoginView.swift in Sources */,
 				FB7AF46E26CFA94F0066A0AA /* SelectedScreenView.swift in Sources */,
 				FB8DF77426D6ACA700D931FC /* UserListView.swift in Sources */,
@@ -813,20 +886,26 @@
 				FB8DF77A26D73BB900D931FC /* Chart.swift in Sources */,
 				FB7AF49D26D4D2200066A0AA /* ConversationsView.swift in Sources */,
 				FB99D9B826CD27E70059850E /* Constants.swift in Sources */,
+				FBC7C69826E9ACD00021C70D /* ReportHeaderView.swift in Sources */,
 				FBB38D2D26ADB6A4005BE209 /* SelectedCalendarsList.swift in Sources */,
 				FB7AF48426D330CC0066A0AA /* SearchClassViewModel.swift in Sources */,
 				FB7AF47C26D0B3800066A0AA /* SearchBar.swift in Sources */,
 				FB99D98426CB96D20059850E /* SettingCalendarList.swift in Sources */,
 				FB99D9D926CEC2F50059850E /* CreateNewClassView.swift in Sources */,
+				FBC7C67D26E8866A0021C70D /* SideMenu.swift in Sources */,
+				FBC7C67826E685370021C70D /* StudentSecondRegistrationView.swift in Sources */,
+				FBC7C68126E8A52C0021C70D /* SideMenuOptionCell.swift in Sources */,
 				FBB249A726D4D85300AC40E8 /* UserService.swift in Sources */,
+				FBC7C69226E92D690021C70D /* SideMenuOptionHeaderCell.swift in Sources */,
 				FB7AF48A26D37FC20066A0AA /* ClassDetailView.swift in Sources */,
 				FB8E5E7626DA0DCB00E832C0 /* AttendanceListViewModel.swift in Sources */,
 				FB99D9B126CD22EC0059850E /* TimeTable.swift in Sources */,
 				FB767BEE26BEED690011C32E /* ChartView.swift in Sources */,
 				FB722E3A26DBB0E800667D74 /* NewsTopView.swift in Sources */,
 				FB99D9CE26CDF1530059850E /* CalendarSettingViewModel.swift in Sources */,
-				FB99D9CB26CDEFAE0059850E /* SettingSheetView.swift in Sources */,
+				FB99D9CB26CDEFAE0059850E /* SettingSheetCell.swift in Sources */,
 				FB99D9B326CD25320059850E /* AuthViewModel.swift in Sources */,
+				FBC7C68E26E908460021C70D /* InquiryView.swift in Sources */,
 				FB7AF48626D349F40066A0AA /* ClassCell.swift in Sources */,
 				FB99D9A326CD1CA60059850E /* Message.swift in Sources */,
 				FB99D9BF26CD2F570059850E /* CustomSecureField.swift in Sources */,
@@ -982,7 +1061,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.5;
 				DEVELOPMENT_TEAM = 73YRY87G79;
 				INFOPLIST_FILE = CaptionCalendar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
@@ -1005,7 +1084,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.5;
 				DEVELOPMENT_TEAM = 73YRY87G79;
 				INFOPLIST_FILE = CaptionCalendar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
@@ -1045,7 +1124,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FB5EA0DA26E004CE00289BBE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		FBC7C66026E4BAA70021C70D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -1053,15 +1132,7 @@
 				minimumVersion = 8.6.1;
 			};
 		};
-		FB5EA0E926E0090100289BBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.1;
-			};
-		};
-		FB5EA0EC26E0095F00289BBE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+		FBC7C67126E4BB890021C70D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
 			requirement = {
@@ -1069,53 +1140,66 @@
 				minimumVersion = 2.0.2;
 			};
 		};
+		FBC7C67426E4BBF00021C70D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		FB5EA0DB26E004CE00289BBE /* FirebaseFirestore */ = {
+		FBC7C66126E4BAA70021C70D /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FB5EA0DA26E004CE00289BBE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = FBC7C66026E4BAA70021C70D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		FB5EA0DD26E004CE00289BBE /* FirebaseDatabase */ = {
+		FBC7C66326E4BAA70021C70D /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FB5EA0DA26E004CE00289BBE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = FBC7C66026E4BAA70021C70D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
 		};
-		FB5EA0DF26E004CE00289BBE /* FirebaseFirestoreSwift-Beta */ = {
+		FBC7C66526E4BAA70021C70D /* FirebaseFirestoreSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FB5EA0DA26E004CE00289BBE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = FBC7C66026E4BAA70021C70D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseFirestoreSwift-Beta";
 		};
-		FB5EA0E126E004CE00289BBE /* FirebaseStorage */ = {
+		FBC7C66726E4BAA70021C70D /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FB5EA0DA26E004CE00289BBE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = FBC7C66026E4BAA70021C70D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		FBC7C66926E4BAA70021C70D /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBC7C66026E4BAA70021C70D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
 		};
-		FB5EA0E326E004CE00289BBE /* FirebaseFunctions */ = {
+		FBC7C66B26E4BAA70021C70D /* FirebaseFunctions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FB5EA0DA26E004CE00289BBE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = FBC7C66026E4BAA70021C70D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFunctions;
 		};
-		FB5EA0E526E004CE00289BBE /* FirebaseMessaging */ = {
+		FBC7C66D26E4BAA70021C70D /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FB5EA0DA26E004CE00289BBE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = FBC7C66026E4BAA70021C70D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
 		};
-		FB5EA0E726E004CE00289BBE /* FirebaseAuth */ = {
+		FBC7C66F26E4BAA70021C70D /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FB5EA0DA26E004CE00289BBE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = FBC7C66026E4BAA70021C70D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		FB5EA0EA26E0090100289BBE /* SwiftyJSON */ = {
+		FBC7C67226E4BB890021C70D /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FB5EA0E926E0090100289BBE /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
-		FB5EA0ED26E0096000289BBE /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FB5EA0EC26E0095F00289BBE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			package = FBC7C67126E4BB890021C70D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		FBC7C67526E4BBF10021C70D /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBC7C67426E4BBF00021C70D /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

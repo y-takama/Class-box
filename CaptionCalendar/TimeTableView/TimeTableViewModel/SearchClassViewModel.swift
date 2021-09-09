@@ -19,7 +19,7 @@ class SearchClassViewModel: ObservableObject {
     
     func fetchTimeTable() {
         guard let user = AuthViewModel.shared.currentUser else { return }
-        let docRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021LH")
+        let docRef = COLLECTION_TIMETABLE.document(user.university!).collection("LH")
         docRef.getDocuments { snapshot, _ in
             guard let documents = snapshot?.documents else { return }
             self.timetable = documents.map({ TimeTable(dictionary: $0.data()) })
@@ -29,12 +29,12 @@ class SearchClassViewModel: ObservableObject {
     func fetchUserTimeTable() {
             guard let user = AuthViewModel.shared.currentUser else { return }
             guard let uid = AuthViewModel.shared.userSession?.uid else { return }
-            let docRef = COLLECTION_USERS.document(uid).collection("2021LH")
+            let docRef = COLLECTION_USERS.document(uid).collection("LH")
             docRef.getDocuments { snapshot, _ in
                 guard let classList = snapshot?.documents.map({ $0.documentID }) else { return }
                 if classList.isEmpty == false {
                     classList.forEach { classes in
-                        COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document(classes).getDocument { snapshot, _ in
+                        COLLECTION_TIMETABLE.document(user.university!).collection("LH").document(classes).getDocument { snapshot, _ in
                             let timetable = snapshot.map({ TimeTable(dictionary: $0.data()!)})
                             self.timeTable.append(timetable!)
                         }
@@ -48,8 +48,8 @@ class SearchClassViewModel: ObservableObject {
                            classId: String) {
         guard let user = AuthViewModel.shared.currentUser else { return }
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
-        let docRef = COLLECTION_USERS.document(user.id!).collection("2021LH").document(classId)
-        let DogRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document(classId).collection("registeredUser").document(uid)
+        let docRef = COLLECTION_USERS.document(user.id!).collection("LH").document(classId)
+        let DogRef = COLLECTION_TIMETABLE.document(user.university!).collection("LH").document(classId).collection("registeredUser").document(uid)
         let docID = docRef.documentID
         let data = ["note": "",
                     "timetable": "\(dayOfWeek)\(timePeriod)",

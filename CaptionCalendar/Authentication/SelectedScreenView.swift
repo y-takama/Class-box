@@ -26,6 +26,7 @@ struct SelectedScreenView: View {
         "学生の方は Standard より多くの機能(BASE)を使うことができます。学内のメールアドレスを登録することで利用することができます"
     ]
     
+    
     var body: some View {
         
         
@@ -35,7 +36,7 @@ struct SelectedScreenView: View {
                 
 //                GeometryReader { proxy in
 ////                    let size = proxy.size
-//                    Color.white
+                Color.white.ignoresSafeArea(.all)
 //                    
 //                    LinearGradient(colors: [
 //                        .clear,
@@ -47,26 +48,27 @@ struct SelectedScreenView: View {
 //                        }
 //                }
                 
+                
                 VStack(spacing: 20) {
                     
-                    HStack(spacing: 0){
-                        ForEach(titleText) { text in
-                            Text(text.text)
-                                .fontWeight(.black)
-                                .font(.largeTitle)
-                                .offset(y: text.offset)
-                                .foregroundColor(.black)
-                        }
-                    }
-                    .offset(y: endAnimation ? -100 : 0)
-                    .opacity(endAnimation ? 0 : 1)
-                    
-                    Text(subtitle[currentIndex])
-                        .offset(y: !subTitleAnimation ? 70 : 0)
-                        .offset(y: endAnimation ? -100 : 0)
-                        .opacity(endAnimation ? 0 : 1)
-                        .padding(.horizontal)
-                        .foregroundColor(.black)
+//                    HStack(spacing: 0){
+//                        ForEach(titleText) { text in
+//                            Text(text.text)
+//                                .fontWeight(.black)
+//                                .font(.largeTitle)
+//                                .offset(y: text.offset)
+//                                .foregroundColor(.black)
+//                        }
+//                    }
+//                    .offset(y: endAnimation ? -100 : 0)
+//                    .opacity(endAnimation ? 0 : 1)
+//
+//                    Text(subtitle[currentIndex])
+//                        .offset(y: !subTitleAnimation ? 70 : 0)
+//                        .offset(y: endAnimation ? -100 : 0)
+//                        .opacity(endAnimation ? 0 : 1)
+//                        .padding(.horizontal)
+//                        .foregroundColor(.black)
                     
                     NavigationLink(
                         destination:
@@ -77,7 +79,11 @@ struct SelectedScreenView: View {
                                     .font(.system(size: 14, weight: .semibold))
                                     .foregroundColor(.black)
                                     .frame(width: 300, height: 50)
-                                    .background(Color.white)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 25)
+                                            .stroke(Color.black, lineWidth: 0.5)
+                                    )
+//                                    .background(Color.white)
                                     .cornerRadius(25)
 //                                    .background(
 //                                        .white.opacity(1)

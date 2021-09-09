@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ClassEvaluationView: View {
     @Binding var name: String
-    @State var pickerSelection = 1
+    @State var pickerSelection = 0
     @State private var angle = Angle(degrees: 315)
     let classes: TimeTable
     
@@ -25,7 +25,11 @@ struct ClassEvaluationView: View {
         
         let barAttendanceValues : [[Int]] =
         [
-            [0,0,0,0,0],
+            [classes.beforeattendanceNone!,
+             classes.beforeattendanceSometimes!,
+             classes.beforeattendanceEverytime!,
+             classes.beforeattendanceReport!,
+             classes.beforeattendanceNotClear!],
             [classes.attendanceNone!,
              classes.attendanceSometimes!,
              classes.attendanceEverytime!,
@@ -34,7 +38,11 @@ struct ClassEvaluationView: View {
         ]
         let barUnitValues : [[Int]] =
         [
-            [0,0,0,0,0],
+            [classes.beforeunit1!,
+             classes.beforeunit2!,
+             classes.beforeunit3!,
+             classes.beforeunit4!,
+             classes.beforeunit5!],
             [classes.unit1!,
              classes.unit2!,
              classes.unit3!,

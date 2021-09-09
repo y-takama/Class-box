@@ -10,20 +10,30 @@ import Firebase
 
 struct ProfileView: View {
     let width = UIScreen.main.bounds.width
-//    @EnvironmentObject var viewModel: AuthViewModel
     let user: User
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
         let width = UIScreen.main.bounds.width
 //        let height = UIScreen.main.bounds.height
         ScrollView {
             VStack {
-                ZStack(alignment: .leading) {
-                    Image("image1")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: width,
-                               height: UIScreen.main.bounds.height/8, alignment: .top)
-                        .clipped()
+                ZStack(alignment: .bottomLeading) {
+                    ZStack(alignment: .topTrailing) {
+                        Image("image1")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: width,
+                                   height: UIScreen.main.bounds.height/7+20, alignment: .top)
+                            .clipped()
+                        Button(action: { mode.wrappedValue.dismiss() }, label: {
+                            Image(systemName: "multiply.circle.fill")
+                                .font(.title)
+                                .foregroundColor(.black)
+                                .padding(.top, 20)
+                                .padding()
+                        })
+                    }
+                        
                     HStack {
                         ZStack {
                             Circle()
@@ -52,53 +62,8 @@ struct ProfileView: View {
                             
                         }
                         Spacer()
-                    }
+                    }.padding(.bottom, 15)
                 }
-                ZStack {
-                    if user.fullname == "" {
-                        ZStack {
-                            Rectangle()
-                                .frame(width: width*2/3,
-                                       height: 2)
-                                .foregroundColor(.gray)
-                            HStack {
-                                Rectangle()
-                                    .frame(width: width*1/2,
-                                           height: 2, alignment: .leading)
-                                    .foregroundColor(Color(red: 104/255, green: 171/255, blue: 121/255))
-                                Spacer()
-                            }
-                            
-                        }.frame(width: width*2/3,
-                                height: 2, alignment: .center)
-                        
-                    } else {
-                        Rectangle()
-                            .frame(width: width*2/3,
-                                   height: 2, alignment: .center)
-                            .foregroundColor(Color(red: 104/255, green: 171/255, blue: 121/255))
-                        
-                    }
-                    
-                    HStack(spacing: width/6-12) {
-                        Circle()
-                            .frame(width: 10, height: 10)
-                            .foregroundColor(Color(red: 104/255, green: 171/255, blue: 121/255))
-                        Circle()
-                            .frame(width: 10, height: 10)
-                            .foregroundColor(Color(red: 104/255, green: 171/255, blue: 121/255))
-                        Circle()
-                            .frame(width: 10, height: 10)
-                            .foregroundColor(Color(red: 104/255, green: 171/255, blue: 121/255))
-                        Circle()
-                            .frame(width: 10, height: 10)
-                            .foregroundColor(Color(red: 104/255, green: 171/255, blue: 121/255))
-                        Circle()
-                            .frame(width: 10, height: 10)
-                            .foregroundColor(user.fullname != "" ? Color(red: 104/255, green: 171/255, blue: 121/255) : .gray)
-                        
-                    }
-                }.padding()
                 
                 VStack(alignment: .leading, spacing: 18) {
                     HStack {
@@ -113,6 +78,7 @@ struct ProfileView: View {
                         HStack {
                             Image(systemName: "shippingbox")
                                 .font(.system(size: 16))
+                                .frame(width: 20)
                             Text("Plans")
                                 .font(.system(size: 14))
                                 .bold()
@@ -130,6 +96,7 @@ struct ProfileView: View {
                         HStack {
                             Image(systemName: "graduationcap")
                                 .font(.system(size: 16))
+                                .frame(width: 20)
                             Text("大学名")
                                 .font(.system(size: 14))
                                 .bold()
@@ -144,6 +111,7 @@ struct ProfileView: View {
                         HStack {
                             Image(systemName: "location.viewfinder")
                                 .font(.system(size: 16))
+                                .frame(width: 20)
                             Text("キャンパス")
                                 .font(.system(size: 14))
                                 .bold()
@@ -158,8 +126,7 @@ struct ProfileView: View {
                         HStack {
                             Image(systemName: "envelope")
                                 .font(.system(size: 16))
-                             
-                            
+                                .frame(width: 20)
                             Text("メールアドレス")
                                 .font(.system(size: 14))
                                 .bold()
@@ -177,11 +144,6 @@ struct ProfileView: View {
                 }.padding()
                 
             }
-            .navigationBarHidden(true)
-        }
-//        .onAppear {
-//            viewModels.fetchUser()
-//        }
-        
+        }.ignoresSafeArea(.all)
     }
 }

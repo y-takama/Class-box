@@ -8,45 +8,44 @@
 import SwiftUI
 
 struct SettingTimeTableView: View {
-    let user: User
-    @ObservedObject var viewModels = AuthViewModel()
+    @State private var isShowAlert = false
+    @State private var showSettingView = false
     var body: some View {
-        NavigationView {
-            VStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    ForEach(CalendarSettingViewModel.allCases, id: \.self) { option in
-                        if option == .profile {
-                            NavigationLink(
-                                destination: ProfileView(user: user),
-                                label: {
-                                    SettingSheetView(option: option)
-                                })
-                        } else if option == .setting {
-                            NavigationLink(
-                                destination: SettingView(),
-                                label: {
-                                    SettingSheetView(option: option)
-                                })
-                        } else if option == .timetableSetting {
-                            NavigationLink(
-                                destination: SettingCalendar(),
-                                label: {
-                                    SettingSheetView(option: option)
-                                })
-                        } else if option == .hide {
-                            Button(action: { AuthViewModel.shared.signOut() }) {
-                                SettingSheetView(option: option)
-                            }
-                        }
+        VStack(alignment: .leading, spacing: 4) {
+            ForEach(CalendarSettingViewModel.allCases, id: \.self) { option in
+                if option == .profile {
+                    //                            NavigationLink(
+                    //                                destination: ProfileView(user: user),
+                    //                                label: {
+                    //                                    SettingSheetView(option: option)
+                    //                                })
+                } else if option == .setting {
+                    Button(action: { showSettingView.toggle() } ) {
+                        SideMenuOptionHeaderCell(option: option)
+                    }
+                } else if option == .timetableSetting {
+                    NavigationLink(
+                        destination: SettingCalendar(),
+                        label: {
+                            SettingSheetCell(option: option)
+                        })
+                } else if option == .hide {
+                    Button(action: { isShowAlert.toggle() }) {
+                        SettingSheetCell(option: option)
+                    }
+                    .alert(isPresented: $isShowAlert) {
+                        Alert(title: Text(""), message: Text("次回アップデート予定です。アップデートをお待ちください。"), dismissButton: .destructive(Text("OK")))
                     }
                 }
-                .padding(.top, 40)
-                .frame(width: UIScreen.main.bounds.width-40,
-                       alignment: .top)
-                .navigationBarHidden(true)
-                Spacer()
             }
-            
+        }
+        .padding(.bottom,(UIApplication.shared.windows.last?.safeAreaInsets.bottom)! + 10)
+        .padding(.top, 20)
+        .frame(width: UIScreen.main.bounds.width)
+        .background(Color("TintColor"))
+        .cornerRadius(25)
+        .fullScreenCover(isPresented: $showSettingView) {
+            SettingView()
         }
     }
 }
