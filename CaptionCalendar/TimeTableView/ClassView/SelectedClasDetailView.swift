@@ -266,6 +266,9 @@ struct SelectedClasDetailView: View {
             }.padding()
             
         }
+        .onAppear(perform: {
+            viewModel.fetchClass()
+        })
         .navigationBarItems(trailing: menuButton)
         .navigationTitle(classes.courseName)
         .sheet(isPresented: $isPresentedColorChooser) {
@@ -353,7 +356,7 @@ struct SelectedClasDetailView: View {
             })
         } label: {
             Image(systemName: "ellipsis")
-                .font(.title3)
+                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
         }
     }

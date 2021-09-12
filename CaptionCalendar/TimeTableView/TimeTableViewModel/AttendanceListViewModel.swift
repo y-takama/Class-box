@@ -16,7 +16,7 @@ class AttendanceListViewModel: ObservableObject {
         self.classInfo = classInfo
         self.classinfo = classInfo
         AttendanceList()
-//        fetchClass()
+        fetchClass()
     }
     func AttendanceList() {
         //        guard let user = AuthViewModel.shared.currentUser else { return }

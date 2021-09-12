@@ -10,7 +10,6 @@ import Foundation
 enum SideMenuOption: Int, CaseIterable {
     case calendar
     case calendarList
-    
     case timeTable
     case chat
     case news
@@ -20,6 +19,10 @@ enum SideMenuOption: Int, CaseIterable {
     case report
     case reminder
     case workPlace
+    case classbox
+    case userreport
+    case other
+
     
     
     var description: String {
@@ -35,6 +38,9 @@ enum SideMenuOption: Int, CaseIterable {
         case .inquiry: return "お知らせ"
         case .report: return "問題を報告する"
         case .workPlace: return "WorkPlace"
+        case .classbox: return "アプリ全体に関して"
+        case .userreport: return "不正利用、ユーザーの問題に関して"
+        case .other: return "その他"
         }
     }
     
@@ -51,6 +57,9 @@ enum SideMenuOption: Int, CaseIterable {
         case .inquiry: return "megaphone"
         case .report: return "arrow.up.doc"
         case .workPlace: return "mosaic"
+        case .classbox: return "shippingbox"
+        case .userreport: return "person.fill.xmark"
+        case .other: return "command.circle"
         }
     }
 }

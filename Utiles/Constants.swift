@@ -13,4 +13,5 @@ let COLLECTION_FOLLOWING = Firestore.firestore().collection("following")
 let COLLECTION_MESSAGES = Firestore.firestore().collection("messages")
 let COLLECTION_TIMETABLE = Firestore.firestore().collection("timetable")
 let COLLECTION_POSTS = Firestore.firestore().collection("captions")
+let COLLECTION_REPORT = Firestore.firestore().collection("report")
 

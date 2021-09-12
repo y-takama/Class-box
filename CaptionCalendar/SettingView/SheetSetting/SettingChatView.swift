@@ -24,17 +24,12 @@ struct SettingChatView: View {
                         SideMenuOptionHeaderCell(option: option)
                     }
                 } else if option == .timetableSetting {
-                    NavigationLink(
-                        destination: SettingCalendar(),
-                        label: {
-                            SettingSheetCell(option: option)
-                        })
-                } else if option == .hide {
                     Button(action: { isShowAlert.toggle() }) {
                         SettingSheetCell(option: option)
                     }
-                    .alert(isPresented: $isShowAlert) {
-                        Alert(title: Text(""), message: Text("次回アップデート予定です。アップデートをお待ちください。"), dismissButton: .destructive(Text("OK")))
+                } else if option == .hide {
+                    Button(action: { isShowAlert.toggle() }) {
+                        SettingSheetCell(option: option)
                     }
                 }
             }
@@ -46,6 +41,9 @@ struct SettingChatView: View {
         .cornerRadius(25)
         .fullScreenCover(isPresented: $showSettingView) {
             SettingView()
+        }
+        .alert(isPresented: $isShowAlert) {
+            Alert(title: Text(""), message: Text("次回アップデート予定です。アップデートをお待ちください。"), dismissButton: .destructive(Text("OK")))
         }
     }
 }

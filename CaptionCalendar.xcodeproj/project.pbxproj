@@ -136,6 +136,9 @@
 		FBC7C69426E937740021C70D /* SettingChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C69326E937740021C70D /* SettingChatView.swift */; };
 		FBC7C69626E99A470021C70D /* UnfinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C69526E99A470021C70D /* UnfinishedView.swift */; };
 		FBC7C69826E9ACD00021C70D /* ReportHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C69726E9ACD00021C70D /* ReportHeaderView.swift */; };
+		FBC7C6A126EA38500021C70D /* ReportSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C6A026EA38500021C70D /* ReportSendView.swift */; };
+		FBC7C6A326EA398B0021C70D /* ReportTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C6A226EA398B0021C70D /* ReportTextField.swift */; };
+		FBC7C6A526EA40520021C70D /* ReportBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7C6A426EA40520021C70D /* ReportBottomView.swift */; };
 		FBE3D9B526BC021B000BE655 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE3D9B426BC021B000BE655 /* CalendarView.swift */; };
 		FBE3D9BB26BC33E5000BE655 /* CalendarRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE3D9BA26BC33E5000BE655 /* CalendarRowView.swift */; };
 		FBE3D9BD26BCC44D000BE655 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE3D9BC26BCC44D000BE655 /* EventView.swift */; };
@@ -268,6 +271,9 @@
 		FBC7C69326E937740021C70D /* SettingChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingChatView.swift; sourceTree = "<group>"; };
 		FBC7C69526E99A470021C70D /* UnfinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfinishedView.swift; sourceTree = "<group>"; };
 		FBC7C69726E9ACD00021C70D /* ReportHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHeaderView.swift; sourceTree = "<group>"; };
+		FBC7C6A026EA38500021C70D /* ReportSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSendView.swift; sourceTree = "<group>"; };
+		FBC7C6A226EA398B0021C70D /* ReportTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTextField.swift; sourceTree = "<group>"; };
+		FBC7C6A426EA40520021C70D /* ReportBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportBottomView.swift; sourceTree = "<group>"; };
 		FBE3D9B426BC021B000BE655 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		FBE3D9BA26BC33E5000BE655 /* CalendarRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRowView.swift; sourceTree = "<group>"; };
 		FBE3D9BC26BCC44D000BE655 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -417,6 +423,7 @@
 				FB99D9BE26CD2F570059850E /* CustomSecureField.swift */,
 				FB7AF47126CFDDBC0066A0AA /* CustomCreateClassTextField.swift */,
 				FB7AF47B26D0B3800066A0AA /* SearchBar.swift */,
+				FBC7C6A226EA398B0021C70D /* ReportTextField.swift */,
 			);
 			path = Utiles;
 			sourceTree = "<group>";
@@ -655,12 +662,22 @@
 		FBC7C68A26E8F2D40021C70D /* SideMenuOptionView */ = {
 			isa = PBXGroup;
 			children = (
+				FBC7C6A626EA40590021C70D /* ReportView */,
 				FBC7C68B26E8F2F70021C70D /* HelpView.swift */,
 				FBC7C68D26E908460021C70D /* InquiryView.swift */,
-				FBC7C68F26E9086E0021C70D /* ReportView.swift */,
-				FBC7C69726E9ACD00021C70D /* ReportHeaderView.swift */,
 			);
 			path = SideMenuOptionView;
+			sourceTree = "<group>";
+		};
+		FBC7C6A626EA40590021C70D /* ReportView */ = {
+			isa = PBXGroup;
+			children = (
+				FBC7C68F26E9086E0021C70D /* ReportView.swift */,
+				FBC7C69726E9ACD00021C70D /* ReportHeaderView.swift */,
+				FBC7C6A426EA40520021C70D /* ReportBottomView.swift */,
+				FBC7C6A026EA38500021C70D /* ReportSendView.swift */,
+			);
+			path = ReportView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -817,7 +834,9 @@
 				FBB249A426D4D76500AC40E8 /* UserCell.swift in Sources */,
 				FB7AF4A726D4D2D50066A0AA /* ChatView.swift in Sources */,
 				FBE3D9BB26BC33E5000BE655 /* CalendarRowView.swift in Sources */,
+				FBC7C6A526EA40520021C70D /* ReportBottomView.swift in Sources */,
 				FB7AF49F26D4D25A0066A0AA /* ConversationCell.swift in Sources */,
+				FBC7C6A326EA398B0021C70D /* ReportTextField.swift in Sources */,
 				FB03AF6326C28DC000CCF20E /* DetailDayView.swift in Sources */,
 				FB7AF4A326D4D2990066A0AA /* ChatBubble.swift in Sources */,
 				FB722E3326DAB00400667D74 /* ClassChatViewModel.swift in Sources */,
@@ -832,6 +851,7 @@
 				FBB38D1A26ADB582005BE209 /* CalendarListView.swift in Sources */,
 				FB0D56F026C2A2A30097CE09 /* CalendarDetailRowView.swift in Sources */,
 				FB99D9DC26CECB310059850E /* TimeTableViewModel.swift in Sources */,
+				FBC7C6A126EA38500021C70D /* ReportSendView.swift in Sources */,
 				FBC7C68526E8AF130021C70D /* SideMenuHeaderView.swift in Sources */,
 				FB7AF47826D00F740066A0AA /* University.swift in Sources */,
 				FBB249AB26D516F600AC40E8 /* ClassEvaluationBarView.swift in Sources */,
@@ -1061,7 +1081,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.5;
+				CURRENT_PROJECT_VERSION = 1.0.7;
 				DEVELOPMENT_TEAM = 73YRY87G79;
 				INFOPLIST_FILE = CaptionCalendar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
@@ -1084,7 +1104,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.5;
+				CURRENT_PROJECT_VERSION = 1.0.7;
 				DEVELOPMENT_TEAM = 73YRY87G79;
 				INFOPLIST_FILE = CaptionCalendar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;

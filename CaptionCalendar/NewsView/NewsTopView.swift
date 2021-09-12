@@ -14,7 +14,7 @@ struct NewsTopView: View {
     @Binding private var source: String
     @ObservedObject var list: getData
     let width = UIScreen.main.bounds.width
-    
+    let height = UIScreen.main.bounds.height
     init(source: Binding<String>) {
         self._source = source
         list = getData(source: source)
@@ -31,7 +31,7 @@ struct NewsTopView: View {
                             WebImage(url: URL(string: i.image), options: .highPriority, context: nil)
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: width, height: width*3/4)
+                                .frame(width: width, height: height/4)
                                 .clipped()
                             
 //                                LinearGradient(colors: [

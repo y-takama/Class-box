@@ -33,7 +33,7 @@ struct SideMenu: View {
                         Divider()
                         SideMenuTabView()
                         Divider()
-                        SideMenuButtomView()
+                        SideMenuButtomView(user: user)
                         Divider()
                         Button(action: {
                             logoutButton.toggle()
@@ -66,7 +66,7 @@ struct SideMenu: View {
                                 Spacer()
                             }
                             HStack {
-                                Text("Version 0.0.1  Build 1.0.5")
+                                Text("Version 0.0.1  Build 1.0.7")
                                     .font(.caption)
                                 Spacer()
                             }

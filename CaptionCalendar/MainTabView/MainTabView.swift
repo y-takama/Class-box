@@ -24,58 +24,111 @@ struct MainTabView: View {
         ZStack {
             HStack(spacing: 0) {
                 SideMenu(showMenu: $showMenu, user: user)
-                TabView(selection: $selection) {
-                    
-                    MainCalendarView(showMenu: $showMenu, showCalendarSheet: $showCalendarSheet, user: user)
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "calendar")
-                                Text("Calendar")
-                            }
-                        }.tag(0)
-                    
-                    CalendarListView(user: user)
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "list.bullet")
-                                Text("List")
-                            }
-                        }.tag(1)
-                    
-                    if user.userStats == "student" {
-                        MainTableView(showTimeTableSheet: $showTimeTableSheet, user: user)
+                if #available(iOS 15.0, *) {
+                    TabView(selection: $selection) {
+                        MainCalendarView(showMenu: $showMenu, showCalendarSheet: $showCalendarSheet, user: user)
                             .tabItem {
                                 VStack {
-                                    Image(systemName: "square.grid.3x3")
-                                    Text("TimeTable")
+                                    Image(systemName: "calendar")
+                                    Text("Calendar")
                                 }
-                            }.tag(2)
+                            }.tag(0)
+                        
+                        CalendarListView(user: user)
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "list.bullet")
+                                    Text("List")
+                                }
+                            }.tag(1)
+                        
+                        if user.userStats == "student" {
+                            MainTableView(showTimeTableSheet: $showTimeTableSheet, user: user)
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "square.grid.3x3")
+                                        Text("TimeTable")
+                                    }
+                                }.tag(2)
+                        }
+                        
+                        ConversationsView(showChatSheet: $showChatSheet, users: user)
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "message")
+                                    Text("Chat")
+                                }
+                            }.tag(3)
+                        NewsMainView()
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "newspaper")
+                                    Text("News")
+                                }
+                            }.tag(4)
+                        
                     }
-                    
-                    ConversationsView(showChatSheet: $showChatSheet, users: user)
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "message")
-                                Text("Chat")
-                            }
-                        }.tag(3)
-                    NewsMainView()
-                        .tabItem {
-                            VStack {
-                                Image(systemName: "newspaper")
-                                Text("News")
-                            }
-                        }.tag(4)
-                    
+                    .frame(width: getRect().width)
+                    .overlay(Rectangle()
+                                .fill(
+                                    Color.primary.opacity(Double((offset/sideBarWidth)/5))
+                                )
+                                .ignoresSafeArea(.container, edges: .vertical)
+                                .onTapGesture { withAnimation { showMenu.toggle()}})
+                } else {
+                    TabView(selection: $selection) {
+                        MainCalendarView(showMenu: $showMenu, showCalendarSheet: $showCalendarSheet, user: user)
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "calendar")
+                                    Text("Calendar")
+                                }
+                            }.tag(0)
+                        
+                        CalendarListView(user: user)
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "list.bullet")
+                                    Text("List")
+                                }
+                            }.tag(1)
+                        
+                        if user.userStats == "student" {
+                            MainTableView(showTimeTableSheet: $showTimeTableSheet, user: user)
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "square.grid.3x3")
+                                        Text("TimeTable")
+                                    }
+                                }.tag(2)
+                        }
+                        
+                        ConversationsView(showChatSheet: $showChatSheet, users: user)
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "message")
+                                    Text("Chat")
+                                }
+                            }.tag(3)
+                        NewsMainView()
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "newspaper")
+                                    Text("News")
+                                }
+                            }.tag(4)
+                        
+                    }
+                    .frame(width: getRect().width)
+                    .overlay( offset > 0 || showMenu == true ?
+                                Rectangle()
+                                .fill(
+                                    Color.primary.opacity(Double((offset/sideBarWidth)/5))
+                                )
+                                .ignoresSafeArea(.container, edges: .vertical)
+                                .onTapGesture { withAnimation { showMenu.toggle()} } : nil )
                 }
-                .frame(width: getRect().width)
-                .overlay(selection == 0 ?
-                            Rectangle()
-                            .fill(
-                                Color.primary.opacity(Double((offset/sideBarWidth)/5))
-                            )
-                            .ignoresSafeArea(.container, edges: .vertical)
-                            .onTapGesture {withAnimation {showMenu.toggle()}} : nil)
+                
             }
             .frame(width: getRect().width + sideBarWidth)
             .offset(x: -sideBarWidth / 2)

@@ -8,6 +8,7 @@
 import SwiftUI
 struct SettingView: View {
     @State private var showingAlert = false
+    @State private var isShowAlert = false
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
@@ -23,46 +24,32 @@ struct SettingView: View {
 //                                    SettingSheetView(option: option)
 //                                })
                         } else if option == .tab {
-                            NavigationLink(
-                                destination: SettingView(),
-                                label: {
-                                    SettingSheetCell(option: option)
-                                })
+                            Button(action: { isShowAlert.toggle() }) {
+                                SettingSheetCell(option: option)
+                            }
+                            
                         } else if option == .announce {
-                            NavigationLink(
-                                destination: SettingView(),
-                                label: {
-                                    SettingSheetCell(option: option)
-                                })
+                            Button(action: { isShowAlert.toggle() }) {
+                                SettingSheetCell(option: option)
+                            }
                         } else if option == .security {
-                            NavigationLink(
-                                destination: SettingView(),
-                                label: {
-                                    SettingSheetCell(option: option)
-                                })
+                            Button(action: { isShowAlert.toggle() }) {
+                                SettingSheetCell(option: option)
+                            }
                         } else if option == .privacyPolicy {
-                            NavigationLink(
-                                destination: SettingView(),
-                                label: {
-                                    SettingSheetCell(option: option)
-                                })
+                            Button(action: { isShowAlert.toggle() }) {
+                                SettingSheetCell(option: option)
+                            }
                         } else if option == .termsOfService {
-                            NavigationLink(
-                                destination: SettingView(),
-                                label: {
-                                    SettingSheetCell(option: option)
-                                })
-                        } else if option == .logout {
-                            Button(action: {
-                                AuthViewModel.shared.signOut()
-                                
-                                
-                            }) {
+                            Button(action: { isShowAlert.toggle() }) {
                                 SettingSheetCell(option: option)
                             }
                         }
                     }
                     Divider()
+                }
+                .alert(isPresented: $isShowAlert) {
+                    Alert(title: Text(""), message: Text("次回アップデート予定です。アップデートをお待ちください。"), dismissButton: .destructive(Text("OK")))
                 }
                 .frame(width: UIScreen.main.bounds.width-40,
                        alignment: .top)

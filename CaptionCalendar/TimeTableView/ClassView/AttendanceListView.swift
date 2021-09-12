@@ -13,6 +13,8 @@ struct AttendanceListView: View {
     var body: some View {
         
         List {
+            Text(String(viewModel.classinfo.attendance!))
+//            Text(viewModel.classinfo.attendance)
             ForEach(viewModel.attendanceList, id: \.self) { list in
                 NavigationLink(destination:
                     ClassUserNote()

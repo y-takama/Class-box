@@ -1,5 +1,5 @@
 //
-//  InquiryView.swift
+//  ReportView.swift
 //  CaptionCalendar
 //
 //  Created by 髙間洋平 on 2021/09/09.
@@ -7,20 +7,25 @@
 
 import SwiftUI
 
-struct InquiryView: View {
+struct ReportView: View {
+    @Binding var showReportView: Bool
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    let user: User
     var body: some View {
         NavigationView {
-            VStack {
-                Text("お知らせはありません")
-                    .bold()
-                    .font(.system(size: 15))
-                    .foregroundColor(.gray)
+            VStack(spacing: 8) {
+                ReportHeaderView(showReportView: $showReportView, user: user)
+                Divider()
+                ReportBottomView(showReportView: $showReportView, user: user)
+                Spacer()
                 
             }
+            .padding(.leading, -40)
             .navigationBarItems(trailing: backButton)
-            .navigationTitle("お知らせ")
+            .navigationTitle("問題")
             .navigationBarTitleDisplayMode(.inline)
+            
+            
         }
     }
     var backButton: some View {
@@ -33,10 +38,4 @@ struct InquiryView: View {
         })
     }
 
-}
-
-struct InquiryView_Previews: PreviewProvider {
-    static var previews: some View {
-        InquiryView()
-    }
 }

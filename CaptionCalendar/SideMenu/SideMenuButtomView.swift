@@ -11,6 +11,7 @@ struct SideMenuButtomView: View {
     @State private var showHelpView = false
     @State private var showInquiryView = false
     @State private var showReportView = false
+    let user: User
     var body: some View {
         ForEach(SideMenuOption.allCases, id: \.self) { option in
             if option == .help {
@@ -36,14 +37,8 @@ struct SideMenuButtomView: View {
             InquiryView()
         }
         .fullScreenCover(isPresented: $showReportView) {
-            ReportView()
+            ReportView(showReportView: $showReportView, user: user)
         }
 
-    }
-}
-
-struct SideMenuButtomView_Previews: PreviewProvider {
-    static var previews: some View {
-        SideMenuButtomView()
     }
 }

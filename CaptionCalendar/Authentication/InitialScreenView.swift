@@ -154,7 +154,7 @@ struct InitialScreenView: View {
                         }
                     }
                 }
-            }
+            }.navigationBarHidden(true)
         }
     }
     

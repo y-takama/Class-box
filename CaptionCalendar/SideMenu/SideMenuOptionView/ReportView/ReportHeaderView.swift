@@ -8,40 +8,42 @@
 import SwiftUI
 
 struct ReportHeaderView: View {
+    @Binding var showReportView: Bool
+    let user: User
     var body: some View {
         VStack(spacing: 0) {
             ForEach(SideMenuOption.allCases, id: \.self) { option in
                 if option == .calendar {
                     NavigationLink(
-                        destination: SettingView(),
+                        destination: ReportSendView(showReportView: $showReportView, option: option, user: user),
                         label: {
                             SideMenuOptionCell(option: option)
                         })
                 }
                 else if option == .calendarList {
                     NavigationLink(
-                        destination: SettingView(),
+                        destination: ReportSendView(showReportView: $showReportView, option: option, user: user),
                         label: {
                             SideMenuOptionCell(option: option)
                         })
                 }
                 else if option == .timeTable {
                     NavigationLink(
-                        destination: SettingView(),
+                        destination: ReportSendView(showReportView: $showReportView, option: option, user: user),
                         label: {
                             SideMenuOptionCell(option: option)
                         })
                 }
                 else if option == .chat {
                     NavigationLink(
-                        destination: SettingView(),
+                        destination: ReportSendView(showReportView: $showReportView, option: option, user: user),
                         label: {
                             SideMenuOptionCell(option: option)
                         })
                 }
                 else if option == .news {
                     NavigationLink(
-                        destination: SettingView(),
+                        destination: ReportSendView(showReportView: $showReportView, option: option, user: user),
                         label: {
                             SideMenuOptionCell(option: option)
                         })
@@ -63,11 +65,5 @@ struct ReportHeaderView: View {
                 }
             }
         }
-    }
-}
-
-struct ReportHeaderView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReportHeaderView()
     }
 }
