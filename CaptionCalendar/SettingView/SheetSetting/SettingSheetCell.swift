@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct SettingSheetCell: View {
-    let option: CalendarSettingViewModel
+    let option: SettingViewModel
     var body: some View {
         HStack(spacing: 16) {
             Image(systemName: option.imageName)
-                .font(.system(size: 20))
+                .font(.system(size: 18))
+                .frame(width: 25)
             Text(option.description)
                 .font(.system(size: 15))
                 .bold()

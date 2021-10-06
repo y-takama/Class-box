@@ -44,10 +44,10 @@ struct DetailDayView: View {
                     }
                     
 //                    Spacer()
-                    AdView()
-                        .frame(width: UIScreen.main.bounds.width,
-                               height: UIScreen.main.bounds.width*5/32)
-                        .padding(.top, 80)
+//                    AdView()
+//                        .frame(width: UIScreen.main.bounds.width,
+//                               height: UIScreen.main.bounds.width*5/32)
+//                        .padding(.top, 80)
                     
                 }
             }

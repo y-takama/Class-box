@@ -8,8 +8,8 @@
 import SwiftUI
 import SwiftyJSON
 
-struct dataType : Identifiable {
-    var id : String
+struct dataType : Identifiable, Hashable {
+    var id = UUID()
     var title : String
     var desc : String
     var url : String
@@ -34,10 +34,10 @@ class getData: ObservableObject {
                 let description = i.1["description"].stringValue
                 let url = i.1["url"].stringValue
                 let image = i.1["urlToImage"].stringValue
-                let id = i.1["publishedAt"].stringValue
+//                let id = i.1["publishedAt"].stringValue
                 
                 DispatchQueue.main.async {
-                    self.datas.append(dataType(id: id, title: title, desc: description, url: url, image: image))
+                    self.datas.append(dataType(title: title, desc: description, url: url, image: image))
                 }
             }
         }.resume()

@@ -29,9 +29,13 @@ struct SideMenu: View {
                         .padding(.trailing, 25)
                         .padding(.top, UIScreen.main.bounds.height/15)
                         
-                        SideMenuHeaderView(user: user)
+                        SideMenuHeaderView(viewModel: ProfileViewModel(user: user), user: user)
                         Divider()
-                        SideMenuTabView()
+                        if user.admin! == "0" {
+                            SideMenuAdminView(user: user)
+                            Divider()
+                        }
+                        SideMenuTabView(user: user)
                         Divider()
                         SideMenuButtomView(user: user)
                         Divider()
@@ -66,7 +70,7 @@ struct SideMenu: View {
                                 Spacer()
                             }
                             HStack {
-                                Text("Version 0.0.1  Build 1.0.7")
+                                Text("Version 1.0.0  Build 1.0.0")
                                     .font(.caption)
                                 Spacer()
                             }
@@ -96,7 +100,7 @@ struct SideMenu: View {
             .ignoresSafeArea(edges: .top)
             .navigationBarHidden(true)
         }
-        
+//        .accentColor(Color("TextColor"))
     }
 }
 extension View {

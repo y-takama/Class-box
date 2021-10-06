@@ -9,31 +9,29 @@ import SwiftUI
 
 class ConversationsViewModel: ObservableObject {
     @Published var recentMessages = [Message]()
+    @Published var classChat: User
+    @Published var loading = false
     private var recentMessagesDictionary = [String: Message]()
     
-    init() {
+    init(classChat: User) {
+        self.classChat = classChat
         fetchRecentMessages()
+        fethClassChat()
     }
     
     func fetchRecentMessages() {
+        self.loading = true
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
-        
-        COLLECTION_USERS.document(uid).collection("user-blocklist").getDocuments { snapshot, _ in
+        COLLECTION_USERS.document(uid).collection("BloakList").getDocuments { snapshot, _ in
             guard let blockUser = snapshot?.documents.map({ $0.documentID }) else { return }
-            print("DEBUG12  :\(blockUser)")
-            if blockUser.isEmpty == true {
+            if blockUser.isEmpty {
                 let query = COLLECTION_MESSAGES.document(uid).collection("recent-messages")
-                print("DEBUG11  :\(query)")
-                query.order(by: "timestamp", descending: true)
-
                 query.addSnapshotListener { snapshot, error in
                     guard let changes = snapshot?.documentChanges else { return }
-
                     changes.forEach { change in
                         print("DEBUG12  :\(change)")
                         let messageData = change.document.data()
                         let uid = change.document.documentID
-
                         COLLECTION_USERS.document(uid).getDocument { snapshot, _ in
                             guard let data = snapshot?.data() else { return }
                             let user = User(dictionary: data)
@@ -47,15 +45,10 @@ class ConversationsViewModel: ObservableObject {
                 let query = COLLECTION_MESSAGES.document(uid).collection("recent-messages")
                 query.addSnapshotListener { snapshot, error in
                     guard let changes = snapshot?.documentChanges else { return }
-
                     changes.forEach { change in
                         print("DEBUG12  :\(change)")
-    //                    if blockUser.firstIndex(of: change) == nil {
-    //
-    //                    }
                         let messageData = change.document.data()
                         let uid = change.document.documentID
-                        
                         if blockUser.firstIndex(of: uid) == nil {
                             COLLECTION_USERS.document(uid).getDocument { snapshot, _ in
                                 guard let data = snapshot?.data() else { return }
@@ -68,6 +61,14 @@ class ConversationsViewModel: ObservableObject {
                     }
                 }
             }
+            self.loading = false
+        }
+    }
+    func fethClassChat() {
+        guard let uid = AuthViewModel.shared.userSession?.uid else { return }
+        COLLECTION_USERS.document(uid).getDocument{ snapshot, _ in
+            guard let data = snapshot?.data() else { return }
+            self.classChat = User(dictionary: data)
         }
     }
 }

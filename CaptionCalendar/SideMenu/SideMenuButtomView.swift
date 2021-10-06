@@ -13,7 +13,7 @@ struct SideMenuButtomView: View {
     @State private var showReportView = false
     let user: User
     var body: some View {
-        ForEach(SideMenuOption.allCases, id: \.self) { option in
+        ForEach(MenuOption.allCases, id: \.self) { option in
             if option == .help {
                 Button(action: { showHelpView.toggle() } ) {
                     SideMenuOptionCell(option: option)

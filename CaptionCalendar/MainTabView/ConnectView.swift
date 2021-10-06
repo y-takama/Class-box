@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ConnectView: View {
+    @State var isLoading = false
     @EnvironmentObject var viewModel: AuthViewModel
     let coloredNavAppearance = UINavigationBarAppearance()
     init() {
@@ -24,11 +25,27 @@ struct ConnectView: View {
             if viewModel.userSession == nil {
                 InitialScreenView()
             } else {
-                if let user = viewModel.currentUser {
-                    MainTabView(user: user)
+                
+                ZStack {
+                    if let user = viewModel.currentUser {
+                        MainTabView(user: user)
+                            .navigationBarHidden(true)
+                    }
+                    if viewModel.loading {
+                        ZStack {
+                            Color("TintColor").ignoresSafeArea(.all)
+                            VStack(spacing: 20) {
+                                Image(systemName: "shippingbox")
+                                    .font(Font.system(size: 55, weight: .bold))
+                                    .foregroundColor(Color(red: 104/255, green: 171/255, blue: 121/255))
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: Color("CaptionColor")))
+                                    .scaleEffect(1)
+                            }
+                        }
+                    }
                 }
             }
-        }
-        .accentColor(Color("CaptionColor"))
+        }.accentColor(Color("CaptionColor"))
     }
 }

@@ -15,7 +15,7 @@ struct TimeTable: Identifiable, Decodable, Hashable {
     var roomLocation: String?
     var teacherName: String?
     var teacherName2: String?
-    let unit: String?
+    let unit: Int?
     var author: String?
     var editer: String?
     var campus: String?
@@ -27,6 +27,7 @@ struct TimeTable: Identifiable, Decodable, Hashable {
     var color: String?
     var classId: String
     var listId: String
+    var graduate: String?
     let status: String
     var absence: Int?
     var attendance: Int?
@@ -60,7 +61,7 @@ struct TimeTable: Identifiable, Decodable, Hashable {
         self.roomLocation = dictionary["roomLocation"] as? String ?? ""
         self.teacherName = dictionary["teacherName"] as? String ?? ""
         self.teacherName2 = dictionary["teacherName"] as? String ?? ""
-        self.unit = dictionary["unit"] as? String ?? ""
+        self.unit = dictionary["unit"] as? Int ?? 0
         self.author = dictionary["author"] as? String ?? ""
         self.editer = dictionary["editer"] as? String ?? ""
         self.campus = dictionary["campus"] as? String ?? ""
@@ -72,6 +73,7 @@ struct TimeTable: Identifiable, Decodable, Hashable {
         self.color = dictionary["color"] as? String ?? "Color"
         self.classId = dictionary["classId"] as? String ?? ""
         self.listId = dictionary["listId"] as? String ?? ""
+        self.graduate = dictionary["graduate"] as? String ?? ""
         self.status = dictionary["status"] as? String ?? ""
         self.absence = dictionary["absence"] as? Int ?? 0
         self.attendance = dictionary["attendance"] as? Int ?? 0

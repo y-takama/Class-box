@@ -12,10 +12,10 @@ class ClassChatViewModel: ObservableObject {
     
     init(userId: User) {
         self.userId = userId
-        fetchChatUser()
+//        fetchChatUser()
     }
-    func fetchChatUser() {
-        guard let uid = AuthViewModel.shared.userSession?.uid else { return }
-        
-    }
+//    func fetchChatUser() {
+//        guard let uid = AuthViewModel.shared.userSession?.uid else { return }
+//
+//    }
 }

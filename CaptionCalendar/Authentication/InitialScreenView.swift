@@ -14,14 +14,14 @@ struct InitialScreenView: View {
     @State var subTitleAnimation: Bool = false
     @State var endAnimation = false
     @State var titles = [
-        "Title here",
-        "Title2 here",
-        "Title3 here",
+        "Class-box",
+        "Class-box",
+        "Class-box",
     ]
     @State var subtitle = [
-        "Sub Title here",
-        "Sub2 Title here",
-        "Sub3 Title here"
+        "There are many tools in the Class-box to help you with your life",
+        "There are many tools in the Class-box to help you with your life",
+        "There are many tools in the Class-box to help you with your life"
     ]
     
     var body: some View {
@@ -44,31 +44,37 @@ struct InitialScreenView: View {
                                    height: size.height)
                             .opacity(currentIndex == (index - 1) ? 1 : 0)
                     }
-//                    LinearGradient(colors: [
-//                        .clear,
-//                        .black.opacity(0.5),
-//                        .black
-//                    ], startPoint: .top, endPoint: .bottom)
+                    if #available(iOS 15.0, *) {
+                        LinearGradient(colors: [
+                            .clear,
+                            .black.opacity(0.1),
+                            .black.opacity(0.1)
+                        ], startPoint: .top, endPoint: .bottom)
+                    }
+                    
                 }
                 
                 VStack(spacing: 20) {
-                    
-                    HStack(spacing: 0){
-                        ForEach(titleText) { text in
-                            Text(text.text)
-                                .font(.largeTitle.bold())
-                                .offset(y: text.offset)
+                    if #available(iOS 15.0, *) {
+                        HStack(spacing: 0){
+                            ForEach(titleText) { text in
+                                Text(text.text)
+                                    .font(.largeTitle.bold())
+                                    .offset(y: text.offset)
 
+                            }
                         }
-                    }
-                    .offset(y: endAnimation ? -100 : 0)
-                    .opacity(endAnimation ? 0 : 1)
-                    
-                    
-                    Text(subtitle[currentIndex])
-                        .offset(y: !subTitleAnimation ? 70 : 0)
                         .offset(y: endAnimation ? -100 : 0)
                         .opacity(endAnimation ? 0 : 1)
+                        
+                        
+                        Text(subtitle[currentIndex])
+                            .offset(y: !subTitleAnimation ? 70 : 0)
+                            .offset(y: endAnimation ? -100 : 0)
+                            .opacity(endAnimation ? 0 : 1)
+                            .padding(.horizontal, 40)
+                    }
+                    
                     
                     NavigationLink(
                         destination:
@@ -104,10 +110,7 @@ struct InitialScreenView: View {
                                     .foregroundColor(.white)
                                 
                                     .frame(width: 300, height: 50)
-//                                    .overlay(
-//                                        RoundedRectangle(cornerRadius: 25)
-//                                            .stroke(Color.black, lineWidth: 1)
-//                                    )
+//                                    
                                     .background(Color.black.opacity(0.2))
                                     .cornerRadius(25)
 //                                    .background(
@@ -177,11 +180,5 @@ struct InitialScreenView: View {
             }
             
         }
-    }
-}
-
-struct InitialScreenView_Previews: PreviewProvider {
-    static var previews: some View {
-        InitialScreenView()
     }
 }

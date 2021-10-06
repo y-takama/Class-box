@@ -20,6 +20,7 @@ struct CalendarView: View {
     let width = UIScreen.main.bounds.width
     let dt = Date()
     @ObservedObject var eventsRepository = EventsRepository.shared
+    @ObservedObject var viewModel = CalenderContentViewModel()
     @State private var activeSheet: ActiveSheet = .calendarChooser
     @State private var selectedEvent: EKEvent?
     var showingSheet = false
@@ -35,11 +36,11 @@ struct CalendarView: View {
     }
     
     var body: some View {
-        // 1週
         let today = CalendarView.longDateFormatter.string(from: dt)
         let selecttedDay = String(format: "%04d",self.year)+String(format: "%02d",self.month)+String(format: "%02d",self.data)
         VStack(spacing: 0) {
             VStack(spacing: 0) {
+            // 1週
             HStack(spacing: 0) {
                 if self.startdaynumber != 0{
                     ForEach(0..<self.startdaynumber,id:\.self){ index in
@@ -97,6 +98,11 @@ struct CalendarView: View {
                                         EventLongView(event: event)
                                     }
                                 }
+                                ForEach(viewModel.reminder, id: \.self) { reminder in
+                                    if reminder.TimestampCalendarString == selectedData {
+                                        CalenderReminderCell(reminder: reminder)
+                                    }
+                                }
                             }
                         }
                     })
@@ -146,6 +152,11 @@ struct CalendarView: View {
                                         EventLongView(event: event)
                                     }
                                 }
+//                                ForEach(viewModel.reminder, id: \.self) { reminder in
+//                                    if reminder.TimestampCalendarString == selectedData {
+//                                        CalenderReminderCell(reminder: reminder)
+//                                    }
+//                                }
                             }
                         }
                     })
@@ -192,6 +203,11 @@ struct CalendarView: View {
                                     }
                                     if CalendarView.longDateFormatter.string(from: event.startDate) < selectedData && CalendarView.longDateFormatter.string(from: event.endDate) >= selectedData {
                                         EventLongView(event: event)
+                                    }
+                                }
+                                ForEach(viewModel.reminder, id: \.self) { reminder in
+                                    if reminder.TimestampCalendarString == selectedData {
+                                        CalenderReminderCell(reminder: reminder)
                                     }
                                 }
                             }
@@ -256,7 +272,6 @@ struct CalendarView: View {
     
     private static var longDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-//        formatter.timeStyle = .short
         formatter.dateFormat = "YYYYMMdd"
         return formatter
     }()

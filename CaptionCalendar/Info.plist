@@ -21,15 +21,13 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-7875348901601775~9729396928</string>
+	<string>ca-app-pub-6537638223494633~7152991973</string>
 	<key>LSRequiresIPhoneOS</key>
 	<false/>
 	<key>NSCalendarsUsageDescription</key>
-	<string>To access your calendars.</string>
+	<string>OSカレンダーとの連携にアクセス権が必要です。カレンダー表示のみに利用され、Class-boxが取得することはありません。</string>
 	<key>NSContactsUsageDescription</key>
 	<string>To access shared calendars and invites.</string>
-	<key>Privacy – Calendars Usage Description</key>
-	<string>カレンダー</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

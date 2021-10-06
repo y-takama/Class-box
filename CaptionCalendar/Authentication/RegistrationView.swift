@@ -16,10 +16,11 @@ struct RegistrationView: View {
     @State private var mailAddress = ""
     @State private var password = ""
     @State private var passwordConfirm = ""
-    
+    @State private var fullname = ""
     @State private var isShowAlert = false
     @State private var isError = false
     @State private var isShowingLogin = false
+    @State private var isShowingBackground = false
     @State private var errorMessage = ""
 //    @Published var userSession: FirebaseAuth.User?
     @EnvironmentObject var viewModel: AuthViewModel
@@ -33,7 +34,7 @@ struct RegistrationView: View {
             VStack {
                 Spacer()
                 VStack(spacing: 13) {
-                    CustomTextField(text: $mailAddress, placeholder: Text("Email"), imageName: "envelope")
+                    CustomRegistrationTextField(text: $mailAddress, placeholder: Text("Email"), imageName: "envelope")
                         .padding()
                         .background(Color(.init(white: 0, alpha: 0.05)))
                         .cornerRadius(10)
@@ -50,32 +51,19 @@ struct RegistrationView: View {
                         .background(Color(.init(white: 0, alpha: 0.05)))
                         .cornerRadius(10)
                         .foregroundColor(.black)
+                    
+                    CustomRegistrationTextField(text: $fullname, placeholder: Text("名前"), imageName: "person")
+                        .padding()
+                        .background(Color(.init(white: 0, alpha: 0.05)))
+                        .cornerRadius(10)
+                        .foregroundColor(.black)
                 }
                 .padding(.horizontal, 25)
                 .padding(.top, 15)
                 
-//                Button(action: {
-//                    if email == "" {
-//                        errormessage = "Emailアドレスが正しく入力されていません"
-//                    } else {
-//                        if 6...15 ~= password.count {
-//                            viewModel.registerUser(email: email,
-//                                                   password: password)
-//                        } else {
-//                            errormessage = "パスワードが正しく入力されていません"
-//                        }
-//                    }
-//                }, label: {
-//                    Text("Sign Up")
-//                        .font(.system(size: 14, weight: .semibold))
-//                        .foregroundColor(Color.white)
-//                        .frame(width: 300, height: 50)
-//                        .background(Color(red: 104/255, green: 171/255, blue: 121/255))
-//                        .clipShape(Capsule())
-//                        .padding()
-//                })
                 
                 Button(action: {
+                    self.isShowingBackground = true
                     self.errorMessage = ""
                     if self.mailAddress.isEmpty {
                         self.errorMessage = "メールアドレスが入力されていません"
@@ -108,20 +96,22 @@ struct RegistrationView: View {
                 })
                     .alert(isPresented: $isShowAlert) {
                         if self.isError {
-                            return Alert(title: Text(""), message: Text(self.errorMessage), dismissButton: .destructive(Text("OK"))
-                            )
+//                            return Alert(title: Text(""), message: Text(self.errorMessage), dismissButton: .destructive(Text("OK"))
+//                            )
+                            return Alert(title: Text(""),
+                                  message: Text(self.errorMessage),
+                                  dismissButton: .default(Text("OK"),
+                                                          action: {
+                                self.isShowingBackground = false
+                            }))
                         } else {
                             return Alert(title: Text(""),
                                   message: Text("登録が完了しました。登録したメールアドレスに送られたURLをクリックして承認を完了してください"),
                                   dismissButton: .default(Text("OK"),
                                                           action: {
                                 self.isShowingLogin = true
+                                self.isShowingBackground = false
                             }))
-                            
-                            
-                            
-//                            Alert(title: Text(""), message: Text("登録が完了しました。登録したメールアドレスに送られたURLをクリックして承認を完了してください"), dismissButton: .default(Text("OK")))
-                            
                         }
                     }
                     .fullScreenCover(isPresented: self.$isShowingLogin) {
@@ -131,8 +121,7 @@ struct RegistrationView: View {
                 Text("登録完了までに数秒かかることがあります")
                     .font(.system(size: 10))
                     .foregroundColor(.black)
-                
-                Spacer()
+                    .padding(.bottom, 40)
                 
                 NavigationLink(destination: InitialScreenView().navigationBarHidden(true), label: {
                     Text("Back")
@@ -152,15 +141,17 @@ struct RegistrationView: View {
                         }
                     }, label: {
                         Text("利用規約")
+                            .font(.caption)
                             .foregroundColor(Color(red: 104/255, green: 171/255, blue: 121/255))
-                            .font(.system(size: 16))
                     })
-                        
                     Text("に同意したことになります")
                         .font(.caption)
                         .foregroundColor(.black)
                     Spacer()
                 }
+            }
+            if isShowingBackground {
+                Color("TintColor").opacity(0.1).ignoresSafeArea()
             }
         }
     }
@@ -178,7 +169,6 @@ struct RegistrationView: View {
                     default:
                         self.errorMessage = error.domain
                     }
-                    
                     self.isError = true
                     self.isShowAlert = true
                 }
@@ -188,12 +178,11 @@ struct RegistrationView: View {
                     user.sendEmailVerification(completion: { error in
                         if error == nil {
                             print("Send Email Success")
-                            
                         }
                     })
                     self.isError = false
                     self.isShowAlert = true
-                    viewModel.registerUser(email: mailAddress ,password: password, result: authResult)
+                    viewModel.registerUser(email: mailAddress ,password: password, fullname: fullname, result: authResult)
                 }
             }
         }

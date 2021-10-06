@@ -7,16 +7,19 @@
 
 import SwiftUI
 struct SettingView: View {
+    let user: User
     @State private var showingAlert = false
     @State private var isShowAlert = false
+    @State private var isShowChangeUserStatusAlert = false
+    @State private var isShowPrivacyPolicy = false
+    @State private var isShowTermsOfService = false
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-
     var body: some View {
-        
         NavigationView {
+            
             ScrollView {
                 VStack(alignment: .leading, spacing: 5) {
-                    ForEach(CalendarSettingViewModel.allCases, id: \.self) { option in
+                    ForEach(SettingViewModel.allCases, id: \.self) { option in
                         if option == .profile {
 //                            NavigationLink(
 //                                destination: ProfileView(),
@@ -37,24 +40,46 @@ struct SettingView: View {
                                 SettingSheetCell(option: option)
                             }
                         } else if option == .privacyPolicy {
-                            Button(action: { isShowAlert.toggle() }) {
+                            Button(action: { isShowPrivacyPolicy.toggle() }) {
                                 SettingSheetCell(option: option)
                             }
+                            .fullScreenCover(isPresented: $isShowPrivacyPolicy) {
+                                safari(urlString: "https://www.caption-service.com")
+                            }
                         } else if option == .termsOfService {
-                            Button(action: { isShowAlert.toggle() }) {
+                            Button(action: { isShowTermsOfService.toggle() }) {
                                 SettingSheetCell(option: option)
+                            }
+                            .fullScreenCover(isPresented: $isShowTermsOfService) {
+                                safari(urlString: "https://caption-service.com/terms.html")
+                            }
+                        } else if option == .userstatus {
+                            if user.userStats != "student" {
+                                Button(action: { isShowChangeUserStatusAlert.toggle() }) {
+                                    SettingSheetCell(option: option)
+                                }
                             }
                         }
                     }
                     Divider()
                 }
-                .alert(isPresented: $isShowAlert) {
-                    Alert(title: Text(""), message: Text("次回アップデート予定です。アップデートをお待ちください。"), dismissButton: .destructive(Text("OK")))
+                .alert(isPresented: $isShowChangeUserStatusAlert) {
+                    Alert(title: Text("ログアウト"),
+                          message: Text("ログアウトしてもよろしいてすか？"),
+                          primaryButton: .cancel(Text("Calcel")),
+                          secondaryButton: .default(Text("OK"),
+                                                    action: {
+                                                        AuthViewModel.shared.signOut()
+                                                    }))
                 }
                 .frame(width: UIScreen.main.bounds.width-40,
                        alignment: .top)
                 
             }
+            .alert(isPresented: $isShowAlert) {
+                Alert(title: Text(""), message: Text("次回アップデート予定です。アップデートをお待ちください。"), dismissButton: .destructive(Text("OK")))
+            }
+            
             .navigationBarItems(trailing: backButton)
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -63,7 +88,7 @@ struct SettingView: View {
         Button(action: {
             mode.wrappedValue.dismiss()
         }, label: {
-            Image(systemName: "chevron.down")
+            Image(systemName: "multiply.circle.fill")
                 .font(.title3)
                 .foregroundColor(Color("TextColor"))
         })

@@ -16,7 +16,8 @@ struct Message: Identifiable {
     let username: String?
     let profileImageUrl: String
     let text: String
-    let fullname: String
+    let fullname: String?
+    var read: Bool?
     let isFromCurrentUser: Bool
     
     
@@ -32,6 +33,7 @@ struct Message: Identifiable {
         self.fullname = dictionary["fullname"] as? String ?? ""
         self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
         self.username = dictionary["username"] as? String ?? ""
+        self.read = dictionary["read"] as? Bool ?? false
         self.isFromCurrentUser = fromId == Auth.auth().currentUser?.uid
     }
     

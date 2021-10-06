@@ -39,7 +39,7 @@ struct LoginView: View {
                 Spacer()
                 
                 VStack(spacing: 20) {
-                    CustomTextField(text: $email, placeholder: Text("Email"), imageName: "envelope")
+                    CustomRegistrationTextField(text: $email, placeholder: Text("Email"), imageName: "envelope")
                         .padding()
                         .background(Color(.init(white: 0, alpha: 0.05)))
 //                        .background(Color("TextColor").opacity(0.1))

@@ -9,6 +9,7 @@ import SwiftUI
 import UIKit
 import EventKitUI
 import GoogleMobileAds
+import Kingfisher
 
 struct MainCalendarView: View {
     @Binding var showMenu: Bool
@@ -82,10 +83,10 @@ struct MainCalendarView: View {
                             .foregroundColor(.secondary)
                     }
                     
-                    AdView()
-                        .frame(width: UIScreen.main.bounds.width,
-                               height: UIScreen.main.bounds.width*5/16)
-                        .padding(.top, 80)
+//                    AdView()
+//                        .frame(width: UIScreen.main.bounds.width,
+//                               height: UIScreen.main.bounds.width*5/16)
+//                        .padding(.top, 80)
                 }
                 
                 VStack {
@@ -112,7 +113,7 @@ struct MainCalendarView: View {
                 
             }
             .navigationBarItems(leading: sideMenuButon, trailing:
-                                    HStack(spacing: 20) {
+                                    HStack(spacing: 15) {
                                         CalendarSettingButton
                                         menuButton
                                     }
@@ -128,18 +129,32 @@ struct MainCalendarView: View {
         Button(action: {
             showMenu.toggle()
         }, label: {
-            let username = user.fullname
-            let start = String(username!.prefix(2))
-            Text(start)
-                .font(.system(size: 15, weight: .semibold))
-                .frame(width: 28, height: 28)
-                .padding(5)
-                .clipShape(Circle())
-                .overlay(
-                    RoundedRectangle(cornerRadius: 19)
-                        .stroke(Color.gray, lineWidth: 0.3)
-                )
-                .foregroundColor(Color("TextColor"))
+            if user.profileImageUrl == "" {
+                let username = user.fullname
+                let start = String(username!.prefix(2))
+                Text(start)
+                    .font(.system(size: 15, weight: .semibold))
+                    .frame(width: 28, height: 28)
+                    .padding(5)
+                    .clipShape(Circle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 19)
+                            .stroke(Color.gray, lineWidth: 0.3)
+                    )
+                    .foregroundColor(Color("TextColor"))
+            } else {
+                KFImage(URL(string: user.profileImageUrl!))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 38, height: 38)
+                    .background(Color("TintColor"))
+                    .clipShape(Circle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 19)
+                            .stroke(Color.gray, lineWidth: 0.3)
+                    )
+            }
+            
         })
     }
     var CalendarSettingButton: some View {
@@ -171,7 +186,7 @@ struct MainCalendarView: View {
             }
         } label: {
             Image(systemName: "ellipsis")
-                .font(Font.system(size: 18, weight: .bold))
+//                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
         }
     }
@@ -181,7 +196,7 @@ struct MainCalendarView: View {
             showCalendarSheet.toggle()
         }, label: {
             Image(systemName: "text.alignright")
-                .font(Font.system(size: 18, weight: .bold))
+//                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
         })
 //        .sheet(isPresented: $showingMenu) {

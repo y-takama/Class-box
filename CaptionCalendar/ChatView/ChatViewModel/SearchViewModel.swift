@@ -91,7 +91,11 @@ class SearchViewModel: ObservableObject {
     
     func filteredUsers(_ query: String) -> [User] {
         let lowercasedQuery = query.lowercased()
-        return users.filter({ $0.uid!.contains(lowercasedQuery)})
-        
+        return users.filter({ $0.username!.contains(lowercasedQuery) || $0.fullname!.contains(lowercasedQuery)})
+    }
+    
+    func filteredUniversityUsers(_ query: String) -> [User] {
+//        let lowercasedQuery = query.lowercased()
+        return users.filter({ $0.university!.contains(query)})
     }
 }

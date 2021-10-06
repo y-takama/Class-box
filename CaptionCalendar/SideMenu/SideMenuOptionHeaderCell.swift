@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SideMenuOptionHeaderCell: View {
-    let option: CalendarSettingViewModel
+    let option: SettingViewModel
     var body: some View {
         HStack(spacing: 16) {
             Image(systemName: option.imageName)

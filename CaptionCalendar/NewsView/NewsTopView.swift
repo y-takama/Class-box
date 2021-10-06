@@ -10,7 +10,7 @@ import SDWebImageSwiftUI
 
 struct NewsTopView: View {
     @State private var isShowSafari = false
-    @State private var imageURL = ""
+//    @State private var imageURL = ""
     @Binding private var source: String
     @ObservedObject var list: getData
     let width = UIScreen.main.bounds.width
@@ -33,12 +33,14 @@ struct NewsTopView: View {
                                 .scaledToFill()
                                 .frame(width: width, height: height/4)
                                 .clipped()
-                            
+                                .ignoresSafeArea(.all)
+                            if #available(iOS 15.0, *) {
 //                                LinearGradient(colors: [
 //                                    .clear,
 //                                    .black.opacity(0.1),
 //                                    .black.opacity(0.4)
 //                                ], startPoint: .top, endPoint: .bottom)
+                            }
                             
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(i.title)
@@ -47,10 +49,12 @@ struct NewsTopView: View {
                                     .lineLimit(2)
                                     .foregroundColor(.white)
                                     .frame(width: width*2/3)
+                                    .shadow(color: .black, radius: 2, x: 0, y: 0)
                                 Text(i.desc)
                                     .lineLimit(1)
                                     .foregroundColor(.white)
                                     .font(.callout)
+                                    .shadow(color: .black, radius: 2, x: 0, y: 0)
                             }
                             .padding(15)
                         }
@@ -61,7 +65,8 @@ struct NewsTopView: View {
             }
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-        .frame(height: width*3/4)
+        .frame(height: height/4)
+        .ignoresSafeArea(.all)
     }
 }
 

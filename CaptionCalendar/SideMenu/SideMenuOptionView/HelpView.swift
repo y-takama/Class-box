@@ -12,7 +12,7 @@ struct HelpView: View {
     var body: some View {
         NavigationView {
             VStack {
-                
+                Text("現在作成中です")
             }
             .navigationBarItems(trailing: backButton)
             .navigationTitle("ヘルプ")

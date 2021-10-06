@@ -11,11 +11,12 @@ struct ClassEvaluationView: View {
     @Binding var name: String
     @State var pickerSelection = 0
     @State private var angle = Angle(degrees: 315)
+    @ObservedObject var viewModel: ClassDetailViewModel
     let classes: TimeTable
-    
-    init( name: Binding<String>, classes: TimeTable ) {
+    init(name: Binding<String>, classes: TimeTable ) {
         self._name = name
         self.classes = classes
+        self.viewModel = ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes, timetable: classes.timetables!)
         UISegmentedControl.appearance().selectedSegmentTintColor = .darkGray
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
@@ -25,29 +26,29 @@ struct ClassEvaluationView: View {
         
         let barAttendanceValues : [[Int]] =
         [
-            [classes.beforeattendanceNone!,
-             classes.beforeattendanceSometimes!,
-             classes.beforeattendanceEverytime!,
-             classes.beforeattendanceReport!,
-             classes.beforeattendanceNotClear!],
-            [classes.attendanceNone!,
-             classes.attendanceSometimes!,
-             classes.attendanceEverytime!,
-             classes.attendanceReport!,
-             classes.attendanceNotClear!]
+            [viewModel.classinfo.beforeattendanceNone!,
+             viewModel.classinfo.beforeattendanceSometimes!,
+             viewModel.classinfo.beforeattendanceEverytime!,
+             viewModel.classinfo.beforeattendanceReport!,
+             viewModel.classinfo.beforeattendanceNotClear!],
+            [viewModel.classinfo.attendanceNone!,
+             viewModel.classinfo.attendanceSometimes!,
+             viewModel.classinfo.attendanceEverytime!,
+             viewModel.classinfo.attendanceReport!,
+             viewModel.classinfo.attendanceNotClear!]
         ]
         let barUnitValues : [[Int]] =
         [
-            [classes.beforeunit1!,
-             classes.beforeunit2!,
-             classes.beforeunit3!,
-             classes.beforeunit4!,
-             classes.beforeunit5!],
-            [classes.unit1!,
-             classes.unit2!,
-             classes.unit3!,
-             classes.unit4!,
-             classes.unit5!]
+            [viewModel.classinfo.beforeunit1!,
+             viewModel.classinfo.beforeunit2!,
+             viewModel.classinfo.beforeunit3!,
+             viewModel.classinfo.beforeunit4!,
+             viewModel.classinfo.beforeunit5!],
+            [viewModel.classinfo.unit1!,
+             viewModel.classinfo.unit2!,
+             viewModel.classinfo.unit3!,
+             viewModel.classinfo.unit4!,
+             viewModel.classinfo.unit5!]
         ]
         
         ZStack{
@@ -105,6 +106,11 @@ struct ClassEvaluationView: View {
                     }
                 }
             }
+//            if viewModel.loading {
+//                ProgressView()
+//                    .progressViewStyle(CircularProgressViewStyle(tint: Color("TextColor")))
+//                    .scaleEffect(1)
+//            }
         }
     }
 }

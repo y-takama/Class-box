@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReportSendView: View {
     @Binding var showReportView: Bool
-    let option: SideMenuOption
+    let option: MenuOption
     let user: User
     @State private var isSendButton = false
     @State private var reportText = ""

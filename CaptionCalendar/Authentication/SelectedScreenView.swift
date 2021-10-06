@@ -25,129 +25,127 @@ struct SelectedScreenView: View {
         "Standard では就職活動関連やTIMETABLE以外の機能(BASE)を使うことができます。",
         "学生の方は Standard より多くの機能(BASE)を使うことができます。学内のメールアドレスを登録することで利用することができます"
     ]
-    
-    
     var body: some View {
-        
-        
-        
-        NavigationView {
-            ZStack(alignment: .top) {
-                
-//                GeometryReader { proxy in
-////                    let size = proxy.size
+        ZStack(alignment: .top) {
+            
+            GeometryReader { proxy in
                 Color.white.ignoresSafeArea(.all)
-//                    
-//                    LinearGradient(colors: [
-//                        .clear,
-//                        Color(red: 104/255, green: 171/255, blue: 121/255).opacity(0.25),
-//                        Color(red: 104/255, green: 171/255, blue: 121/255).opacity(0.5)
-//                    ], startPoint: .top, endPoint: .bottom)
-//                        .onTapGesture {
-//                            UIApplication.shared.closeKeyboard()
-//                        }
-//                }
-                
-                
-                VStack(spacing: 20) {
-                    
-//                    HStack(spacing: 0){
-//                        ForEach(titleText) { text in
-//                            Text(text.text)
-//                                .fontWeight(.black)
-//                                .font(.largeTitle)
-//                                .offset(y: text.offset)
-//                                .foregroundColor(.black)
-//                        }
+//                    if #available(iOS 15.0, *) {
+//                        LinearGradient(colors: [
+//                            .clear,
+//                            Color(red: 104/255, green: 171/255, blue: 121/255).opacity(0.25),
+//                            Color(red: 104/255, green: 171/255, blue: 121/255).opacity(0.5)
+//                        ], startPoint: .top, endPoint: .bottom)
+//                            .onTapGesture {
+//                                UIApplication.shared.closeKeyboard()
+//                            }
+//                    } else {
 //                    }
-//                    .offset(y: endAnimation ? -100 : 0)
-//                    .opacity(endAnimation ? 0 : 1)
-//
-//                    Text(subtitle[currentIndex])
-//                        .offset(y: !subTitleAnimation ? 70 : 0)
-//                        .offset(y: endAnimation ? -100 : 0)
-//                        .opacity(endAnimation ? 0 : 1)
-//                        .padding(.horizontal)
-//                        .foregroundColor(.black)
-                    
-                    NavigationLink(
-                        destination:
-                            StudentFirstRegistrationView().navigationBarHidden(true),
-                        label: {
-                            VStack {
-                                Text("Student Here!")
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundColor(.black)
-                                    .frame(width: 300, height: 50)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 25)
-                                            .stroke(Color.black, lineWidth: 0.5)
-                                    )
-//                                    .background(Color.white)
-                                    .cornerRadius(25)
+            }
+            VStack(spacing: 20) {
+                if #available(iOS 15.0, *) {
+                    HStack(spacing: 0){
+                        ForEach(titleText) { text in
+                            Text(text.text)
+                                .fontWeight(.black)
+                                .font(.largeTitle)
+                                .offset(y: text.offset)
+                                .foregroundColor(.black)
+                        }
+                    }
+                    .offset(y: endAnimation ? -80 : 0)
+                    .opacity(endAnimation ? 0 : 1)
+//                        .padding(.bottom, 20)
+
+                    Text(subtitle[currentIndex])
+                        .offset(y: !subTitleAnimation ? 100 : 0)
+                        .offset(y: endAnimation ? -70 : 0)
+                        .opacity(endAnimation ? 0 : 1)
+                        .font(.system(size: 12, weight: .semibold))
+                        .padding(.horizontal, 30)
+                        .foregroundColor(.black)
+                        .padding(.bottom, 40)
+                } else {
+                }
+               
+                
+                NavigationLink(
+                    destination:
+                        StudentFirstRegistrationView().navigationBarHidden(true),
+                    label: {
+                        VStack {
+                            Text("Student Here!")
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundColor(.black)
+                                .frame(width: 300, height: 50)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(Color.black, lineWidth: 0.5)
+                                )
+                                .background(Color.white)
+                                .cornerRadius(25)
 //                                    .background(
 //                                        .white.opacity(1)
 //                                        ,in: Capsule()
 //                                    )
-                                    .padding(.horizontal)
-                            }
-                        })
-                    Text("TIMETABLE,就活関連の機能を利用することができます")
-                        .font(.system(size: 9))
-                        .padding(.top, -10)
-                        .foregroundColor(.black)
-                    
-                    NavigationLink(
-                        destination:
-                            RegistrationView().navigationBarHidden(true),
-                        label: {
-                            VStack {
-                                Text("Standard")
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundColor(.white)
-                                
-                                    .frame(width: 300, height: 50)
-                                    .background(Color.black.opacity(0.2))
-                                    .cornerRadius(25)
+                                .padding(.horizontal)
+                        }
+                    })
+                Text("TIMETABLE,就活関連の機能を利用することができます")
+                    .font(.system(size: 9))
+                    .padding(.top, -10)
+                    .foregroundColor(.black)
+                
+                NavigationLink(
+                    destination:
+                        RegistrationView().navigationBarHidden(true),
+                    label: {
+                        VStack {
+                            Text("Standard")
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundColor(.black)
+                                .frame(width: 300, height: 50)
+                                .background(Color.black.opacity(0.2))
+                                .cornerRadius(25)
 //                                    .background(
 //                                        .black.opacity(0.2)
 //                                        ,in: Capsule()
 //                                    )
-                                    .padding(.horizontal)
-                                    .padding(.bottom, 50)
-                            }
-                        })
-                    
-                    NavigationLink(destination: InitialScreenView().navigationBarHidden(true), label: {
-                        Text("Back")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(.black)
+                                .padding(.horizontal)
+                                .padding(.bottom, 20)
+                        }
                     })
-                }
-                .foregroundColor(.white)
-                .padding(.bottom, 50)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                
+                NavigationLink(destination: InitialScreenView().navigationBarHidden(true), label: {
+                    Text("Back")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.black)
+                        .padding(30)
+                })
             }
-            .ignoresSafeArea()
-            .onAppear(perform: {
-                currentIndex = 0
-            })
-            .onChange(of: currentIndex) { newValue in
-                getSpilitedText(text: titles[currentIndex]){
-                    withAnimation(.easeInOut(duration: 1)) {
-                        endAnimation.toggle()
-                    }
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now()+1) {
-                        titleText.removeAll()
-                        subTitleAnimation.toggle()
-                        endAnimation.toggle()
-                        withAnimation(.easeIn(duration: 0.6)){
-                            if currentIndex < (titles.count - 1) {
-                                currentIndex += 1
-                            } else {
-                                currentIndex = 0
-                            }
+            .foregroundColor(.white)
+//            .background(Color.red)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        }
+        .ignoresSafeArea()
+        .onAppear(perform: {
+            currentIndex = 0
+        })
+        .onChange(of: currentIndex) { newValue in
+            getSpilitedText(text: titles[currentIndex]){
+                withAnimation(.easeInOut(duration: 1)) {
+                    endAnimation.toggle()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                    titleText.removeAll()
+                    subTitleAnimation.toggle()
+                    endAnimation.toggle()
+                    withAnimation(.easeIn(duration: 0.6)){
+                        if currentIndex < (titles.count - 1) {
+                            currentIndex += 1
+                        } else {
+                            currentIndex = 0
                         }
                     }
                 }

@@ -10,9 +10,10 @@ import SwiftUI
 struct SettingTimeTableView: View {
     @State private var isShowAlert = false
     @State private var showSettingView = false
+    let user: User
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            ForEach(CalendarSettingViewModel.allCases, id: \.self) { option in
+            ForEach(SettingViewModel.allCases, id: \.self) { option in
                 if option == .profile {
                     //                            NavigationLink(
                     //                                destination: ProfileView(user: user),
@@ -41,7 +42,7 @@ struct SettingTimeTableView: View {
         .background(Color("TintColor"))
         .cornerRadius(25)
         .fullScreenCover(isPresented: $showSettingView) {
-            SettingView()
+            SettingView(user: user)
         }
         .alert(isPresented: $isShowAlert) {
             Alert(title: Text(""), message: Text("次回アップデート予定です。アップデートをお待ちください。"), dismissButton: .destructive(Text("OK")))

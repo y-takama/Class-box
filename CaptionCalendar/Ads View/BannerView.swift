@@ -10,10 +10,12 @@ import GoogleMobileAds
 import UIKit
 
 struct AdView: UIViewRepresentable {
+    let adUnitID: String
     func makeUIView(context: UIViewRepresentableContext<AdView>) -> GADBannerView {
         let banner = GADBannerView(adSize: kGADAdSizeBanner)
 //        let viewController = UIViewController()
-        banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//        banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        banner.adUnitID = adUnitID
         banner.rootViewController = UIApplication.shared.windows.first?.rootViewController
 //        viewController.view.addSubview(view)
 //        viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)

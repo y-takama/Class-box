@@ -93,7 +93,7 @@ struct CalendarListView: View {
             }
         } label: {
             Image(systemName: "ellipsis")
-                .font(Font.system(size: 18, weight: .bold))
+//                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
         }
     }}

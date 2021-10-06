@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SideMenuOptionCell: View {
-    let option: SideMenuOption
+    let option: MenuOption
     var body: some View {
         HStack(spacing: 16) {
             Image(systemName: option.imageName)

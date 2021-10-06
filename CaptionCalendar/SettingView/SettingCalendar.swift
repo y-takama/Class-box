@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct SettingCalendar: View {
-    @State private var selectionValue = University.Ritumeikan
+    @State private var selectionValue = KansaiUniversity.Ritumeikan
     @State private var showingAlert = false
     @State var tab1Text = "Tab1"
     @State var url1Text = "https://www.apple.com"
@@ -23,10 +23,10 @@ struct SettingCalendar: View {
 //        NavigationView {
         Form{
             Picker("",selection: $selectionValue) {
-                Text("立命館").tag(University.Ritumeikan)
-                Text("同志社").tag(University.Dousisya)
-                Text("関西大学").tag(University.Kansai)
-                Text("関西学院大学").tag(University.Kansaigakuin)
+                Text("立命館").tag(KansaiUniversity.Ritumeikan)
+                Text("同志社").tag(KansaiUniversity.Dousisya)
+                Text("関西大学").tag(KansaiUniversity.Kansai)
+                Text("関西学院大学").tag(KansaiUniversity.Kansaigakuin)
             }
             if selectionValue.rawValue == "Ritumeikan" {
                 if let url = URL(string: "webcal://p22-caldav.icloud.com/published/2/MTg1NjM3MTY4OTE4NTYzNwYemyYIaVCwsEqq8QsxIUHKFVxLpcNtcscwiNTguTHwJ52yzL7ONMgcEN8dwF0YTTGJtnelx18fB0232rXx0F4"){

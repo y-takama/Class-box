@@ -17,6 +17,7 @@ struct StudentThirdRegistrationView: View {
     @State private var isShowAlert = false
     @State private var isError = false
     @State private var isShowingLogin = false
+    @State private var isShowingBackground = false
 //    @State private var isShowingLogin = false
     @State private var errorMessage = ""
     @Binding var universityName: String
@@ -25,18 +26,10 @@ struct StudentThirdRegistrationView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
         ZStack(alignment: .topLeading) {
-            
             Color.white.edgesIgnoringSafeArea(.all)
-//            self.backGroundColor().edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     UIApplication.shared.closeKeyboard()
                 }
-            
-//            LinearGradient(colors: [
-//                .clear,
-//                .black.opacity(0.5),
-//                .black
-//            ], startPoint: .top, endPoint: .bottom)
                 
             VStack {
                 Spacer()
@@ -54,7 +47,7 @@ struct StudentThirdRegistrationView: View {
                         
                         Spacer()
                     }
-                    CustomTextField(text: $mailAddress, placeholder: Text("大学メールアドレス/ac.jp"), imageName: "envelope")
+                    CustomRegistrationTextField(text: $mailAddress, placeholder: Text("大学メールアドレス/ac.jp"), imageName: "envelope")
                         .padding()
                         .background(Color(.init(white: 0, alpha: 0.05)))
                         .cornerRadius(10)
@@ -88,19 +81,19 @@ struct StudentThirdRegistrationView: View {
                         .padding(.bottom)
                     HStack{
                         Text("名前")
-//                        Text("必須")
-//                            .font(.system(size: 10, weight: .semibold))
-//                            .frame(width: 30, height: 14)
-//                            .overlay(
-//                                RoundedRectangle(cornerRadius: 15)
-//                                    .stroke(Color.black, lineWidth: 0.5)
-//                            )
+                        Text("必須")
+                            .font(.system(size: 10, weight: .semibold))
+                            .frame(width: 30, height: 14)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black, lineWidth: 0.5)
+                            )
 //
 //                        Text("※")
 //                            .font(.system(size: 10, weight: .semibold))
                         Spacer()
                     }
-                    CustomTextField(text: $fullname, placeholder: Text("名前"), imageName: "person")
+                    CustomRegistrationTextField(text: $fullname, placeholder: Text("名前"), imageName: "person")
                         .padding()
                         .background(Color(.init(white: 0, alpha: 0.05)))
                         .cornerRadius(10)
@@ -112,6 +105,7 @@ struct StudentThirdRegistrationView: View {
                 .foregroundColor(.black)
                 
                 Button(action: {
+                    self.isShowingBackground = true
                     self.errorMessage = ""
                     if self.mailAddress.isEmpty {
                         self.errorMessage = "メールアドレスが入力されていません"
@@ -127,6 +121,10 @@ struct StudentThirdRegistrationView: View {
                         self.isShowAlert = true
                     } else if self.passwordConfirm.isEmpty {
                         self.errorMessage = "確認パスワードが入力されていません"
+                        self.isError = true
+                        self.isShowAlert = true
+                    } else if self.fullname.isEmpty {
+                        self.errorMessage = "名前が入力されていません"
                         self.isError = true
                         self.isShowAlert = true
                     } else if self.password.compare(self.passwordConfirm) != .orderedSame {
@@ -147,15 +145,20 @@ struct StudentThirdRegistrationView: View {
                 })
                     .alert(isPresented: $isShowAlert) {
                         if self.isError {
-                            return Alert(title: Text(""), message: Text(self.errorMessage), dismissButton: .destructive(Text("OK"))
-                            )
+                            return Alert(title: Text(""),
+                                  message: Text(self.errorMessage),
+                                  dismissButton: .default(Text("OK"),
+                                                          action: {
+                                self.isShowingBackground = false
+                            }))
                         } else {
                             return Alert(title: Text(""),
                                          message: Text("登録が完了しました。登録したメールアドレスに送られたURLをクリックして承認を完了してください"),
                                          dismissButton: .default(Text("OK"),
                                                                  action: {
-                                       self.isShowingLogin = true
-                                   }))
+                                self.isShowingLogin = true
+                                self.isShowingBackground = false
+                            }))
                         }
                     }
                     .fullScreenCover(isPresented: self.$isShowingLogin) {
@@ -188,6 +191,11 @@ struct StudentThirdRegistrationView: View {
                     Spacer()
                 }
             }.foregroundColor(.black)
+            
+            if isShowingBackground {
+                Color("TintColor").opacity(0.1).ignoresSafeArea()
+            }
+            
             
             Button(action: {
                 mode.wrappedValue.dismiss()

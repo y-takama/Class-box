@@ -24,6 +24,4 @@ struct Chart: Identifiable, Decodable, Hashable {
         self.attendanceReport = dictionary["attendanceReport"] as? Int ?? 0
         self.attendanceNotClear = dictionary["attendanceNotClear"] as? Int ?? 0
     }
-    
-    
 }

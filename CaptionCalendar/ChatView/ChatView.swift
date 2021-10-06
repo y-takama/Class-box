@@ -19,31 +19,31 @@ struct ChatView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 9) {
                     ForEach(viewModel.messages) { message in
-                        MessageView(message: message)
+                        MessageView(viewModel: MessageViewModel(message: message, messageUser: user), message: message, user: user)
                     }
                     .padding(.top, 8)
-                    .padding(.bottom, -8)
                 }
             }
             .rotationEffect(.degrees(-180))
-            
+            .onTapGesture {
+                UIApplication.shared.closeKeyboard()
+            }
+            .onAppear(perform: {
+                readedMessage()
+            })
             MessageInputView(messageText: $messageText, action: sendMessage)
         }
         .navigationTitle(user.fullname!)
-        .onTapGesture {
-            UIApplication.shared.closeKeyboard()
-        }
-
     }
-    
-    
-    
     func sendMessage() {
         viewModel.sendMessage(messageText)
         messageText = ""
+    }
+    func readedMessage() {
+        viewModel.readedMessage()
     }
 }
 

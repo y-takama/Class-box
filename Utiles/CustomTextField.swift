@@ -1,36 +1,37 @@
 //
 //  CustomTextField.swift
-//  CustomTextField
+//  CaptionCalendar
 //
-//  Created by 髙間洋平 on 2021/08/18.
+//  Created by 髙間洋平 on 2021/09/19.
 //
 
 import SwiftUI
 
 struct CustomTextField: View {
     @Binding var text: String
-    let placeholder: Text
-    let imageName: String
+    let placeholder: String
+    
+    init(_ placeholder: String, text: Binding<String>) {
+        self._text = text
+        self.placeholder = placeholder
+        UITextView.appearance().backgroundColor = .clear
+    }
     
     var body: some View {
-        ZStack(alignment: .leading) {
+        ZStack(alignment: .topLeading) {
             if text.isEmpty {
-                placeholder
-                    .foregroundColor(Color.gray)
-                    .padding(.leading, 40)
-                    .foregroundColor(.black)
+                Text(placeholder)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(Color(.placeholderText))
+                    .padding(10)
             }
-            
-            HStack(spacing: 16) {
-                Image(systemName: imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 20, height: 20)
-//                    .foregroundColor(Color("TextColor"))
-                    .foregroundColor(Color.black)
+            TextEditor(text: $text)
+                .foregroundColor(Color("TextColor"))
                 
-                TextField("", text: $text)
-            }
         }
+        .font(.body)
+        .frame(width: UIScreen.main.bounds.width-40,
+               height: 60,
+               alignment: .leading)
     }
 }

@@ -14,76 +14,79 @@ struct ConversationsView: View {
     @State var isShowingNewMessageView = false
     @State var showChat = false
     @State var user: User?
-    let users: User
-//    @State private var showingMenu = false
-    @ObservedObject var viewModel = ConversationsViewModel()
-    
-    //    @State private var showingMenu = false
-    //    @EnvironmentObject var viewModels: AuthViewModel
+    var users: User
+    @ObservedObject var viewModel: ConversationsViewModel
     
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .bottomTrailing) {
-                if let user = user {
-                    NavigationLink(destination: LazyView(ChatView(user: user)),
-                                   isActive: $showChat,
-                                   label: {} )
-                }
-                ScrollView {
-                    LazyVStack {
-                        ForEach(viewModel.recentMessages) { message in
-                            NavigationLink(
-                                destination: ChatView(user: User(message: message)),
-                                label: {
-                                    ConversationCell(message: message)
-                                        
-                                })
+        ZStack {
+            NavigationView {
+                ZStack(alignment: .bottomTrailing) {
+                    if let user = user {
+                        NavigationLink(destination: LazyView(ChatView(user: user)),
+                                       isActive: $showChat,
+                                       label: {} )
+                    }
+                    VStack(spacing: 0) {
+                        if viewModel.classChat.isShowClassChat! {
+                            ConversationClassChatView(user: users)
+                        }
+                        ScrollView {
+                            VStack(spacing: 1) {
+                                ForEach(viewModel.recentMessages) { message in
+                                    NavigationLink(
+                                        destination: ChatView(user: User(message: message)),
+                                        label: {
+                                            ConversationCell(message: message, user: users)
+                                            
+                                        })
+                                }
+                            }.padding(.top, 10)
                         }
                     }
-                }
-                .padding(.horizontal, 7)
-                .padding(.top, -7)
-                
-                HStack {
-                    Spacer()
                     HStack {
-                        Button(action:
-                                { self.isShowingNewMessageView.toggle() }
-                               , label: {
+                        Spacer()
+                        HStack {
+                            Button(action:
+                                    { self.isShowingNewMessageView.toggle() }
+                                   , label: {
                                 Image(systemName: "envelope.open")
                                     .resizable()
                                     .foregroundColor(Color("TintColor"))
                                     .scaledToFit()
                                     .frame(width: 22, height: 22)
                                     .padding(15)
-                               })
+                            })
+                        }
+                        .background(Color("CaptionColor"))
+                        .cornerRadius(26)
+                        .padding()
+                        .sheet(isPresented: $isShowingNewMessageView, content: {
+                            NewMessageView(show: $isShowingNewMessageView, startChat: $showChat, user: $user, users: users)
+                        })
                     }
-                    .background(Color("CaptionColor"))
-                    .cornerRadius(26)
-                    .padding()
-                    .sheet(isPresented: $isShowingNewMessageView, content: {
-                        NewMessageView(show: $isShowingNewMessageView, startChat: $showChat, user: $user)
-                    })
+                }
+                .navigationTitle("Chat")
+                .navigationBarItems(trailing: HStack(spacing: 15) {
+                    ChatSettingButton
+                    menuButton
+                })
+                .navigationBarTitleDisplayMode(.inline)
+                //            .onTapGesture {
+                //                UIApplication.shared.closeKeyboard()
+                //            }
+            }
+            if viewModel.loading {
+                ZStack {
+                    Color("TintColor").ignoresSafeArea()
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color("TextColor")))
+                        .scaleEffect(1)
                 }
             }
-            .navigationTitle("Chat")
-            .navigationBarItems(trailing: HStack(spacing: 20) {
-                ChatSettingButton
-                menuButton
-            })
-            .navigationBarTitleDisplayMode(.inline)
-//            .navigationBarItems(leading: menuButton)
-//            .navigationBarItems(trailing: ChatSettingButton)
         }
         .onAppear {
             viewModel.fetchRecentMessages()
         }
-        .onTapGesture {
-            UIApplication.shared.closeKeyboard()
-        }
-//        .onAppear(perform: {
-//            self.showingMenu = false
-//        })
     }
     
     var menuButton: some View {
@@ -91,7 +94,7 @@ struct ConversationsView: View {
             showChatSheet.toggle()
         }, label: {
             Image(systemName: "text.alignright")
-                .font(Font.system(size: 18, weight: .bold))
+//                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
         })
     }
@@ -104,7 +107,7 @@ struct ConversationsView: View {
             }
         } label: {
             Image(systemName: "ellipsis")
-                .font(Font.system(size: 18, weight: .bold))
+//                .font(Font.system(size: 18, weight: .bold))
                 .foregroundColor(Color("TextColor"))
         }
     }

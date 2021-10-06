@@ -19,10 +19,10 @@ class ChatViewModel: ObservableObject {
     
     func fetchMessages() {
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
-        COLLECTION_USERS.document(uid).collection("user-blocklist").getDocuments { snapshot, _ in
+        COLLECTION_USERS.document(uid).collection("BloakList").getDocuments { snapshot, _ in
             guard let blockUser = snapshot?.documents.map({ $0.documentID }) else { return }
 //            print("DEBUG1  :\(blockUser)")
-            if blockUser.isEmpty == true {
+            if blockUser.isEmpty {
                 let query = COLLECTION_MESSAGES.document(uid).collection(self.user.id!)
                 query.addSnapshotListener { snapshot, error in
                     guard let changes = snapshot?.documentChanges.filter({ $0.type == .added }) else { return }
@@ -38,7 +38,6 @@ class ChatViewModel: ObservableObject {
                     }
                 }
             } else {
-//                print("DEBUG2  :\(self.user.id!)")
                 if blockUser.firstIndex(of: self.user.id!) != nil {
 //                    print("DEBUG2  :true")
                 } else {
@@ -63,7 +62,6 @@ class ChatViewModel: ObservableObject {
     
     func sendMessage(_ messageText: String) {
         guard let currentUid = AuthViewModel.shared.userSession?.uid else { return }
-//        guard let uid = user.id else { return }
         let currentUserRef = COLLECTION_MESSAGES.document(currentUid).collection(user.id!).document()
         let receivingUserRef = COLLECTION_MESSAGES.document(user.id!).collection(currentUid)
         let receivingRecentRef = COLLECTION_MESSAGES.document(user.id!).collection("recent-messages")
@@ -76,10 +74,23 @@ class ChatViewModel: ObservableObject {
                                    "fromId": currentUid,
                                    "toId": user.id!,
                                    "timestamp": Timestamp(date: Date())]
+        let sendData: [String: Any] = ["text": messageText,
+                                       "id": messageID,
+                                       "fromId": currentUid,
+                                       "toId": user.id!,
+                                       "read": true,
+                                       "timestamp": Timestamp(date: Date())]
         
         currentUserRef.setData(data)
         receivingUserRef.document(messageID).setData(data)
-        receivingRecentRef.document(currentUid).setData(data)
+        receivingRecentRef.document(currentUid).setData(sendData)
         currentRecentRef.document(user.id!).setData(data)
+    }
+    
+    func readedMessage() {
+        guard let currentUid = AuthViewModel.shared.userSession?.uid else { return }
+        let currentRecentRef =  COLLECTION_MESSAGES.document(currentUid).collection("recent-messages")
+        let data: [String: Any] = ["read": false]
+        currentRecentRef.document(user.id!).updateData(data)
     }
 }

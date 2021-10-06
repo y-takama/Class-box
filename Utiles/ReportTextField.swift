@@ -25,9 +25,8 @@ struct ReportTextField: View {
                     .foregroundColor(Color(.placeholderText))
                     .padding(10)
             }
-            
             TextEditor(text: $text)
-                .foregroundColor(Color("TextColor"))
+//                .foregroundColor(Color("TextColor"))
                 
         }
         .font(.body)

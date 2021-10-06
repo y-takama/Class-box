@@ -12,7 +12,7 @@ struct ReportBottomView: View {
     let user: User
     var body: some View {
         VStack(spacing: 0) {
-            ForEach(SideMenuOption.allCases, id: \.self) { option in
+            ForEach(MenuOption.allCases, id: \.self) { option in
                 if option == .classbox {
                     NavigationLink(
                         destination: ReportSendView(showReportView: $showReportView, option: option, user: user),

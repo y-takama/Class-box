@@ -12,6 +12,7 @@ struct User: Identifiable, Decodable {
     @DocumentID var id: String?
     var username: String?
     var profileImageUrl: String?
+    var backImageUrl: String?
     var fullname: String?
     let email: String
     var stats: UserStats?
@@ -25,6 +26,9 @@ struct User: Identifiable, Decodable {
     var birthplace: String?
     var resident: String?
     var uid: String?
+    var admin: String?
+    var fromId: String?
+    var isShowClassChat: Bool?
     var isFollowed: Bool? = false
     var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == id }
     
@@ -40,6 +44,7 @@ struct User: Identifiable, Decodable {
         self.id = dictionary["uid"] as? String ?? ""
         self.username = dictionary["username"] as? String ?? ""
         self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
+        self.backImageUrl = dictionary["backImageUrl"] as? String ?? ""
         self.email = dictionary["email"] as? String ?? ""
         self.fullname = dictionary["fullname"] as? String ?? "not set"
         self.stats = UserStats(followers: 0, following: 0)
@@ -53,6 +58,9 @@ struct User: Identifiable, Decodable {
         self.birthplace = dictionary["birthplace"] as? String ?? ""
         self.resident = dictionary["resident"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
+        self.admin = dictionary["admin"] as? String ?? ""
+        self.fromId = dictionary["fromId"] as? String ?? ""
+        self.isShowClassChat = dictionary["isShowClassChat"] as? Bool ?? false
     }
 }
 

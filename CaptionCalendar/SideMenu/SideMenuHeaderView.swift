@@ -11,10 +11,11 @@ struct SideMenuHeaderView: View {
     @State private var showProfileView = false
     @State private var showSettingView = false
     @State private var isShowAlert = false
+    @ObservedObject var viewModel: ProfileViewModel
     let user: User
     var body: some View {
         VStack(spacing: 0) {
-            ForEach(CalendarSettingViewModel.allCases, id: \.self) { option in
+            ForEach(SettingViewModel.allCases, id: \.self) { option in
                 if option == .profile {
                     Button(action: { showProfileView.toggle() } ) {
                         SideMenuOptionHeaderCell(option: option)
@@ -36,10 +37,10 @@ struct SideMenuHeaderView: View {
             }
         }
         .fullScreenCover(isPresented: $showProfileView) {
-            ProfileView(user: user)
+            ProfileView(user: $viewModel.user, viewModel: ProfileViewModel(user: user))
         }
         .fullScreenCover(isPresented: $showSettingView) {
-            SettingView()
+            SettingView(user: user)
         }
         
     }

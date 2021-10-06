@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Kingfisher
 //import KingfisherSwiftUI
 
 struct MessageView: View {
+    @ObservedObject var viewModel: MessageViewModel
     let message: Message
-//    let viewModel: MessageViewModel
+    let user: User
     
     var body: some View {
         HStack {
@@ -34,15 +36,33 @@ struct MessageView: View {
                         .padding(.horizontal)}
             } else {
                 HStack(alignment: .bottom) {
-//                    KFImage(URL(string: message.user.profileImageUrl))
-//                        .resizable()
-//                        .scaledToFill()
-//                        .frame(width: 36, height: 36)
-//                        .clipShape(Circle())
+                    NavigationLink(destination: {
+                        ChatFromUserProfileView(user: user, viewModel: MessageViewModel(message: message, messageUser: user))
+                    }, label: {
+                        if viewModel.messageUser.profileImageUrl == "" {
+                            let username = message.user.fullname!
+                            let start = String(username.prefix(2))
+                            Text(start)
+                                .font(.system(size: 16, weight: .semibold))
+                                .frame(width: 34, height: 34)
+                                .padding(4)
+                //                .background(Color("TintColor").opacity(0.8))
+                                .clipShape(Circle())
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 21)
+                                        .stroke(Color.gray, lineWidth: 0.3)
+                                )
+                                .foregroundColor(Color("TextColor"))
+                        } else {
+                            KFImage(URL(string: viewModel.messageUser.profileImageUrl!))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 42, height: 42)
+                                .background(Color("TintColor"))
+                                .clipShape(Circle())
+                        }
+                    })
                     
-                    Circle()
-                        .frame(width: 52, height: 52)
-                        .foregroundColor(Color(.systemGray5))
                     
                     Text(message.text)
                         .font(.system(size: 13))
@@ -67,7 +87,6 @@ struct MessageView: View {
             }
         }
         .rotationEffect(.degrees(-180))
-//        .navigationTitle()
         .navigationBarTitleDisplayMode(.inline)
     }
 }
