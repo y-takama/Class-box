@@ -7,14 +7,22 @@
 
 import SwiftUI
 
-struct BlockListViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class BlockListViewModel: ObservableObject {
+    
+    @Published var blockList = [User]()
+    
+    init() {
+        fetchList()
     }
-}
-
-struct BlockListViewModel_Previews: PreviewProvider {
-    static var previews: some View {
-        BlockListViewModel()
+    
+    func fetchList() {
+        guard let user = AuthViewModel.shared.currentUser else { return }
+        let uid = user.uid!
+        let docRef = COLLECTION_USERS.document(uid).collection("bloakList")
+        print("bbbbbbbb")
+        docRef.getDocuments { snapshot, _ in
+            guard let documents = snapshot?.documents else { return }
+            self.blockList = documents.map({ User(dictionary: $0.data()) })
+        }
     }
 }
