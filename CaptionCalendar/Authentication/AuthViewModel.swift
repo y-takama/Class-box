@@ -10,11 +10,11 @@ import Firebase
 
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
-//    @Published var userSessions: FirebaseAuth.User?
-//    @Published var isAuthenticating = false
     @Published var error: Error?
     @Published var currentUser: User?
     @Published var loading = false
+    @Published var erralert = false
+    @Published var complete = false
     static let shared = AuthViewModel()
     
     init() {
@@ -27,7 +27,10 @@ class AuthViewModel: ObservableObject {
             if let error = error {
                 print("DEBUG: Failed to login: \(error.localizedDescription)")
                 return
+            } else {
+                print("login is succecced!!!!!!!")
             }
+            print("login is succecced!!!!!!!")
             guard let user = result?.user else { return }
             self.userSession = user
             self.fetchUser()
@@ -36,6 +39,7 @@ class AuthViewModel: ObservableObject {
     
     func signin(result: AuthDataResult?) {
         guard let user = result?.user else { return }
+        print("login is succecced!!!!!!!")
         self.userSession = user
         self.fetchUser()
     }
@@ -52,8 +56,8 @@ class AuthViewModel: ObservableObject {
                     "isShowClassChat": false,
                     "uid": user.uid] as [String : Any]
         Firestore.firestore().collection("users").document(user.uid).setData(data) { _ in
-//            self.userSession = user
-//            self.fetchUser()
+            self.userSession = user
+            self.fetchUser()
         }
     }
     
@@ -74,12 +78,28 @@ class AuthViewModel: ObservableObject {
                     "university": university,
                     "campus": campus,
                     "userStats": "student",
-                    "isShowClassChat": true,
-                    "profileImageUrl": ""] as [String : Any]
+                    "isShowClassChat": true] as [String : Any]
         Firestore.firestore().collection("users").document(user.uid).setData(data) { _ in
-//            self.userSession = user
-//            self.fetchUser()
+            self.userSession = user
+            self.fetchUser()
             print("DEBUG1\(String(describing: self.userSession))")
+        }
+    }
+    
+    func updateStudentUser(mailAddress: String,
+                             university: String,
+                             campus: String) {
+        guard let user = AuthViewModel.shared.currentUser else { return }
+        let data = ["email": mailAddress.lowercased(),
+                    "university": university,
+                    "campus": campus,
+                    "userStats": "student",
+                    "usedTmetable": false,
+                    "isShowClassChat": true] as [String : Any]
+        Firestore.firestore().collection("users").document(user.uid!).updateData(data) { _ in
+//            self.userSession = user
+            self.fetchUser()
+            self.complete = true
         }
     }
     
@@ -91,12 +111,52 @@ class AuthViewModel: ObservableObject {
     func fetchUser() {
         self.loading = true
         guard let uid = userSession?.uid else { return }
-        COLLECTION_USERS.document(uid).getDocument { snapshot, _ in
-            guard let data = snapshot?.data() else { return }
-            self.currentUser = User(dictionary: data)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.loading = false
+        COLLECTION_USERS.document(uid).getDocument { snapshot, err in
+            if err == nil {
+                guard let data = snapshot?.data() else { return }
+                self.currentUser = User(dictionary: data)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.loading = false
+                }
+            } else {
+                self.erralert = true
             }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.erralert = true
+        }
+    }
+    func fetchUserSetting() {
+        self.loading = true
+        guard let uid = userSession?.uid else { return }
+        COLLECTION_USERS.document(uid).getDocument { snapshot, err in
+            if err == nil {
+                guard let data = snapshot?.data() else { return }
+                self.currentUser = User(dictionary: data)
+                self.loading = false
+            } else {
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.erralert = true
+        }
+    }
+    
+    func fetchUserSettingLoading() {
+        self.erralert = false
+        self.loading = true
+        guard let uid = userSession?.uid else { return }
+        COLLECTION_USERS.document(uid).getDocument { snapshot, err in
+            if err == nil {
+                guard let data = snapshot?.data() else { return }
+                self.currentUser = User(dictionary: data)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                    self.loading = false
+                }
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.erralert = true
         }
     }
 }

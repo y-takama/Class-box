@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 //import KingfisherSwiftUI
 
 struct ConversationsView: View {
@@ -13,103 +14,84 @@ struct ConversationsView: View {
     @State private var showingMenu: Bool = false
     @State var isShowingNewMessageView = false
     @State var showChat = false
+    @State private var selectedFilter: ChatFilterOptions = .main
     @State var user: User?
     var users: User
-    @ObservedObject var viewModel: ConversationsViewModel
+    @StateObject var viewModel: ConversationsViewModel
     
     var body: some View {
         ZStack {
-            NavigationView {
-                ZStack(alignment: .bottomTrailing) {
-                    if let user = user {
-                        NavigationLink(destination: LazyView(ChatView(user: user)),
-                                       isActive: $showChat,
-                                       label: {} )
+            ZStack(alignment: .bottomTrailing) {
+                if let user = user {
+                    NavigationLink(destination: LazyView(ChatView(user: user)),
+                                   isActive: $showChat,
+                                   label: {} )
+                }
+                VStack(spacing: 0) {
+                    if users.isShowClassChat! {
+                        ConversationClassChatView(user: users)
                     }
-                    VStack(spacing: 0) {
-                        if viewModel.classChat.isShowClassChat! {
-                            ConversationClassChatView(user: users)
-                        }
+                    
+                    ChatFilterButtonView(selectedOption: $selectedFilter)
+                        .padding(.top, 10)
+                    ZStack {
                         ScrollView {
                             VStack(spacing: 1) {
-                                ForEach(viewModel.recentMessages) { message in
-                                    NavigationLink(
-                                        destination: ChatView(user: User(message: message)),
-                                        label: {
-                                            ConversationCell(message: message, user: users)
-                                            
-                                        })
+                                if selectedFilter == .main {
+                                    ForEach(viewModel.recentMessages) { message in
+                                        NavigationLink(
+                                            destination: ChatView(user: User(message: message)),
+                                            label: {
+                                                ConversationCell(message: message, user: users)
+                                                    .redacted(reason: viewModel.loading ? .placeholder: [])
+                                            })
+                                    }
+                                } else {
+                                    RequestView()
                                 }
                             }.padding(.top, 10)
                         }
-                    }
-                    HStack {
-                        Spacer()
-                        HStack {
-                            Button(action:
-                                    { self.isShowingNewMessageView.toggle() }
-                                   , label: {
-                                Image(systemName: "envelope.open")
-                                    .resizable()
-                                    .foregroundColor(Color("TintColor"))
-                                    .scaledToFit()
-                                    .frame(width: 22, height: 22)
-                                    .padding(15)
-                            })
+                        
+                        if viewModel.loading {
+                            ZStack {
+                                Color("TintColor").ignoresSafeArea()
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: Color("TextColor")))
+                                    .scaleEffect(1)
+                            }
                         }
-                        .background(Color("CaptionColor"))
-                        .cornerRadius(26)
-                        .padding()
-                        .sheet(isPresented: $isShowingNewMessageView, content: {
-                            NewMessageView(show: $isShowingNewMessageView, startChat: $showChat, user: $user, users: users)
+                    }
+                }
+                HStack {
+                    Spacer()
+                    HStack {
+                        Button(action:
+                                { self.isShowingNewMessageView.toggle() }
+                               , label: {
+                            Image(systemName: "envelope.open")
+                                .font(Font.system(size: 24, weight: .semibold))
+                                .foregroundColor(Color("TintColor"))
+                                .frame(width: 24, height: 24)
+                                .padding(14)
+                                .background(Color("CaptionColor"))
+                                .cornerRadius(26)
+                                .padding()
+                                .shadow(color: .gray, radius: 4, x: 1, y: 1)
                         })
                     }
-                }
-                .navigationTitle("Chat")
-                .navigationBarItems(trailing: HStack(spacing: 15) {
-                    ChatSettingButton
-                    menuButton
-                })
-                .navigationBarTitleDisplayMode(.inline)
-                //            .onTapGesture {
-                //                UIApplication.shared.closeKeyboard()
-                //            }
-            }
-            if viewModel.loading {
-                ZStack {
-                    Color("TintColor").ignoresSafeArea()
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color("TextColor")))
-                        .scaleEffect(1)
+                    .sheet(isPresented: $isShowingNewMessageView, content: {
+                        NewMessageView(show: $isShowingNewMessageView, startChat: $showChat, user: $user, users: users)
+                    })
                 }
             }
-        }
-        .onAppear {
+        }.onAppear {
             viewModel.fetchRecentMessages()
         }
     }
-    
-    var menuButton: some View {
-        Button(action: {
-            showChatSheet.toggle()
-        }, label: {
-            Image(systemName: "text.alignright")
-//                .font(Font.system(size: 18, weight: .bold))
-                .foregroundColor(Color("TextColor"))
-        })
+}
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        print(dataDict)
     }
-    
-    var ChatSettingButton: some View {
-        Menu {
-            Button(action: {}) {
-                Text("Chatの使い方を見る")
-                Image(systemName: "doc")
-            }
-        } label: {
-            Image(systemName: "ellipsis")
-//                .font(Font.system(size: 18, weight: .bold))
-                .foregroundColor(Color("TextColor"))
-        }
-    }
-    
 }

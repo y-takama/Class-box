@@ -50,7 +50,7 @@ struct AddQuestionView: View {
     let timer = ["10","15","30","60","90","120","180","240","300"]
     let choiceCount = ["0","4","5","6","7","8","9","10","11","12"]
     let answer = ["0","1","2","3","4","5","6","7","8","9","10"]
-    let cource: Study
+    let cource: Textbook
     var body: some View {
         NavigationView {
             ScrollView {
@@ -210,7 +210,7 @@ struct AddQuestionView: View {
     }
     
     func registration() {
-        let DogRef = COLLECTION_STUDY.document(cource.courseID!).collection("contents").document(cource.detailID!).collection("question").document()
+        let DogRef = COLLECTION_TEXTBOOK.document(cource.textbookID!).collection("course").document(cource.courseID!).collection("question").document()
         let DocID = DogRef.documentID
         let datas: [String: Any] = ["title": title,
                                     "questionTop": questionTop,
@@ -248,8 +248,8 @@ struct AddQuestionView: View {
                                     "choice2_10": choice2_10,
                                     "order": Int(selectedOrder)!,
                                     "timer": Int(selectedTimer)!,
+                                    "textbookID": cource.textbookID!,
                                     "courseID": cource.courseID!,
-                                    "detailID": cource.detailID!,
                                     "nextID": "",
                                     "questionID": DocID]
         if question1 != "" && choice1_1 != "" {

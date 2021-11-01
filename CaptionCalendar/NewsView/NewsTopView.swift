@@ -34,13 +34,13 @@ struct NewsTopView: View {
                                 .frame(width: width, height: height/4)
                                 .clipped()
                                 .ignoresSafeArea(.all)
-                            if #available(iOS 15.0, *) {
-//                                LinearGradient(colors: [
-//                                    .clear,
-//                                    .black.opacity(0.1),
-//                                    .black.opacity(0.4)
-//                                ], startPoint: .top, endPoint: .bottom)
-                            }
+//                            if #available(iOS 15.0, *) {
+////                                LinearGradient(colors: [
+////                                    .clear,
+////                                    .black.opacity(0.1),
+////                                    .black.opacity(0.4)
+////                                ], startPoint: .top, endPoint: .bottom)
+//                            }
                             
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(i.title)

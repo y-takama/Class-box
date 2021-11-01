@@ -20,7 +20,6 @@ struct SideMenuOptionCell: View {
             Spacer()
         }
         .frame(width: UIScreen.main.bounds.width-90,height: 45)
-        .foregroundColor(option.description == "Notification" || option.description == "Remindar" || option.description == "WorkPlace" ? Color.gray : Color("TextColor"))
-//        .background(Color.red)
+        .foregroundColor(option.description == "Notification" || option.description == "News" || option.description == "WorkPlace" ? Color.gray : Color("TextColor"))
     }
 }

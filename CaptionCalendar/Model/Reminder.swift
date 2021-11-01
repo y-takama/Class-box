@@ -57,4 +57,12 @@ struct Reminder: Identifiable, Decodable, Hashable {
         formatter.dateFormat = "YYYYMMdd"
         return formatter.string(from: timestamp.dateValue())
     }
+    var date_time_date: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.timeZone = TimeZone(identifier:  "Asia/Tokyo")
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter.string(from: timestamp.dateValue())
+    }
 }

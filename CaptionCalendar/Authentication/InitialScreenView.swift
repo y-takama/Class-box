@@ -94,11 +94,7 @@ struct InitialScreenView: View {
                                     .padding(.horizontal)
                             }
                         })
-//                    Button(action: {
-//                        AuthViewModel.shared.signOut()
-//                    }, label: {
-//                        /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
-//                    })
+//                    
                     
                     NavigationLink(
                         destination:

@@ -29,7 +29,7 @@ struct CalendarListView: View {
     }
     
     var body: some View {
-        NavigationView {
+//        NavigationView {
             ScrollView {
                 VStack {
                     if eventsRepository.events?.isEmpty ?? true {
@@ -51,12 +51,11 @@ struct CalendarListView: View {
                     }
                 }.padding(.horizontal)
             }
-            .navigationTitle("CalendarList")
-            .navigationBarItems(trailing: CalendarListSettingButton)
-            .navigationBarTitleDisplayMode(.inline)
+//            .navigationBarItems(trailing: CalendarListSettingButton)
+//            .navigationBarTitleDisplayMode(.inline)
 //            .navigationBarItems(trailing: CalendarListSettingButton)
 //            .navigationBarItems(leading: menuButton)
-        }
+//        }
         .sheet(isPresented: $showingSheet) {
             CalendarChooser(calendars: self.$eventsRepository.selectedCalendars, eventStore: self.eventsRepository.eventStore)
                 .ignoresSafeArea()

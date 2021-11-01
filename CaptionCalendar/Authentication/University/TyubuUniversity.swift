@@ -300,7 +300,7 @@ enum TyubuUniversity: String, CaseIterable {
     }
     var description: [String] {
         switch self {
-        case .Aichi: return ["--","名古屋キャンパス","豊橋キャンパス","車道キャンパス"]
+        case .Aichi: return ["--","名古屋校舎","豊橋校舎","車道校舎"]
         case .Aichigakuin: return ["--","日進キャンパス","名城公園キャンパス","楠元キャンパス","末盛キャンパス"]
         case .Aichigakusen: return ["--","岡崎キャンパス"]
         case .Aichikenritsu: return ["--","長久手キャンパス","守山キャンパス"]
@@ -428,7 +428,6 @@ enum TyubuUniversity: String, CaseIterable {
         case .Matumotokanngo: return ["--","本校"]
         case .Matumotosika: return ["--","本校"]
         case .Gifuhokenn: return ["--","本校"]
-        case .Tokaigakuin: return ["--","本校"]
         case .Itinomiyakennsinn: return ["--","本校"]
         case .Kinjogakuin: return ["--","本校"]
         case .Toyotakougyou: return ["--","本校"]

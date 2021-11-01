@@ -37,7 +37,7 @@ struct SideMenuHeaderView: View {
             }
         }
         .fullScreenCover(isPresented: $showProfileView) {
-            ProfileView(user: $viewModel.user, viewModel: ProfileViewModel(user: user))
+            ProfileView(profileToggle: $showProfileView, user: $viewModel.user, viewModel: ProfileViewModel(user: user))
         }
         .fullScreenCover(isPresented: $showSettingView) {
             SettingView(user: user)

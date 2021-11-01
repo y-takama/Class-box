@@ -14,7 +14,7 @@ let COLLECTION_MESSAGES = Firestore.firestore().collection("messages")
 let COLLECTION_TIMETABLE = Firestore.firestore().collection("timetable")
 let COLLECTION_POSTS = Firestore.firestore().collection("captions")
 let COLLECTION_REPORT = Firestore.firestore().collection("report")
-let COLLECTION_STUDY = Firestore.firestore().collection("study")
+let COLLECTION_TEXTBOOK = Firestore.firestore().collection("textbook")
 let COLLECTION_REMINDER = Firestore.firestore().collection("reminder")
 let COLLECTION_NOTIFICATION = Firestore.firestore().collection("notification")
 

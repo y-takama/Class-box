@@ -13,6 +13,8 @@ struct SideMenuTabView: View {
     @State private var showStudyView = false
     @State private var showWorkPlaceView = false
     @State private var showRemindarView = false
+    @State private var emailUpdate = false
+    @State private var emailUpdateView = false
     var body: some View {
         VStack(spacing: 0) {
             ForEach(MenuOption.allCases, id: \.self) { option in
@@ -21,51 +23,64 @@ struct SideMenuTabView: View {
                         SideMenuOptionCell(option: option)
                     }
                 }
-                else if option == .calendarList {
+                if option == .calendarList {
                     Button(action: { showNotificationView.toggle() } ) {
                         SideMenuOptionCell(option: option)
                     }
                 }
-                else if option == .timeTable {
-//                    if user.userStats == "student" {
-//
+                if option == .timeTable {
+                    if user.userStats == "standard" {
+                        Button(action: { emailUpdate.toggle() } ) {
+                            SideMenuOptionGrayCell(option: option)
+                        }
+                    } else {
+                        Button(action: { showNotificationView.toggle() } ) {
+                            SideMenuOptionCell(option: option)
+                        }
+                    }
+                }
+                if option == .chat {
+                    Button(action: { showNotificationView.toggle() } ) {
+                        SideMenuOptionCell(option: option)
+                    }
+                }
+//                if option == .news {
+//                    Button(action: { showNotificationView.toggle() } ) {
+//                        SideMenuOptionCell(option: option)
 //                    }
-                    Button(action: { showNotificationView.toggle() } ) {
-                        SideMenuOptionCell(option: option)
-                    }
-                }
-                else if option == .chat {
-                    Button(action: { showNotificationView.toggle() } ) {
-                        SideMenuOptionCell(option: option)
-                    }
-                }
-                else if option == .news {
-                    Button(action: { showNotificationView.toggle() } ) {
-                        SideMenuOptionCell(option: option)
-                    }
-                }
+//                }
 //                else if option == .study {
+//
 //                    Button(action: { showStudyView.toggle() } ) {
 //                        SideMenuOptionCell(option: option)
 //                    }
 //                }
-                else if option == .notification {
-                    Button(action: { showNotificationView.toggle() } ) {
-                        SideMenuOptionCell(option: option)
-                    }
-                }
-                else if option == .workPlace {
-                    Button(action: { showWorkPlaceView.toggle() } ) {
-                        SideMenuOptionCell(option: option)
-                    }
-                }
-                else if option == .reminder {
+//                if option == .notification {
+//                    Button(action: { showNotificationView.toggle() } ) {
+//                        SideMenuOptionCell(option: option)
+//                    }
+//                }
+//                if option == .workPlace {
+//                    Button(action: { showWorkPlaceView.toggle() } ) {
+//                        SideMenuOptionCell(option: option)
+//                    }
+//                }
+                if option == .reminder {
                     Button(action: { showRemindarView.toggle() } ) {
                         SideMenuOptionCell(option: option)
                     }
                 }
             }
-            .animation(.default)
+//            .animation(.default)
+        }
+        .alert(isPresented: $emailUpdate) {
+            Alert(title: Text("学生アカウントにアップデートする"),
+                  message: Text("学生アカウントにアップデートすることで利用することができます"),
+                  primaryButton: .cancel(Text("Calcel")),
+                  secondaryButton: .default(Text("OK"),
+                                            action: {
+                emailUpdateView.toggle()
+                                            }))
         }
         .fullScreenCover(isPresented: $showNotificationView) {
             UnfinishedView()
@@ -76,11 +91,14 @@ struct SideMenuTabView: View {
         .fullScreenCover(isPresented: $showRemindarView) {
             UnfinishedView()
         }
-        .fullScreenCover(isPresented: $showStudyView) {
-            NavigationView {
-                StudyMainView(showStudyView: $showStudyView, user: user)
-            }.accentColor(Color("CaptionColor"))
-            
+//        .fullScreenCover(isPresented: $showStudyView) {
+//            NavigationView {
+//                TextBookMainView(showStudyView: $showStudyView, user: user)
+//            }.accentColor(Color("CaptionColor"))
+//
+//        }
+        .fullScreenCover(isPresented: $emailUpdateView) {
+            AuthEmailUpdateSelectedLocationView(emailUpdateView: $emailUpdateView)
         }
     }
 }

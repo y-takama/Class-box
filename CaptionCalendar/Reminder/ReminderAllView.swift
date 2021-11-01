@@ -92,7 +92,7 @@ struct ReminderContentView: View {
                     ForEach(viewModel.reminder, id: \.self) { reminderinfo in
                         if reminderinfo.categoryName == reminder.categoryName {
                             NavigationLink(destination: {
-                                ReminderDeteilView(reminder: reminderinfo)
+                                ReminderDeteilView(viewModel: ReminderDetailViewModel(reminder: reminderinfo), reminder: reminderinfo)
                             }, label: {
                                 if reminderinfo.courseName == "" {
                                     ReminderCellView(reminder: reminderinfo)
@@ -104,7 +104,7 @@ struct ReminderContentView: View {
                     }
                     NavigationLink(destination: {
                         CreateReminderView(categoryName: reminder.categoryName!, user: user)
-                            .navigationBarBackButtonHidden(true)
+//                            .navigationBarBackButtonHidden(true)
                     }, label: {
                         HStack {
                             Image(systemName: "plus")

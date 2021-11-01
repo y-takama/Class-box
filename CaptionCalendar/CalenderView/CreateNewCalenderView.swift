@@ -15,7 +15,6 @@ struct CreateNewCalenderView: View {
     @State private var enddatePicker = false
     @State private var datePickerDate = false
     @State private var datePickerDateDetail = false
-    @State private var timetablePicker = false
     @State private var colorPicker = false
     @State private var title = ""
     @State var timetable = ""
@@ -89,10 +88,6 @@ struct CreateNewCalenderView: View {
                     Spacer()
                 }.frame(height: 40)
                 
-//                if datePicker {
-//                    TimePicker(datePickerDateDetail: $datePickerDateDetail, startdate: $startdate)
-//                }
-                
                 if enddatePicker {
                     VStack {
                         if datePickerDateDetail {
@@ -119,10 +114,11 @@ struct CreateNewCalenderView: View {
                     .padding(.horizontal)
                     .frame(height: 400)
                 }
-                if user.status == "university" {
+                if user.userStats! == "student" {
                     HStack(spacing: 0) {
-                        Button(action: {
-                            timetablePicker.toggle()
+                        NavigationLink(destination: {
+                            ReminderTimetablePickerView(timetable: $timetable,
+                                                        classId: $classId)
                         }, label: {
                             HStack(spacing: 9) {
                                 HStack {
@@ -135,12 +131,16 @@ struct CreateNewCalenderView: View {
                                     Spacer()
                                 }.frame(width: getScreenBounds().width*2/5-40)
                                 Text(timetable)
+                                    .bold()
                                     .font(.system(size: 14))
                                     .foregroundColor(Color("TextColor"))
                                 Spacer()
                             }
                         })
-                        if timetable != "" {
+                        if timetable == "" {
+                            Image(systemName: "chevron.right")
+                                .font(Font.system(size: 13, weight: .semibold))
+                        } else {
                             Button(action: {
                                 self.timetable = ""
                             }, label: {
@@ -148,7 +148,7 @@ struct CreateNewCalenderView: View {
                                     .font(.system(size: 16))
                             })
                         }
-                    }.frame(minHeight: 40)
+                    }.frame(minHeight: 45)
                 }
                 
                 
@@ -185,7 +185,7 @@ struct CreateNewCalenderView: View {
                                 .font(.system(size: 16))
                         })
                     }
-                }.frame(height: 40)
+                }.frame(height: 45)
                 if colorPicker {
                     ColorChooserView(color: $color, coloropacity: $coloropacity)
                 }
@@ -194,16 +194,10 @@ struct CreateNewCalenderView: View {
             
             CustomTextField("Note", text: $note)
         }
-
         .foregroundColor(Color("TextColor"))
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading: backButton, trailing: saveButton)
-        
-        .fullScreenCover(isPresented: $timetablePicker){
-            ReminderTimetablePickerView(timetable: $timetable,
-                                        classId: $classId,
-                                        timetablePicker: $timetablePicker)
-        }
+        .navigationTitle("")
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
         }
@@ -219,14 +213,20 @@ struct CreateNewCalenderView: View {
         })
     }
     var saveButton: some View {
+        
         Button(action: {
-            if title.count != 0 {
+            let startTime = CreateNewCalenderView.longDateFormatter.string(from: startdate)
+            let endTime = CreateNewCalenderView.longDateFormatter.string(from: enddate)
+            if title.count != 0 && startTime <= endTime {
                 saveReminder()
             }
         }, label: {
+            let startTime = CreateNewCalenderView.longDateFormatter.string(from: startdate)
+            let endTime = CreateNewCalenderView.longDateFormatter.string(from: enddate)
             Text("保存")
+                .bold()
                 .font(.system(size: 15))
-                .foregroundColor(Color("TextColor"))
+                .foregroundColor(title.count == 0 && startTime <= endTime ? .gray.opacity(0.5) : Color("TextColor"))
         })
     }
     func saveReminder() {
@@ -242,7 +242,7 @@ struct CreateNewCalenderView: View {
                     "classId": classId,
                     "color": color,
                     "coloropacity": coloropacity,
-                    "reminderID": docID] as [String: Any]
+                    "calendarID": docID] as [String: Any]
         docRef.setData(data) { _ in
         }
         mode.wrappedValue.dismiss()

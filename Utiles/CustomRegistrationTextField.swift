@@ -30,6 +30,8 @@ struct CustomRegistrationTextField: View {
                     .foregroundColor(Color.black)
                 
                 TextField("", text: $text)
+//                    .autocapitalization(.none)
+//                    .keyboardType(.emailAddress)
             }
         }
     }

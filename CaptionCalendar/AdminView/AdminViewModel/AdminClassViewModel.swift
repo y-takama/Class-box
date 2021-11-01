@@ -24,7 +24,7 @@
 //    
 //    func fetchClass() {
 //        self.loading = true
-//        let docRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH")
+//        let docRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS")
 //        docRef.getDocuments { snapshot, _ in
 //            guard let documents = snapshot?.documents else { return }
 //            self.classinfo = documents.map({ Admin(dictionary: $0.data()) })

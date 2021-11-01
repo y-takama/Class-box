@@ -20,17 +20,18 @@ class ReminderAllViewModel: ObservableObject {
     }
     
     func fetchReminder() {
-        self.loading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.loading = true
+        }
         guard let user = AuthViewModel.shared.currentUser else { return }
         let docRef = COLLECTION_USERS.document(user.uid!).collection("reminder")
         docRef.getDocuments { snapshot, _ in
             guard let documents = snapshot?.documents else { return }
             let reminder = documents.map({ Reminder(dictionary: $0.data()) })
             self.reminder = reminder.sorted(by: { $0.timestamp.dateValue() < $1.timestamp.dateValue() })
-            self.loading = false
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//
-//            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.loading = false
+            }
         }
     }
     func saveUserImage(profileImage: UIImage) {
@@ -41,7 +42,7 @@ class ReminderAllViewModel: ObservableObject {
             storageRef.downloadURL { url, _ in
                 let headerImageUrl = url?.absoluteString
                 let reminderID = self.reminderInfo.reminderID!
-                COLLECTION_USERS.document(uid).collection("reminderCategory").document(reminderID).updateData(["headerImageUrl": headerImageUrl as Any]) { _ in
+                COLLECTION_USERS.document(uid).collection("reminder_category").document(reminderID).updateData(["headerImageUrl": headerImageUrl as Any]) { _ in
                 }
             }
         }
@@ -50,7 +51,7 @@ class ReminderAllViewModel: ObservableObject {
         self.loading = true
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
         let reminderID = self.reminderInfo.reminderID!
-        COLLECTION_USERS.document(uid).collection("reminderCategory").document(reminderID).updateData(["headerImageUrl": ""]) { _ in
+        COLLECTION_USERS.document(uid).collection("reminder_category").document(reminderID).updateData(["headerImageUrl": ""]) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.loading = false
             }

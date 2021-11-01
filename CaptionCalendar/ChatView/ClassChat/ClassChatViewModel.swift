@@ -21,7 +21,7 @@ class ClassChatViewModel: ObservableObject {
     
     func fetchMessages() {
         guard let user = AuthViewModel.shared.currentUser else { return }
-        let classChatRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document(classInfo.classId).collection("classChat")
+        let classChatRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021AS").document(classInfo.classId).collection("classChat")
         classChatRef.addSnapshotListener { snapshot, error in
             guard let changes = snapshot?.documentChanges.filter({ $0.type == .added }) else { return }
             changes.forEach { change in
@@ -40,8 +40,8 @@ class ClassChatViewModel: ObservableObject {
     func sendMessage(_ messageText: String) {
         guard let user = AuthViewModel.shared.currentUser else { return }
         guard let currentUid = AuthViewModel.shared.userSession?.uid else { return }
-        let classChatRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document(classInfo.classId).collection("classChat").document()
-        let classChatRecentRef =  COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document(classInfo.classId).collection("recent-messages")
+        let classChatRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021AS").document(classInfo.classId).collection("classChat").document()
+        let classChatRecentRef =  COLLECTION_TIMETABLE.document(user.university!).collection("2021AS").document(classInfo.classId).collection("recent-messages")
         let messageID = classChatRef.documentID
         let data: [String: Any] = ["text": messageText,
                                    "id": messageID,
@@ -60,7 +60,7 @@ class ClassChatViewModel: ObservableObject {
     }
     
     func readedMessage() {
-        let classChatRecentRef =  COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document(classInfo.classId).collection("recent-messages")
+        let classChatRecentRef =  COLLECTION_TIMETABLE.document(user.university!).collection("2021AS").document(classInfo.classId).collection("recent-messages")
         let data: [String: Any] = ["read": false]
         classChatRecentRef.document(classInfo.classId).updateData(data)
     }

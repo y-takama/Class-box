@@ -31,7 +31,7 @@ struct NewMessageView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
-                    ForEach(viewModel.filteredUniversityUsers(users.university!)) { user in
+                    ForEach(viewModel.filteredUniversityUsers(users.university ?? "")) { user in
                         
                         Button(action: {
                             self.show.toggle()
@@ -69,13 +69,13 @@ struct NewMessageView: View {
                                 Text(user.fullname!)
                                     .font(.system(size: 10))
                                     .frame(height: 12)
-                                    .foregroundColor(Color("CaptionColor"))
+                                    .foregroundColor(Color("TextColor"))
                             }
                             .frame(width: 58, height: 75)
                         })
                     }
                 }.padding(.leading)
-            }
+            }.frame(height: 75)
             Divider()
             VStack(alignment: .leading) {
                 if searchText.isEmpty {

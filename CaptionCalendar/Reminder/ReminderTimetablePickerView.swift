@@ -10,36 +10,21 @@ import SwiftUI
 struct ReminderTimetablePickerView: View {
     @Binding var timetable: String
     @Binding var classId: String
-    @Binding var timetablePicker: Bool
-    @ObservedObject var viewModel = TimeTableClassViewModel()
-//    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @StateObject var viewModel = TimeTableClassViewModel()
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
-        NavigationView {
-            ScrollView {
-                ForEach(viewModel.timetable, id: \.self) { classes in
-                    Button(action: {
-                        self.timetable = classes.courseName
-                        self.classId = classes.classId
-                        timetablePicker.toggle()
-                    }, label: {
-                        ClassCell(classes: classes)
-                    })
-                }
-                Spacer()
+        ScrollView {
+            ForEach(viewModel.timetable, id: \.self) { classes in
+                Button(action: {
+                    self.timetable = classes.courseName
+                    self.classId = classes.classId
+                    mode.wrappedValue.dismiss()
+                }, label: {
+                    ClassCell(classes: classes)
+                })
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: backButton)
+            Spacer()
         }
-        
-    }
-    var backButton: some View {
-        Button(action: {
-            timetablePicker.toggle()
-        }, label: {
-            Image(systemName: "chevron.backward")
-                .font(.system(size: 16))
-                .font(.title3)
-                .foregroundColor(Color("TextColor"))
-        })
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

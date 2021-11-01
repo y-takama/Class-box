@@ -5,8 +5,8 @@
 //  Created by 髙間洋平 on 2021/08/18.
 //
 
-import SwiftUI
-
+//import SwiftUI
+//
 //struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
 //    var sheetView: SheetView
 //    let controller = UIViewController()
@@ -40,5 +40,15 @@ import SwiftUI
 //            ]
 //            presentationController.prefersGrabberVisible = true
 //        }
+//    }
+//}
+//
+//extension View {
+//    func halfSheet<SheetView: View>(showSheet: Binding<Bool>, @ViewBuilder sheetView: @escaping ()->SheetView)->some View{
+//        
+//        return self
+//            .background(
+//            HalfSheetHelper(sheetView: sheetView(), showingSetting: showSheet)
+//            )
 //    }
 //}

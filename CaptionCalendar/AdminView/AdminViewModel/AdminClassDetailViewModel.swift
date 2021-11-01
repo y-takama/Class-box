@@ -23,7 +23,7 @@ class AdminClassDetailViewModel: ObservableObject {
     }
     
     func fetchClassDetail() {
-        let docRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH").document(classId.classId)
+        let docRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS").document(classId.classId)
         docRef.getDocument { snapshot, _ in
             let classinfo = snapshot.map({ Admin(dictionary: $0.data()!)})
             self.classinfo = classinfo!
@@ -32,7 +32,7 @@ class AdminClassDetailViewModel: ObservableObject {
     
     func fetchClass() {
         self.loading = true
-        let docRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH")
+        let docRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS")
         docRef.getDocuments { snapshot, _ in
             guard let documents = snapshot?.documents else { return }
             let classInfo = documents.map({ Admin(dictionary: $0.data()) })
@@ -47,7 +47,7 @@ class AdminClassDetailViewModel: ObservableObject {
     
     func fetchBeforeattendanceNone() {
         let data = ["beforeattendanceNone": 1] as [String: Any]
-        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH").document(classId.classId)
+        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS").document(classId.classId)
         if classId.beforeattendanceNone! == 0 {
             dogRef.updateData(data) { _ in
             }
@@ -58,7 +58,7 @@ class AdminClassDetailViewModel: ObservableObject {
     }
     func fetchBeforeattendanceSometimes() {
         let data = ["beforeattendanceSometimes": 1] as [String: Any]
-        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH").document(classId.classId)
+        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS").document(classId.classId)
         if classId.beforeattendanceSometimes! == 0 {
             dogRef.updateData(data) { _ in
             }
@@ -69,7 +69,7 @@ class AdminClassDetailViewModel: ObservableObject {
     }
     func fetchBeforeattendanceEverytime() {
         let data = ["beforeattendanceEverytime": 1] as [String: Any]
-        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH").document(classId.classId)
+        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS").document(classId.classId)
         if classId.beforeattendanceEverytime! == 0 {
             dogRef.updateData(data) { _ in
             }
@@ -80,7 +80,7 @@ class AdminClassDetailViewModel: ObservableObject {
     }
     func fetchBeforeattendanceReport() {
         let data = ["beforeattendanceReport": 1] as [String: Any]
-        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH").document(classId.classId)
+        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS").document(classId.classId)
         if classId.beforeattendanceReport! == 0 {
             dogRef.updateData(data) { _ in
             }
@@ -91,7 +91,7 @@ class AdminClassDetailViewModel: ObservableObject {
     }
     func fetchBeforeattendanceNotClear() {
         let data = ["beforeattendanceNotClear": 1] as [String: Any]
-        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH").document(classId.classId)
+        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS").document(classId.classId)
         if classId.beforeattendanceNotClear! == 0 {
             dogRef.updateData(data) { _ in
             }
@@ -102,7 +102,7 @@ class AdminClassDetailViewModel: ObservableObject {
     }
     func fetchBeforeunit1() {
         let data = ["beforeunit1": 1] as [String: Any]
-        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH").document(classId.classId)
+        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS").document(classId.classId)
         if classId.beforeunit1! == 0 {
             dogRef.updateData(data) { _ in
             }
@@ -113,7 +113,7 @@ class AdminClassDetailViewModel: ObservableObject {
     }
     func fetchBeforeunit2() {
         let data = ["beforeunit2": 1] as [String: Any]
-        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH").document(classId.classId)
+        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS").document(classId.classId)
         if classId.beforeunit2! == 0 {
             dogRef.updateData(data) { _ in
             }
@@ -124,7 +124,7 @@ class AdminClassDetailViewModel: ObservableObject {
     }
     func fetchBeforeunit3() {
         let data = ["beforeunit3": 1] as [String: Any]
-        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH").document(classId.classId)
+        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS").document(classId.classId)
         if classId.beforeunit3! == 0 {
             dogRef.updateData(data) { _ in
             }
@@ -135,7 +135,7 @@ class AdminClassDetailViewModel: ObservableObject {
     }
     func fetchBeforeunit4() {
         let data = ["beforeunit4": 1] as [String: Any]
-        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH").document(classId.classId)
+        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS").document(classId.classId)
         if classId.beforeunit4! == 0 {
             dogRef.updateData(data) { _ in
             }
@@ -146,7 +146,7 @@ class AdminClassDetailViewModel: ObservableObject {
     }
     func fetchBeforeunit5() {
         let data = ["beforeunit5": 1] as [String: Any]
-        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021LH").document(classId.classId)
+        let dogRef = COLLECTION_TIMETABLE.document(classId.university!).collection("2021AS").document(classId.classId)
         if classId.beforeunit5! == 0 {
             dogRef.updateData(data) { _ in
             }

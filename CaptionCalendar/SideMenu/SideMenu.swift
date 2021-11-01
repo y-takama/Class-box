@@ -10,6 +10,7 @@ import SwiftUI
 struct SideMenu: View {
     @Binding var showMenu: Bool
     @State private var logoutButton = false
+//    @Binding var sidemenu: Bool
     let user: User
     var body: some View {
         NavigationView {
@@ -29,7 +30,8 @@ struct SideMenu: View {
                         .padding(.trailing, 25)
                         .padding(.top, UIScreen.main.bounds.height/15)
                         
-                        SideMenuHeaderView(viewModel: ProfileViewModel(user: user), user: user)
+                        SideMenuHeaderView(viewModel: ProfileViewModel(user: user),
+                                           user: user)
                         Divider()
                         if user.admin! == "0" {
                             SideMenuAdminView(user: user)
@@ -70,7 +72,7 @@ struct SideMenu: View {
                                 Spacer()
                             }
                             HStack {
-                                Text("Version 1.0.0  Build 1.0.0")
+                                Text("Version 1.5.0  Build 4")
                                     .font(.caption)
                                 Spacer()
                             }
@@ -100,7 +102,6 @@ struct SideMenu: View {
             .ignoresSafeArea(edges: .top)
             .navigationBarHidden(true)
         }
-//        .accentColor(Color("TextColor"))
     }
 }
 extension View {

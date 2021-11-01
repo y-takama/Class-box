@@ -28,7 +28,10 @@ struct TimeTable: Identifiable, Decodable, Hashable {
     var classId: String
     var listId: String
     var graduate: String?
+    var reference_source: String?
     let status: String
+    var myself: Bool
+    var whereFieldCampus: Bool?
     var absence: Int?
     var attendance: Int?
     var behindtime: Int?
@@ -74,7 +77,10 @@ struct TimeTable: Identifiable, Decodable, Hashable {
         self.classId = dictionary["classId"] as? String ?? ""
         self.listId = dictionary["listId"] as? String ?? ""
         self.graduate = dictionary["graduate"] as? String ?? ""
+        self.reference_source = dictionary["reference_source"] as? String ?? ""
         self.status = dictionary["status"] as? String ?? ""
+        self.myself = dictionary["myself"] as? Bool ?? false
+        self.whereFieldCampus = dictionary["whereFieldCampus"] as? Bool ?? true
         self.absence = dictionary["absence"] as? Int ?? 0
         self.attendance = dictionary["attendance"] as? Int ?? 0
         self.behindtime = dictionary["behindtime"] as? Int ?? 0

@@ -16,7 +16,7 @@ struct ClassEvaluationView: View {
     init(name: Binding<String>, classes: TimeTable ) {
         self._name = name
         self.classes = classes
-        self.viewModel = ClassDetailViewModel(classId: classes, classInfo: classes, editClass: classes, timetable: classes.timetables!)
+        self.viewModel = ClassDetailViewModel(classId: classes, timetable: classes.timetables!)
         UISegmentedControl.appearance().selectedSegmentTintColor = .darkGray
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)

@@ -15,18 +15,10 @@ class SettingChatViewModel: ObservableObject {
     init(user: User) {
         self.user = user
     }
-    func ShowClassChat(_ isShowClassChat: Bool) {
+    func ShowClassChat() {
         COLLECTION_USERS.document(user.uid!).updateData(["isShowClassChat": user.isShowClassChat! ? false : true]) { _ in
-            self.user.isShowClassChat = isShowClassChat
             self.complete = true
-            self.user.isShowClassChat?.toggle()
+            AuthViewModel.shared.fetchUser()
         }
     }
-//    func fethClassChat() {
-//        guard let uid = AuthViewModel.shared.userSession?.uid else { return }
-//        COLLECTION_USERS.document(uid).getDocument{ snapshot, _ in
-//            guard let data = snapshot?.data() else { return }
-//            self.classChat = User(dictionary: data)
-//        }
-//    }
 }

@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import FirebaseFirestore
 
 struct Message: Identifiable {
     let user: User

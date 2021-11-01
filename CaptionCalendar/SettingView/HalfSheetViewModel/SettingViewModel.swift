@@ -30,6 +30,9 @@ enum SettingViewModel: Int, CaseIterable {
     case termsOfService
     case userstatus
     case isShowClassChat
+    case isHiddenClassChat
+    case isShowTextbook
+    case isHiddenTextbook
     case hide
 //    case report
     
@@ -58,8 +61,10 @@ enum SettingViewModel: Int, CaseIterable {
         case .four: return "tab4の設定"
         case .five: return "tab5の設定"
         case .userstatus: return "Plan の変更"
-        case .isShowClassChat: return "ClassChatの表示を変更する"
-//        case .report: return "問題の間違いを報告する"
+        case .isShowClassChat: return "ClassChatを表示する"
+        case .isHiddenClassChat: return "ClassChatを非表示にする"
+        case .isShowTextbook: return "Textbookを表示する"
+        case .isHiddenTextbook: return "Textbookを非表示にする"
         }
     }
     
@@ -88,6 +93,9 @@ enum SettingViewModel: Int, CaseIterable {
         case .five: return "5.circle"
         case .userstatus: return "exclamationmark.circle"
         case .isShowClassChat: return "bubble.left.and.bubble.right"
+        case .isHiddenClassChat: return "bubble.left.and.exclamationmark.bubble.right"
+        case .isShowTextbook: return "book"
+        case .isHiddenTextbook: return "book.closed"
         }
     }
 }

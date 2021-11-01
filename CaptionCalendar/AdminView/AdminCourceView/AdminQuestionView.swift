@@ -11,13 +11,13 @@ struct AdminQuestionView: View {
     @ObservedObject var viewModel: StudyContentDetailViewModel
     @State private var addQuestion = false
     @State private var showStudyView = false
-    let cource: Study
+    let cource: Textbook
     let user: User
     var body: some View {
         RefreshableScrollView(content: {
             VStack {
                 ForEach(viewModel.contents, id: \.self) { courceinfo in
-                    NavigationLink(destination: StudyContenrDetaiView(showStudyView: $showStudyView, content: courceinfo, user: user)
+                    NavigationLink(destination: StudyContenrDetaiView(showStudyView: $showStudyView, showQuestion: $showStudyView, content: courceinfo, user: user)
                                     .navigationBarTitleDisplayMode(.inline), label: {
                         HStack {
                             Text("\(courceinfo.order!)")

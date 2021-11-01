@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct ConnectView: View {
-    @State var isLoading = false
     @EnvironmentObject var viewModel: AuthViewModel
+    @State private var selectedIndex = 0
     let coloredNavAppearance = UINavigationBarAppearance()
     init() {
         coloredNavAppearance.configureWithOpaqueBackground()
         coloredNavAppearance.backgroundColor = UIColor.init(Color("TintColor"))
+//        coloredNavAppearance.backgroundColor = UIColor(Color("TintColor"))
         coloredNavAppearance.shadowColor = .clear
         UINavigationBar.appearance().standardAppearance = coloredNavAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
-        
     }
     
     var body: some View {
@@ -28,8 +28,7 @@ struct ConnectView: View {
                 
                 ZStack {
                     if let user = viewModel.currentUser {
-                        MainTabView(user: user)
-                            .navigationBarHidden(true)
+                            MainTabView(user: user)
                     }
                     if viewModel.loading {
                         ZStack {
@@ -42,10 +41,25 @@ struct ConnectView: View {
                                     .progressViewStyle(CircularProgressViewStyle(tint: Color("CaptionColor")))
                                     .scaleEffect(1)
                             }
+                            VStack {
+                                Spacer()
+                                if viewModel.erralert {
+                                    Button(action: {
+                                        AuthViewModel.shared.signOut()
+                                    }, label: {
+                                        Text("ログインできない方はこちら")
+                                            .bold()
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 12))
+                                    })
+                                }
+                            }
                         }
                     }
                 }
             }
-        }.accentColor(Color("CaptionColor"))
+        }
+//        .accentColor(Color("CaptionColor"))
+        .accentColor(Color("TextColor"))
     }
 }

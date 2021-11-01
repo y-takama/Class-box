@@ -12,19 +12,21 @@ import Kingfisher
 
 struct ProfileView: View {
     @State var showImagePicker = false
+    @State var showsafari = false
+    @State var profileURL = ""
     @State var selectedUIImage: UIImage?
     @State var image: Image?
+    @Binding var profileToggle: Bool
     let width = UIScreen.main.bounds.width
     @Binding var user: User
     @ObservedObject var viewModel: ProfileViewModel
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
         NavigationView {
             ZStack {
-                ScrollView {
+                RefreshableScrollView(content: {
                     VStack {
                         ZStack(alignment: .bottomLeading) {
-                            if viewModel.user.backImageUrl == "" {
+                            if user.backImageUrl == "" {
                                 Image("image1")
                                     .resizable()
                                     .scaledToFill()
@@ -32,7 +34,7 @@ struct ProfileView: View {
                                            height: 140)
                                     .clipped()
                             } else {
-                                KFImage(URL(string: viewModel.user.backImageUrl!))
+                                KFImage(URL(string: user.backImageUrl!))
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: getScreenBounds().width,
@@ -40,10 +42,10 @@ struct ProfileView: View {
                                     .clipped()
                             }
                             
-                                
+                            
                             HStack(spacing: 20) {
-                                if viewModel.user.profileImageUrl == "" {
-                                    let username = viewModel.user.fullname
+                                if user.profileImageUrl == "" {
+                                    let username = user.fullname
                                     let start = String(username!.prefix(2))
                                     Text(start)
                                         .font(.system(size: 24, weight: .semibold))
@@ -58,7 +60,7 @@ struct ProfileView: View {
                                         .foregroundColor(Color("TextColor"))
                                         .padding(.leading, 20)
                                 } else {
-                                    KFImage(URL(string: viewModel.user.profileImageUrl!))
+                                    KFImage(URL(string: user.profileImageUrl!))
                                         .resizable()
                                         .scaledToFill()
                                         .frame(width: 60, height: 60)
@@ -69,26 +71,26 @@ struct ProfileView: View {
                                                 .stroke(Color.gray, lineWidth: 0.3)
                                         )
                                         .padding(.leading, 20)
-                                        
+                                    
                                 }
                                 
                                 
                                 VStack(alignment: .leading, spacing: 5) {
-                                    if viewModel.user.fullname == "" {
+                                    if user.fullname == "" {
                                         Text("名前は設定されていません")
                                     } else {
-                                        Text(viewModel.user.fullname!)
+                                        Text(user.fullname!)
                                             .bold()
                                             .foregroundColor(Color.black)
                                     }
-                                    Text(viewModel.user.uid!)
+                                    Text(user.uid!)
                                         .foregroundColor(Color.gray)
                                         .modifier(SecondaryCaptionTextStyle())
                                 }
                                 Spacer()
                             }
                             .frame(width: getScreenBounds().width,
-                                    height: 55)
+                                   height: 55)
                             .padding(.bottom)
                         }
                         
@@ -126,7 +128,7 @@ struct ProfileView: View {
                                         .bold()
                                     Spacer()
                                 }.frame(width: width*2/5)
-                                Text(viewModel.user.fullname!)
+                                Text(user.fullname!)
                                     .font(.system(size: 14))
                                     .bold()
                                 Spacer()
@@ -142,9 +144,8 @@ struct ProfileView: View {
                                         .bold()
                                     Spacer()
                                 }.frame(width: width*2/5)
-                                Text(viewModel.user.username!)
+                                Text(user.username!)
                                     .font(.system(size: 12))
-    //                                .foregroundColor(Color.gray)
                                     .bold()
                                 Spacer()
                             }
@@ -159,7 +160,7 @@ struct ProfileView: View {
                                         .bold()
                                     Spacer()
                                 }.frame(width: width*2/5)
-                                Text(viewModel.user.userStats!)
+                                Text(user.userStats!)
                                     .font(.system(size: 14))
                                     .bold()
                                 Spacer()
@@ -178,7 +179,7 @@ struct ProfileView: View {
                                             .bold()
                                         Spacer()
                                     }.frame(width: width*2/5)
-                                    Text(viewModel.user.university!)
+                                    Text(user.university!)
                                         .font(.system(size: 14))
                                         .bold()
                                 }
@@ -193,7 +194,7 @@ struct ProfileView: View {
                                             .bold()
                                         Spacer()
                                     }.frame(width: width*2/5)
-                                    Text(viewModel.user.campus!)
+                                    Text(user.campus!)
                                         .font(.system(size: 14))
                                         .bold()
                                 }
@@ -211,31 +212,75 @@ struct ProfileView: View {
                                 }.frame(width: width*2/5)
                                 
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    Text(viewModel.user.email)
+                                    Text(user.email)
                                         .font(.system(size: 14))
                                         .bold()
                                 }
                             }
                         }.padding(20)
                     }
-                }
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(leading: profileButton, trailing: backButton)
+                    
+                    Spacer()
+                }, onRefresh: { control in
+                    DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+                        AuthViewModel.shared.fetchUserSetting()
+                        control.endRefreshing()
+                    }
+                })
                 
-                if viewModel.loading {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color("CaptionColor")))
-                        .scaleEffect(1)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarItems(leading: profileButton, trailing: backButton)
+                
+//                if viewModel.loading {
+//                    ProgressView()
+//                        .progressViewStyle(CircularProgressViewStyle(tint: Color("CaptionColor")))
+//                        .scaleEffect(0.5)
+//                }
+                
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        if user.instagramText! == "" || user.instagramText == nil {
+                            
+                        } else {
+                            NavigationLink(destination: {
+                                WebView(loadUrl: "https://www.instagram.com/" + String(user.instagramText!))
+                            }, label: {
+                                Image("instagram_icon")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 35, height: 35)
+                                    .clipped()
+                                    .padding(10)
+                            })
+                        }
+                        if user.twitterText! == "" || user.twitterText == nil {
+                            
+                        } else {
+                            NavigationLink(destination: {
+                                WebView(loadUrl: "https://twitter.com/" + String(user.twitterText!))
+                            }, label: {
+                                Image("twitter_icon")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 35, height: 35)
+                                    .clipped()
+                                    .padding(10)
+                            })
+                        }
+                        Spacer()
+                    }
                 }
             }
-            .onAppear(perform: {
-                viewModel.fetchUser()
-            })
+            NavigationLink(isActive: $showsafari, destination: {
+                WebView(loadUrl: profileURL)
+            }, label: {})
         }
     }
     var backButton: some View {
         Button(action: {
-            mode.wrappedValue.dismiss()
+            profileToggle.toggle()
         }, label: {
             Image(systemName: "multiply.circle.fill")
                 .font(.title3)
@@ -244,11 +289,10 @@ struct ProfileView: View {
     }
     var profileButton: some View {
         Button(action: {
-//            mode.wrappedValue.dismiss()
         }, label: {
             HStack {
-                let fullname = viewModel.user.fullname
-                if viewModel.user.profileImageUrl == "" {
+                let fullname = user.fullname
+                if user.profileImageUrl == "" {
                     let start = String(fullname!.prefix(2))
                     Text(start)
                         .font(.system(size: 12, weight: .semibold))
@@ -262,7 +306,7 @@ struct ProfileView: View {
                         .foregroundColor(Color("TextColor"))
                     
                 } else {
-                    KFImage(URL(string: viewModel.user.profileImageUrl!))
+                    KFImage(URL(string: user.profileImageUrl!))
                         .resizable()
                         .scaledToFill()
                         .frame(width: 30, height: 30)

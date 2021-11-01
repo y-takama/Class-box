@@ -35,6 +35,7 @@ struct RegistrationView: View {
                 Spacer()
                 VStack(spacing: 13) {
                     CustomRegistrationTextField(text: $mailAddress, placeholder: Text("Email"), imageName: "envelope")
+                        .keyboardType(.emailAddress)
                         .padding()
                         .background(Color(.init(white: 0, alpha: 0.05)))
                         .cornerRadius(10)
@@ -53,14 +54,14 @@ struct RegistrationView: View {
                         .foregroundColor(.black)
                     
                     CustomRegistrationTextField(text: $fullname, placeholder: Text("名前"), imageName: "person")
+                        .keyboardType(.namePhonePad)
                         .padding()
                         .background(Color(.init(white: 0, alpha: 0.05)))
                         .cornerRadius(10)
                         .foregroundColor(.black)
                 }
                 .padding(.horizontal, 25)
-                .padding(.top, 15)
-                
+                .padding(.bottom, 50)
                 
                 Button(action: {
                     self.isShowingBackground = true
@@ -96,8 +97,6 @@ struct RegistrationView: View {
                 })
                     .alert(isPresented: $isShowAlert) {
                         if self.isError {
-//                            return Alert(title: Text(""), message: Text(self.errorMessage), dismissButton: .destructive(Text("OK"))
-//                            )
                             return Alert(title: Text(""),
                                   message: Text(self.errorMessage),
                                   dismissButton: .default(Text("OK"),
@@ -106,27 +105,30 @@ struct RegistrationView: View {
                             }))
                         } else {
                             return Alert(title: Text(""),
-                                  message: Text("登録が完了しました。登録したメールアドレスに送られたURLをクリックして承認を完了してください"),
+                                  message: Text("登録が完了しました。"),
                                   dismissButton: .default(Text("OK"),
                                                           action: {
-                                self.isShowingLogin = true
+//                                self.isShowingLogin = true
                                 self.isShowingBackground = false
                             }))
                         }
                     }
-                    .fullScreenCover(isPresented: self.$isShowingLogin) {
-                        ValidLoginView(mailAddress: $mailAddress, password: $password, isShowingLogin: $isShowingLogin)
-                    }
                 
-                Text("登録完了までに数秒かかることがあります")
-                    .font(.system(size: 10))
-                    .foregroundColor(.black)
-                    .padding(.bottom, 40)
-                
-                NavigationLink(destination: InitialScreenView().navigationBarHidden(true), label: {
-                    Text("Back")
-                        .font(.system(size: 14, weight: .semibold))
-                })
+//                Button(action: {
+//
+//                }, label: {
+//                    Text("Sign Up せずに始める")
+//                        .font(.system(size: 14, weight: .semibold))
+//                        .foregroundColor(.black)
+//                        .frame(width: 300, height: 50)
+//                        .overlay(
+//                            RoundedRectangle(cornerRadius: 25)
+//                                .stroke(Color.black, lineWidth: 0.5)
+//                        )
+//                        .background(Color.white)
+//                        .cornerRadius(25)
+//                        .padding()
+//                })
                 
                 HStack(alignment: .center) {
                     Spacer()
@@ -150,9 +152,20 @@ struct RegistrationView: View {
                     Spacer()
                 }
             }
+            
+            
             if isShowingBackground {
                 Color("TintColor").opacity(0.1).ignoresSafeArea()
             }
+            HStack {
+                NavigationLink(destination: InitialScreenView().navigationBarHidden(true), label: {
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: 20))
+                        .foregroundColor(Color.black)
+                        .padding(.leading, 10)
+                })
+                Spacer()
+            }.padding(.horizontal)
         }
     }
     

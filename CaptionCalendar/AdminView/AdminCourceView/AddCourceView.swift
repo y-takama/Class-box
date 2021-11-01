@@ -10,11 +10,11 @@ import SwiftUI
 struct AddCourceView: View {
     @State private var selectedOrder = "1"
     @State private var courceName = ""
-    @State private var headerName = ""
+    @State private var tabName = ""
     @State private var isShowAlert = false
     @Binding var addCource: Bool
     let order = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"]
-    let cource: Study
+    let cource: Textbook
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
@@ -22,7 +22,7 @@ struct AddCourceView: View {
                 TextField("コース名を入力してください", text: $courceName)
                 Divider()
                 Text("header").padding(.leading)
-                TextField("ヘッダーを入力してください", text: $headerName)
+                TextField("ヘッダーを入力してください", text: $tabName)
                 Divider()
                 Text("order").padding(.leading)
                 Picker(selection: $selectedOrder, label: Text("order")) {
@@ -43,7 +43,7 @@ struct AddCourceView: View {
         Button(action: {
             registration()
         }, label: {
-            if courceName != "" && headerName != "" {
+            if courceName != "" && tabName != "" {
                 Image(systemName: "plus")
             } else {
                 Image(systemName: "plus")
@@ -53,14 +53,14 @@ struct AddCourceView: View {
     }
     
     func registration() {
-        let dogRef = COLLECTION_STUDY.document(cource.courseID!).collection("contents").document()
+        let dogRef = COLLECTION_TEXTBOOK.document(cource.textbookID!).collection("course").document()
         let docID = dogRef.documentID
-        let datas: [String: Any] = ["courseID": cource.courseID!,
-                                   "detailID": docID,
-                                   "header": headerName,
+        let datas: [String: Any] = ["textbookID": cource.textbookID!,
+                                   "courseID": docID,
+                                   "tab": tabName,
                                    "title": courceName,
                                     "order": Int(selectedOrder)!]
-        if courceName != "" && headerName != "" {
+        if courceName != "" && tabName != "" {
             dogRef.setData(datas) { err in
                 if err == nil {
                     addCource.toggle()

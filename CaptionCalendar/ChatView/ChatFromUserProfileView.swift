@@ -155,7 +155,7 @@ struct ChatFromUserProfileView: View {
     }
     func userBlock() {
         guard let user = AuthViewModel.shared.currentUser else { return }
-        let docRef = COLLECTION_USERS.document(user.id!).collection("BloakList").document(viewModel.messageUser.uid!)
+        let docRef = COLLECTION_USERS.document(user.id!).collection("bloakList").document(viewModel.messageUser.uid!)
         let data = ["uid": viewModel.messageUser.uid!,
                     "fullname": viewModel.messageUser.fullname!] as [String: Any]
         docRef.setData(data) { _ in

@@ -47,7 +47,9 @@ struct StudentThirdRegistrationView: View {
                         
                         Spacer()
                     }
-                    CustomRegistrationTextField(text: $mailAddress, placeholder: Text("大学メールアドレス/ac.jp"), imageName: "envelope")
+                    CustomRegistrationTextField(text: $mailAddress, placeholder: Text("大学メールアドレス/ .ac.jp"), imageName: "envelope")
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
                         .padding()
                         .background(Color(.init(white: 0, alpha: 0.05)))
                         .cornerRadius(10)
@@ -67,7 +69,7 @@ struct StudentThirdRegistrationView: View {
                             .font(.system(size: 10, weight: .semibold))
                         Spacer()
                     }
-                    CustomSecureField(text: $password, placeholder: Text("Password　(半角英数字6-15文字)"))
+                    CustomSecureField(text: $password, placeholder: Text("Password　(6-15文字)"))
                         .padding()
                         .background(Color(.init(white: 0, alpha: 0.05)))
                         .cornerRadius(10)
@@ -94,6 +96,7 @@ struct StudentThirdRegistrationView: View {
                         Spacer()
                     }
                     CustomRegistrationTextField(text: $fullname, placeholder: Text("名前"), imageName: "person")
+                        .keyboardType(.namePhonePad)
                         .padding()
                         .background(Color(.init(white: 0, alpha: 0.05)))
                         .cornerRadius(10)
@@ -153,21 +156,14 @@ struct StudentThirdRegistrationView: View {
                             }))
                         } else {
                             return Alert(title: Text(""),
-                                         message: Text("登録が完了しました。登録したメールアドレスに送られたURLをクリックして承認を完了してください"),
+                                         message: Text("登録が完了しました。"),
                                          dismissButton: .default(Text("OK"),
                                                                  action: {
-                                self.isShowingLogin = true
+//                                self.isShowingLogin = true
                                 self.isShowingBackground = false
                             }))
                         }
                     }
-                    .fullScreenCover(isPresented: self.$isShowingLogin) {
-                        ValidLoginView(mailAddress: $mailAddress, password: $password, isShowingLogin: $isShowingLogin)
-                    }
-                
-                Text("登録完了までに数秒かかることがあります")
-                    .font(.system(size: 10))
-                    .foregroundColor(.black)
                 
                 Spacer()
                 
@@ -206,6 +202,9 @@ struct StudentThirdRegistrationView: View {
                     .foregroundColor(Color.black)
             })
         }
+//        .fullScreenCover(isPresented: $isShowingLogin) {
+//            ValidLoginView(mailAddress: $mailAddress, password: $password, isShowingLogin: $isShowingLogin)
+//        }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
         }
@@ -247,7 +246,6 @@ struct StudentThirdRegistrationView: View {
                 }
             }
         }
-    
     private func backGroundColor() -> LinearGradient {
         let start = UnitPoint.init(x: 1, y: 1)
         let end = UnitPoint.init(x: 0, y: 0)

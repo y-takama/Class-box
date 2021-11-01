@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct StudentFirstRegistrationView: View {
-    let location = ["北海道","東北","関東","中部","関西","中国","四国","九州"]
-    @State private var favoriteColor = 4
+//    let location = ["北海道","東北","関東","中部","関西","中国","四国","九州"]
+    let location = ["九州","四国","中国","関西","中部","関東","東北","北海道"]
+    @State private var favoriteColor = 3
     @State private var imagename = "japan_kansai"
     @State private var selectedlocation = "関西"
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+//    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     init() {
         let foregroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
@@ -47,14 +48,14 @@ struct StudentFirstRegistrationView: View {
 //                            }
 //                        }
                         Picker(selection: $favoriteColor.onChange(colorChange), label: Text("Color")) {
-                            Text("北海道").tag(0)
-                            Text("東北").tag(1)
-                            Text("関東").tag(2)
-                            Text("中部").tag(3)
-                            Text("関西").tag(4)
-                            Text("中国").tag(5)
-                            Text("四国").tag(6)
-                            Text("九州").tag(7)
+                            Text("九州").tag(0)
+                            Text("四国").tag(1)
+                            Text("中国").tag(2)
+                            Text("関西").tag(3)
+                            Text("中部").tag(4)
+                            Text("関東").tag(5)
+                            Text("東北").tag(6)
+                            Text("北海道").tag(7)
                         }
                         
                     }.padding()
@@ -85,31 +86,29 @@ struct StudentFirstRegistrationView: View {
                                 .font(.system(size: 14, weight: .semibold))
                                 .foregroundColor(.black)
                                 .padding(30)
-        //                        .ignoresSafeArea()
                         })
                 }.edgesIgnoringSafeArea(.bottom)
-//                .background(Color.red)
             }
             
         }
     }
     func colorChange(_ tag: Int) {
         if tag == 0 {
-            imagename = "japan_hokkaido"
-        } else if tag == 1 {
-            imagename = "japan_tohoku"
-        } else if tag == 2 {
-            imagename = "japan_kanto"
-        } else if tag == 3 {
-            imagename = "japan_tyubu"
-        } else if tag == 4 {
-            imagename = "japan_kansai"
-        } else if tag == 5 {
-            imagename = "japan_tyugoku"
-        } else if tag == 6 {
-            imagename = "japan_sikoku"
-        } else if tag == 7 {
             imagename = "japan_kyusyu"
+        } else if tag == 1 {
+            imagename = "japan_sikoku"
+        } else if tag == 2 {
+            imagename = "japan_tyugoku"
+        } else if tag == 3 {
+            imagename = "japan_kansai"
+        } else if tag == 4 {
+            imagename = "japan_tyubu"
+        } else if tag == 5 {
+            imagename = "japan_kanto"
+        } else if tag == 6 {
+            imagename = "japan_tohoku"
+        } else if tag == 7 {
+            imagename = "japan_hokkaido"
         }
     }
 }

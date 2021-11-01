@@ -27,10 +27,10 @@ class TimeTableViewModel: ObservableObject {
                          timePeriod: String) {
         guard let user = AuthViewModel.shared.currentUser else { return }
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
-        let docfef = COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document()
+        let docfef = COLLECTION_TIMETABLE.document(user.university!).collection("2021AS").document()
         let docID = docfef.documentID
-        let docRef = COLLECTION_USERS.document(user.id!).collection("2021LH").document(docID)
-        let DogRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021LH").document(docID).collection("registeredUser").document(uid)
+        let docRef = COLLECTION_USERS.document(user.id!).collection("2021AS").document(docID)
+        let DogRef = COLLECTION_TIMETABLE.document(user.university!).collection("2021AS").document(docID).collection("registeredUser").document(uid)
         let datas: [String: Any] = ["university": user.university as Any,
                                    "courseName": courseName,
                                    "roomLocation": roomLocation,

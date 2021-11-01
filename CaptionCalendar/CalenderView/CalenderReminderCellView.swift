@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalenderReminderCellView: View {
     let selectedData: String
-    @ObservedObject var viewModel = CalenderContentViewModel()
+    @StateObject var viewModel = CalenderContentViewModel()
     var body: some View {
         ForEach(viewModel.reminder, id: \.self) { reminder in
             if reminder.TimestampCalendarString == selectedData {

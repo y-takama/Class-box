@@ -6,97 +6,101 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ReminderMainView: View {
     @State private var categoryName = ""
     @State private var showMakeCategoryView = false
     @State private var showMakeCategoryButton = false
+    @State private var showInitialReminderView = true
+    @State var loading = false
     @State private var date = Date()
     @Binding var showReminderSheet: Bool
-    @ObservedObject var viewModel = ReminderMainViewModel()
+    @StateObject var viewModel = ReminderMainViewModel()
     let user: User
     var body: some View {
-        NavigationView {
-            ZStack {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 0) {
-                        ForEach(viewModel.reminder, id: \.self) { reminder in
-                            if reminder.categoryName! == "All" {
-                                ReminderContentView(viewModel: ReminderAllViewModel(remindeInfo: reminder), reminder: reminder, user: user)
-                            } else {
-                                ReminderContentView(viewModel: ReminderAllViewModel(remindeInfo: reminder), reminder: reminder, user: user)
-                            }
-                        }
-                        if viewModel.reminder != [] {
-                            VStack(spacing: 0) {
-                                if showMakeCategoryButton {
-                                    HStack {
-                                        TextField("", text: $categoryName)
-//                                            .padding(2)
-                                            .background(Color("TextColor").opacity(0.1))
-                                            .cornerRadius(5)
+        ZStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
+                    ForEach(viewModel.reminder, id: \.self) { reminder in
+                        ReminderContentView(viewModel: ReminderAllViewModel(remindeInfo: reminder), reminder: reminder, user: user)
+                    }
+                    if viewModel.reminder != [] {
+                        VStack(spacing: 0) {
+                            if showMakeCategoryButton {
+                                HStack {
+                                    
+                                    TextField("", text: $categoryName)
+                                        .background(Color("TextColor").opacity(0.1))
+                                        .cornerRadius(5)
+                                        .font(.system(size: 14))
+                                        .padding(.leading, 10)
+                                    
+                                    Button(action: {
+                                        if categoryName.count != 0 {
+                                            makeCategory()
+                                            showMakeCategoryButton = false
+                                        }
+                                    }, label: {
+                                        Image(systemName: "plus")
                                             .font(.system(size: 14))
-                                            .padding(.leading, 10)
-                                        Button(action: {
-                                            if categoryName.count != 0 {
-                                                makeCategory()
-                                                showMakeCategoryButton = false
-                                            }
-                                        }, label: {
-                                            Image(systemName: "plus")
-                                                .font(.system(size: 14))
-                                                .foregroundColor(categoryName.count != 0 ? Color("TextColor") : Color.gray)
-                                        })
-                                    }
-                                    .frame(width: getScreenBounds().width*3/5 - 40,
-                                           height: 35)
-                                } else {
-                                    HStack {
-                                        Button(action: {
-                                            showMakeCategoryButton = true
-                                        }, label: {
-                                            Image(systemName: "plus")
-                                                .font(.system(size: 14))
-                                                .padding(.leading)
-                                        })
-                                        Spacer()
-                                    }
-                                    .foregroundColor(Color.gray)
-                                    .frame(width: getScreenBounds().width*3/5 - 40,
-                                           height: 35)
+                                            .foregroundColor(categoryName.count != 0 ? Color("TextColor") : Color.gray)
+                                    })
+                                    
                                 }
-                                Spacer()
+                                .frame(width: getScreenBounds().width*3/5 - 40,
+                                       height: 35)
+                            } else {
+                                HStack {
+                                    Button(action: {
+                                        showMakeCategoryButton = true
+                                    }, label: {
+                                        Image(systemName: "plus")
+                                            .font(.system(size: 14))
+                                            .padding(.leading)
+                                    })
+                                    Spacer()
+                                }
+                                .foregroundColor(Color.gray)
+                                .frame(width: getScreenBounds().width*3/5 - 40,
+                                       height: 35)
                             }
+                            Spacer()
                         }
-                        Spacer()
                     }
-                }
-                if viewModel.reminder == [] {
-                    Button(action: {
-                        makeAll()
-                    }, label: {
-                        Text("はじめる")
-                    })
-                }
-                if viewModel.loading {
-                    ZStack {
-                        Color("TintColor").ignoresSafeArea(.all)
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: Color("CaptionColor")))
-                            .scaleEffect(1)
-                    }
+                    Spacer()
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Reminder").navigationBarItems(trailing: HStack(spacing: 15) {
-                CalendarSettingButton
-                menuButton
-            })
-            
+            if viewModel.reminder == [] && showInitialReminderView {
+                InitialReminderView(loading: $loading,
+                                    showInitialReminderView: $showInitialReminderView)
+                    .onDisappear() {
+                        viewModel.fetchReminder()
+                    }
+            }
+            if viewModel.loading {
+                ZStack {
+                    Color("TintColor").ignoresSafeArea(.all)
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color("CaptionColor")))
+                        .scaleEffect(1)
+                }
+            }
+            if loading {
+                ZStack {
+//                    Color.red.ignoresSafeArea(.all)
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color("CaptionColor")))
+                        .scaleEffect(1)
+                }
+            }
         }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
         }
+//        .onAppear(perform: {
+//            viewModel.fetchReminder()
+//        })
     }
     var CalendarSettingButton: some View {
         Menu {
@@ -120,9 +124,10 @@ struct ReminderMainView: View {
     }
     func makeCategory() {
         guard let user = AuthViewModel.shared.currentUser else { return }
-        let docRef = COLLECTION_USERS.document(user.id!).collection("reminderCategory").document()
+        let docRef = COLLECTION_USERS.document(user.id!).collection("reminder_category").document()
         let docID = docRef.documentID
         let data = ["categoryName": categoryName,
+                    "timestamp": Timestamp(date: Date()),
                     "reminderID": docID] as [String: Any]
         docRef.setData(data) { _ in
             self.categoryName = ""
@@ -132,10 +137,11 @@ struct ReminderMainView: View {
     }
     func makeAll() {
         guard let user = AuthViewModel.shared.currentUser else { return }
-        let docRef = COLLECTION_USERS.document(user.id!).collection("reminderCategory").document()
+        let docRef = COLLECTION_USERS.document(user.id!).collection("reminder_category").document()
         let docID = docRef.documentID
         let data = ["categoryName": "All",
                     "timestamp": date,
+                    "timestamp": Timestamp(date: Date()),
                     "reminderID": docID] as [String: Any]
         docRef.setData(data) { _ in
             viewModel.fetchReminder()

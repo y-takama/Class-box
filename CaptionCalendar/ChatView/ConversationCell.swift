@@ -14,7 +14,7 @@ struct ConversationCell: View {
     let user: User
     
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 0) {
             if message.user.profileImageUrl == "" {
                 let username = message.user.fullname!
                 let start = String(username.prefix(2))
@@ -41,38 +41,36 @@ struct ConversationCell: View {
                     )
             }
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 6) {
                 HStack {
-                    
                     Text(message.user.fullname!)
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(Color("TextColor"))
-                    
-                    Spacer()
-                    
-                    Text("\(message.timestampString) ago")
+                        .frame(width: getScreenBounds().width - 190, alignment: .leading)
+//                    Spacer()
+                    Text("\(message.timestampString)前")
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
-                        .padding(.trailing, -20)
+                        .frame(width: 70, alignment: .trailing)
+                        .padding(.leading, 10)
                 }
-                HStack {
+                HStack(spacing: 10) {
                     if user.uid == message.fromId {
                         Text("あなた")
                             .font(.system(size: 10))
                             .foregroundColor(.gray)
-                        
+                            .frame(width: 40, alignment: .leading)
                     }
                     Text(message.text)
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
                         .lineLimit(2)
+                    Spacer()
                 }
-            }
-            .padding(.trailing,8)
-            Spacer()
+            }.padding(.leading, 10)
         }
-        .padding(7)
-        .padding(.horizontal, 7)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 7)
         .background(user.uid != message.fromId && message.read! ? Color.green.opacity(0.05) : Color.clear)
         .alert(isPresented: $alertDeleteMesage) {
             Alert(title: Text("メッセージの消去"),

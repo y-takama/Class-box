@@ -12,7 +12,6 @@ struct CreateReminderView: View {
     @State private var datePicker = false
     @State private var datePickerDate = false
     @State private var datePickerDateDetail = false
-    @State private var timetablePicker = false
     @State private var colorPicker = false
     @State private var title = ""
     @State var timetable = ""
@@ -21,7 +20,7 @@ struct CreateReminderView: View {
     @State var coloropacity: Double = 1
 //    @State var timetables: [String] = []
     @State private var note = ""
-    @State private var date = Date()
+    @State var date = Date()
     @State private var remindertime = Date()
 //    @State private var selection = 0
     let categoryName: String
@@ -74,8 +73,9 @@ struct CreateReminderView: View {
                     
                     if user.userStats == "student" {
                         HStack(spacing: 0) {
-                            Button(action: {
-                                timetablePicker.toggle()
+                            NavigationLink(destination: {
+                                ReminderTimetablePickerView(timetable: $timetable,
+                                                            classId: $classId)
                             }, label: {
                                 HStack(spacing: 9) {
                                     HStack {
@@ -94,6 +94,7 @@ struct CreateReminderView: View {
                                     Spacer()
                                 }
                             })
+                            
                             if timetable != "" {
                                 Button(action: {
                                     self.timetable = ""
@@ -108,7 +109,9 @@ struct CreateReminderView: View {
                     
                     HStack(spacing: 0) {
                         Button(action: {
-                            colorPicker.toggle()
+                            withAnimation() {
+                                colorPicker.toggle()
+                            }
                         }, label: {
                             HStack(spacing: 9) {
                                 HStack {
@@ -132,7 +135,9 @@ struct CreateReminderView: View {
                         if color != "BackgroundColor" {
                             Button(action: {
                                 color = "BackgroundColor"
-                                colorPicker = false
+                                withAnimation() {
+                                    colorPicker = false
+                                }
                                 coloropacity = 1
                             }, label: {
                                 Image(systemName: "multiply.circle")
@@ -156,7 +161,7 @@ struct CreateReminderView: View {
         
         .foregroundColor(Color("TextColor"))
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading: backButton, trailing: saveButton)
+        .navigationBarItems(trailing: saveButton)
 //        .alert(isPresented: $bacButtonAlert) {
 //            Alert(title: Text(""),
 //                  message: Text("保存されていません。戻ってもよろしいてしょうか？"),
@@ -172,11 +177,6 @@ struct CreateReminderView: View {
                                    datePickerDateDetail: $datePickerDateDetail,
                                    date: $date)
         }
-        .fullScreenCover(isPresented: $timetablePicker){
-            ReminderTimetablePickerView(timetable: $timetable,
-                                        classId: $classId,
-                                        timetablePicker: $timetablePicker)
-        }
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
         }
@@ -186,17 +186,17 @@ struct CreateReminderView: View {
 //                                        timetablePicker: $timetablePicker)
 //        }, label: {})
     }
-    var backButton: some View {
-        Button(action: {
-            mode.wrappedValue.dismiss()
-//            bacButtonAlert.toggle()
-        }, label: {
-            Image(systemName: "chevron.backward")
-                .font(.system(size: 16))
-                .font(.title3)
-                .foregroundColor(Color("TextColor"))
-        })
-    }
+//    var backButton: some View {
+//        Button(action: {
+//            mode.wrappedValue.dismiss()
+////            bacButtonAlert.toggle()
+//        }, label: {
+//            Image(systemName: "chevron.backward")
+//                .font(.system(size: 16))
+//                .font(.title3)
+//                .foregroundColor(Color("TextColor"))
+//        })
+//    }
     var saveButton: some View {
         Button(action: {
             if title.count != 0 {
@@ -210,11 +210,11 @@ struct CreateReminderView: View {
         })
     }
     func saveReminder() {
-        if datePickerDate {
-        } else {
-            date = Date().advanced(by: TimeInterval.reminder)
-        }
-        
+//        let limit = CreateReminderView.longDateFormatter.string(from: date)
+//        if datePickerDate {
+//        } else {
+//            date = Date().advanced(by: TimeInterval.reminder)
+//        }
         guard let user = AuthViewModel.shared.currentUser else { return }
         let docRef = COLLECTION_USERS.document(user.id!).collection("reminder").document()
         let docID = docRef.documentID

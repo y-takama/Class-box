@@ -14,7 +14,7 @@ struct UserCell: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(spacing: 8) {
+            HStack(spacing: 10) {
                 if user.profileImageUrl == "" {
                     let username = user.fullname!
                     let start = String(username.prefix(2))
@@ -46,9 +46,8 @@ struct UserCell: View {
                     Text(user.username!)
                         .font(.system(size: 11))
                         .foregroundColor(.primary)
-                }
-                .padding(.trailing,8)
-                Spacer()
+                }.frame(width: getScreenBounds().width - 200)
+                UserActionButton(viewModel: UserListViewModel(user: user))
             }.foregroundColor(Color("TextColor"))
         }
     }

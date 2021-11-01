@@ -74,7 +74,7 @@ struct SelectedScreenView: View {
                         StudentFirstRegistrationView().navigationBarHidden(true),
                     label: {
                         VStack {
-                            Text("Student Here!")
+                            Text("学生の方はこちら")
                                 .font(.system(size: 14, weight: .semibold))
                                 .foregroundColor(.black)
                                 .frame(width: 300, height: 50)
@@ -101,7 +101,7 @@ struct SelectedScreenView: View {
                         RegistrationView().navigationBarHidden(true),
                     label: {
                         VStack {
-                            Text("Standard")
+                            Text("一般の方はこちら")
                                 .font(.system(size: 14, weight: .semibold))
                                 .foregroundColor(.black)
                                 .frame(width: 300, height: 50)

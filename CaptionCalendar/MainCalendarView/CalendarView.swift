@@ -261,7 +261,8 @@ struct CalendarView: View {
             }.padding(.top)
             .frame(height: 160)
 
-        }.navigationTitle("\(self.month)月 \(String(self.year))")
+        }
+//        .navigationTitle("\(self.month)月 \(String(self.year))")
     }
     private static var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

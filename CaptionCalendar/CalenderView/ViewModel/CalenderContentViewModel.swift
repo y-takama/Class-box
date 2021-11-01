@@ -11,7 +11,6 @@ class CalenderContentViewModel: ObservableObject {
     
     @Published var reminder = [Reminder]()
     @Published var calendar = [CCalendar]()
-    @Published var loading = false
     
     init() {
         fetchReminder()
@@ -19,29 +18,20 @@ class CalenderContentViewModel: ObservableObject {
     }
     
     func fetchReminder() {
-        self.loading = true
         guard let user = AuthViewModel.shared.currentUser else { return }
         let docRef = COLLECTION_USERS.document(user.uid!).collection("reminder")
         docRef.getDocuments { snapshot, _ in
             guard let documents = snapshot?.documents else { return }
-            let reminder = documents.map({ Reminder(dictionary: $0.data()) })
-            self.reminder = reminder.sorted(by: { $0.timestamp.dateValue() > $1.timestamp.dateValue() })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                self.loading = false
-            }
+            self.reminder = documents.map({ Reminder(dictionary: $0.data()) })
         }
     }
     func fetchCalendar() {
-        self.loading = true
+        print("rrrrrrrrrrr")
         guard let user = AuthViewModel.shared.currentUser else { return }
         let docRef = COLLECTION_USERS.document(user.uid!).collection("calendar")
         docRef.getDocuments { snapshot, _ in
             guard let documents = snapshot?.documents else { return }
             self.calendar = documents.map({ CCalendar(dictionary: $0.data()) })
-//            self.calendar = calendar.sorted(by: { $0.timestamp.dateValue() > $1.timestamp.dateValue() })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                self.loading = false
-            }
         }
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct TimetablePicker: View {
     @Binding var timetable: String
     @Binding var timetablePicker: Bool
-    @ObservedObject var viewModel = TimeTableClassViewModel()
+    @StateObject var viewModel = TimeTableClassViewModel()
     
     var body: some View {
         VStack(spacing: 0) {

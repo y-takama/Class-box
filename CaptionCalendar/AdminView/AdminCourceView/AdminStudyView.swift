@@ -10,7 +10,7 @@ import SwiftUI
 struct AdminStudyView: View {
     @ObservedObject var viewModel: StudyContentViewModel
     @State private var addCource = false
-    let cource: Study
+    let cource: Textbook
     let user: User
     var body: some View {
         RefreshableScrollView(content: {
@@ -18,7 +18,7 @@ struct AdminStudyView: View {
                 ForEach(viewModel.contentName, id: \.self) { cources in
                     NavigationLink(destination: AdminQuestionView(viewModel: StudyContentDetailViewModel(detail: cources), cource: cources, user: user).navigationBarTitleDisplayMode(.inline), label: {
                         HStack {
-                            Text(cources.header!)
+                            Text(cources.tab!)
                                 .font(.system(size: 15, weight: .semibold))
                                 .frame(width: 36, height: 36)
                                 .padding(5)

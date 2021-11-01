@@ -19,8 +19,11 @@ struct ProfileEditView: View {
     @State var backgroundImage: Image?
     @State private var fullnameText: String = ""
     @State private var usernameText: String = ""
+    @State private var instagramText: String = ""
+    @State private var instagramCommentary = false
+    @State private var twitterText: String = ""
+    @State private var twitterCommentar = false
     @Binding var user: User
-//    @ObservedObject var viewModel: ProfileViewModel
     @ObservedObject var viewModel: EditProfileViewModel
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
@@ -29,8 +32,8 @@ struct ProfileEditView: View {
         self.viewModel = EditProfileViewModel(user: self._user.wrappedValue)
         self._fullnameText = State(initialValue: _user.wrappedValue.fullname ?? "")
         self._usernameText = State(initialValue: _user.wrappedValue.username ?? "")
-//        self._usernameText = State(initialValue: _user.wrappedValue.username ?? "")
-        
+        self._instagramText = State(initialValue: _user.wrappedValue.instagramText ?? "")
+        self._twitterText = State(initialValue: _user.wrappedValue.twitterText ?? "")
     }
     
     var body: some View {
@@ -63,20 +66,11 @@ struct ProfileEditView: View {
                                     .clipped()
                             }
                         }
-
-//                        if #available(iOS 15.0, *) {
-//                                LinearGradient(colors: [
-//                                    .clear,
-//                                    .white.opacity(0.1),
-//                                    .white.opacity(0.2)
-//                                ], startPoint: .top, endPoint: .bottom)
-//                        }
-                        
-                        
-                            
                         HStack(spacing: 20) {
                             
-                            Button(action: { showImagePicker.toggle() }, label: {
+                            Button(action: {
+                                showImagePicker.toggle()
+                            }, label: {
                                 ZStack(alignment: .bottomTrailing) {
                                     if let image = image {
                                         image
@@ -116,8 +110,6 @@ struct ProfileEditView: View {
                                         }
                                     }
                                 }
-                            }).sheet(isPresented: $showImagePicker, onDismiss: loadImage, content: {
-                                ImagePicker(image: $selectedUIImage)
                             })
                             
                             .padding(.leading, 20)
@@ -156,22 +148,17 @@ struct ProfileEditView: View {
                         .frame(width: getScreenBounds().width,
                                 height: 55)
                         .padding(.bottom)
-                        
-                        
                     }
                     
                     VStack(alignment: .leading, spacing: 18) {
-                        
                         HStack(spacing: 9) {
                             HStack {
                                 Image(systemName: "person")
                                     .font(.system(size: 16))
                                     .frame(width: 20)
-                                
                                 Text("Name")
                                     .bold()
                                     .font(.system(size: 14))
-    //
                                 Spacer()
                             }.frame(width: getScreenBounds().width*2/5)
                             TextField("name", text: $fullnameText)
@@ -211,8 +198,7 @@ struct ProfileEditView: View {
                                 .font(.system(size: 12))
                                 .foregroundColor(Color.gray)
                             Spacer()
-                            Image(systemName: "exclamationmark.circle")
-                                .font(.system(size: 12))
+                            
                         }
                         
                         if user.userStats == "student" {
@@ -265,6 +251,105 @@ struct ProfileEditView: View {
                             }
                         }
                     }.padding(20)
+                    
+                    VStack(alignment: .leading, spacing: 18) {
+                        HStack(spacing: 9) {
+                            HStack {
+                                Image("instagram_icon")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 25, height: 25)
+                                    .clipped()
+                                
+                                Text("Instagram")
+                                    .bold()
+                                    .font(.system(size: 14))
+    //
+                                Spacer()
+                            }.frame(width: getScreenBounds().width*2/5)
+                            TextField("ユーザーネーム", text: $instagramText)
+                                .foregroundColor(Color.blue)
+                                .font(.system(size: 14))
+    //                            .bold()
+                            Spacer()
+                            Button(action: {
+                                instagramCommentary.toggle()
+                            }, label: {
+                                Image(systemName: "exclamationmark.circle")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(Color("TextColor"))
+                            })
+                        }
+                        
+                        if instagramCommentary {
+                            VStack(alignment: .leading) {
+                                Text("Instagramのユーザーネームを入力してください。")
+                                    .font(.system(size: 11))
+                                    .foregroundColor(.primary)
+                                Text("ユーザーネームはInstagramアプリのプロフィール画面上部に表示されます。")
+                                    .font(.system(size: 11))
+                                    .foregroundColor(.primary)
+                                Text("プロフィール画面 > プロフィールを編集 > ユーザーネーム からコピーすることができます。")
+                                    .font(.system(size: 11))
+                                    .foregroundColor(.primary)
+                            }
+                            .padding(20)
+                            .background(Color("TextColor").opacity(0.1))
+                            .cornerRadius(10)
+                            .onTapGesture(perform: {
+                                instagramCommentary.toggle()
+                            })
+                        }
+                        
+                        HStack(spacing: 9) {
+                            HStack {
+                                Image("twitter_icon")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 25, height: 25)
+                                    .clipped()
+                                Text("Twitter")
+                                    .font(.system(size: 14))
+                                    .bold()
+                                Spacer()
+                            }.frame(width: getScreenBounds().width*2/5)
+                            TextField("ユーザー名 / @...", text: $twitterText)
+                                .foregroundColor(Color.blue)
+                                .font(.system(size: 14))
+                            Spacer()
+                            Button(action: {
+                                twitterCommentar.toggle()
+                            }, label: {
+                                Image(systemName: "exclamationmark.circle")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(Color("TextColor"))
+                            })
+                        }
+                        if twitterCommentar {
+                            VStack(alignment: .leading) {
+                                Text("Twitterのユーザー名を入力してください。")
+                                    .font(.system(size: 11))
+                                    .foregroundColor(.primary)
+                                Text("ユーザー名は＠から始まる英数字または_で構成される名前です。")
+                                    .font(.system(size: 11))
+                                    .foregroundColor(.primary)
+                                Text("Twitterアプリのプロフィール画面から確認することができます。")
+                                    .font(.system(size: 11))
+                                    .foregroundColor(.primary)
+                                Text("＠以降の英数字または_で構成される名前を入力してください")
+                                    .bold()
+                                    .font(.system(size: 11))
+                                    .foregroundColor(.primary)
+                                    .padding(.top, 5)
+                            }
+                            .padding(20)
+                            .background(Color("TextColor").opacity(0.1))
+                            .cornerRadius(10)
+                            .onTapGesture(perform: {
+                                twitterCommentar.toggle()
+                            })
+                        }
+                    }.padding(20)
                 }
                 .onTapGesture {
                     UIApplication.shared.closeKeyboard()
@@ -275,7 +360,7 @@ struct ProfileEditView: View {
                           primaryButton: .cancel(Text("Calcel")),
                           secondaryButton: .default(Text("OK"),
                                                     action: {
-                        viewModel.saveUserInfo(fullname: fullnameText, username: usernameText)
+                        viewModel.saveUserInfo(fullname: fullnameText, username: usernameText, instagramText: instagramText, twitterText: twitterText)
                         if let image = selectedUIImage {
                             viewModel.saveUserImage(profileImage: image)
                         }
@@ -298,10 +383,9 @@ struct ProfileEditView: View {
                     }
                 }
             }
-//            .onAppear(perform: {
-//                viewModel.fetchUser()
-//            })
-            
+            .sheet(isPresented: $showImagePicker, onDismiss: loadImage, content: {
+                ImagePicker(image: $selectedUIImage)
+            })
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("編集")
