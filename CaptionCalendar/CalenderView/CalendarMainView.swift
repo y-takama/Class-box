@@ -8,14 +8,13 @@
 import SwiftUI
 import Kingfisher
 
-struct NewCalendarMainView: View {
-    
+struct CalendarMainView: View {
     @State var data : Int = AppDelegate().data
     @State private var showingMenu: Bool = false
     @Binding var year : Int
     @Binding var month : Int
     @Binding var selection: Int
-    
+    @ObservedObject var usersetting = SettingModel(setting: Setting(dictionary: [:]))
     let user: User
     let dayofweek = ["日","月","火","水","木","金","土"]
     var body: some View {
@@ -24,6 +23,9 @@ struct NewCalendarMainView: View {
         ZStack(alignment: .bottomTrailing) {
             ScrollView {
                 VStack {
+                    if usersetting.ctsetting.calendar_timetables {
+                        Text("Hello")
+                    }
                     TabView(selection: $selection) {
                         ForEach(0..<12) { num in
                             VStack(spacing: 0) {
@@ -49,8 +51,6 @@ struct NewCalendarMainView: View {
                     }
                     .frame(height: 515)
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                    
-                    
                     
                     HStack {
                         Text("\(selectedmonth)月\(data)日")
