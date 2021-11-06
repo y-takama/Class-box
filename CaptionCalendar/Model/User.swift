@@ -12,20 +12,15 @@ struct User: Identifiable, Decodable, Hashable {
     @DocumentID var id: String?
     var docId: String?
     var username: String?
+    var fullname: String?
     var profileImageUrl: String?
     var backImageUrl: String?
-    var fullname: String?
     let email: String
-//    var stats: UserStats?
     var userStats: String?
     var bio: String?
     var job: String?
     var university: String?
     var campus: String?
-    var highschool: String?
-    var status: String?
-    var birthplace: String?
-    var resident: String?
     var uid: String?
     var admin: String?
     var fromId: String?
@@ -53,20 +48,16 @@ struct User: Identifiable, Decodable, Hashable {
         self.id = dictionary["uid"] as? String ?? ""
         self.docId = dictionary["docId"] as? String ?? ""
         self.username = dictionary["username"] as? String ?? ""
+        self.fullname = dictionary["fullname"] as? String ?? ""
         self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
         self.backImageUrl = dictionary["backImageUrl"] as? String ?? ""
         self.email = dictionary["email"] as? String ?? ""
-        self.fullname = dictionary["fullname"] as? String ?? "not set"
-//        self.stats = UserStats(followers: 0, following: 0)
+        
         self.userStats = dictionary["userStats"] as? String ?? ""
         self.bio = dictionary["bio"] as? String ?? ""
         self.job = dictionary["job"] as? String ?? ""
         self.university = dictionary["university"] as? String ?? ""
         self.campus = dictionary["campus"] as? String ?? ""
-        self.highschool = dictionary["highschool"] as? String ?? ""
-        self.status = dictionary["status"] as? String ?? ""
-        self.birthplace = dictionary["birthplace"] as? String ?? ""
-        self.resident = dictionary["resident"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
         self.admin = dictionary["admin"] as? String ?? ""
         self.fromId = dictionary["fromId"] as? String ?? ""

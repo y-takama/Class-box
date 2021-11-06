@@ -10,15 +10,16 @@ import SwiftUI
 struct TimeTableView: View {
     @State var isCreatingNewTimeTable = false
     @State var isShowingClass = false
-//    @State var timetable = TimeTable(dictionary: [:])
     @State var dayOfWeek = "月"
     @State var timePeriod = "1"
     @StateObject private var viewModel = TimeTableClassViewModel()
+    let ts6setting: Setting
     let user: User
     let dayofweek = ["月","火","水","木","金"]
     let width = UIScreen.main.bounds.width
     
     var body: some View {
+        let period: Int = ts6setting.timatable_show_6thperiod ? 5 : 6
         ZStack {
             VStack(spacing: 6) {
                 HStack(spacing: 6) {
@@ -35,7 +36,9 @@ struct TimeTableView: View {
                 }
                 .padding(.leading, 32)
                 
-                ForEach(0..<6) { num in
+                Text("\(period)")
+                
+                ForEach(0..<period) { num in
                     HStack(spacing: 6) {
 //                        let j = 0
                         Text("\(num+1)")
@@ -108,11 +111,6 @@ struct TimeTableView: View {
                 ZStack {
                     Rectangle()
                         .foregroundColor(Color("TintColor").opacity(0.01))
-//                    if viewModel.showloading {
-//                        ProgressView()
-//                            .progressViewStyle(CircularProgressViewStyle(tint: Color("TextColor")))
-//                            .scaleEffect(1)
-//                    }
                 }
             }
         }

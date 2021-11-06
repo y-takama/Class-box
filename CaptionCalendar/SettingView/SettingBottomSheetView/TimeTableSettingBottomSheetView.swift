@@ -10,6 +10,7 @@ import SwiftUI
 struct TimeTableSettingBottomSheetView: View {
     @State private var isShowAlert = false
     @State private var showSettingView = false
+    @Binding var showTimetableSetting: Bool
     @Binding var showTimeTableSheet: Bool
     let user: User
     var body: some View {
@@ -20,7 +21,12 @@ struct TimeTableSettingBottomSheetView: View {
                         SideMenuOptionHeaderCell(option: option)
                     }
                 } else if option == .timetableSetting {
-                    Button(action: { isShowAlert.toggle() }) {
+                    Button(action: {
+                        withAnimation() {
+                            self.showTimeTableSheet = false
+                            self.showTimetableSetting = true
+                        }
+                    }) {
                         SettingSheetCell(option: option)
                     }
                 } else if option == .isShowTextbook && user.isShowTextbook! == false {

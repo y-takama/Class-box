@@ -15,17 +15,20 @@ struct MainContentView: View {
     @State var showChatSheet = false
     @State var showReminderSheet = false
     @State var notificationButton = false
+    @State var showCalendarSetting = false
+    @State var showTimetableSetting = false
     @State var year : Int = AppDelegate().year
     @State var month : Int = AppDelegate().month
     @State var calendarselection = 0
     @Binding var selection: Int
     @Binding var showMenu: Bool
+    @StateObject var usersetting = SettingModel(setting: Setting(dictionary: [:]))
     let user: User
     var body: some View {
         ZStack {
             NavigationView {
                 TabView(selection: $selection) {
-                    NewCalendarMainView(year: $year, month: $month, selection: $calendarselection, user: user)
+                    CalendarMainView(year: $year, month: $month, selection: $calendarselection, ctsetting: usersetting.ctsetting, user: user)
                         .onTapGesture {
                             selection = 0
                         }
@@ -55,7 +58,7 @@ struct MainContentView: View {
 //                        }.tag(1)
                     
                     if user.userStats == "student" {
-                        MainTableView(showTimeTableSheet: $showTimeTableSheet, user: user)
+                        MainTableView(showTimeTableSheet: $showTimeTableSheet, ts6setting: usersetting.ts6setting, user: user)
                             .onTapGesture {
                                 selection = 2
                             }
@@ -91,8 +94,8 @@ struct MainContentView: View {
                                 }
                             }
                         }.tag(3)
-                    ReminderMainView(showReminderSheet: $showReminderSheet, user: user)
-//                    RegistrationTimetableView()
+//                    ReminderMainView(showReminderSheet: $showReminderSheet, user: user)
+                    RegistrationTimetableView()
                         .onTapGesture {
                             selection = 4
                         }
@@ -124,16 +127,19 @@ struct MainContentView: View {
             VStack {
                 Spacer()
                 ZStack(alignment: .bottom) {
-                    TimeTableSettingBottomSheetView(showTimeTableSheet: $showTimeTableSheet,
-                                         user: user)
+                    TimeTableSettingBottomSheetView(showTimetableSetting: $showTimetableSetting, showTimeTableSheet: $showTimeTableSheet, user: user)
                         .offset(y: self.showTimeTableSheet ? 0 : UIScreen.main.bounds.height)
+                    TimetableSetingView(showTimetableSetting: $showTimetableSetting, user: user)
+                        .offset(y: self.showTimetableSetting ? 0 : UIScreen.main.bounds.height)
                 }
             }
-            .background((self.showTimeTableSheet ? Color("TextColor").opacity(0.2) : Color.clear)
+            .background((self.showTimeTableSheet || self.showTimetableSetting ? Color("TextColor").opacity(0.2) : Color.clear)
                             .edgesIgnoringSafeArea(.all)
                             .onTapGesture {
                 withAnimation() {
+                    self.usersetting.fetchTimetableShow6thPeriodSetting()
                     self.showTimeTableSheet = false
+                    self.showTimetableSetting = false
                 }
                                 
             }).ignoresSafeArea(edges: .bottom)
@@ -142,15 +148,20 @@ struct MainContentView: View {
             VStack {
                 Spacer()
                 ZStack(alignment: .bottom) {
-                    CalendarSettingBottomSheetView(user: user)
+                    CalendarSettingBottomSheetView(showCalendarSetting: $showCalendarSetting, showCalendarSheet: $showCalendarSheet, user: user)
                         .offset(y: self.showCalendarSheet ? 0 : UIScreen.main.bounds.height)
+                    CalendarSettingView(showCalendarSetting: $showCalendarSetting, user: user)
+                        .offset(y: self.showCalendarSetting ? 0 : UIScreen.main.bounds.height)
                 }
+
             }
-            .background((self.showCalendarSheet ? Color("TextColor").opacity(0.2) : Color.clear)
+            .background((self.showCalendarSheet || self.showCalendarSetting ? Color("TextColor").opacity(0.2) : Color.clear)
                             .edgesIgnoringSafeArea(.all)
                             .onTapGesture {
                 withAnimation() {
+                    self.usersetting.fetchCalendarTimetablesSetting()
                     self.showCalendarSheet = false
+                    self.showCalendarSetting = false
                 }
             }).ignoresSafeArea(edges: .bottom)
             
@@ -158,9 +169,9 @@ struct MainContentView: View {
             VStack {
                 Spacer()
                 ZStack(alignment: .bottom) {
-                    ChatSettingBottomSheetView(showChatSheet: $showChatSheet,
-                                    user: user)
+                    ChatSettingBottomSheetView(showChatSheet: $showChatSheet, user: user)
                         .offset(y: self.showChatSheet ? 0 : UIScreen.main.bounds.height)
+                    
                 }
             }
             .background(( self.showChatSheet ? Color("TextColor").opacity(0.2) : Color.clear)
@@ -188,6 +199,11 @@ struct MainContentView: View {
                 }
             })
             .ignoresSafeArea(edges: .bottom)
+            
+            
+//            NavigationLink(destination: CalendarSettingView(),
+//                           isActive: $showCalendarSetting) {
+//            }
         }
         .fullScreenCover(isPresented: $notificationButton) {
             NotificationMainView(notificationButton: $notificationButton, user: user)

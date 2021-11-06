@@ -9,9 +9,6 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct Users: Identifiable, Decodable, Hashable {
-//    static func == (lhs: Users, rhs: Users) -> Bool {
-//        lhs.stats == rhs.stats
-//    }
     
     @DocumentID var id: String?
     var docId: String
@@ -20,9 +17,8 @@ struct Users: Identifiable, Decodable, Hashable {
     var fullname: String?
     var university: String?
     var isFollowed = false
-    var isRead: Bool?
+//    var isRead: Bool?
     var isCurrentUser: Bool { return Auth.auth().currentUser?.uid == id }
-//    var stats: UserStats?
     let timestamp: Timestamp
     
     init(dictionary: [String: Any]) {
@@ -32,8 +28,7 @@ struct Users: Identifiable, Decodable, Hashable {
         self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
         self.fullname = dictionary["fullname"] as? String ?? ""
         self.university = dictionary["university"] as? String ?? ""
-        self.isRead = dictionary["isRead"] as? Bool ?? false
-//        self.stats = UserStats(followers: 0, following: 0)
+//        self.isRead = dictionary["isRead"] as? Bool ?? false
         self.timestamp = dictionary["timestamp"] as? Timestamp ?? Timestamp(date: Date())
     }
     

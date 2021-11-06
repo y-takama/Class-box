@@ -10,6 +10,8 @@ import SwiftUI
 struct CalendarSettingBottomSheetView: View {
     @State private var isShowAlert = false
     @State private var showSettingView = false
+    @Binding var showCalendarSetting: Bool
+    @Binding var showCalendarSheet: Bool
     let user: User
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -19,7 +21,12 @@ struct CalendarSettingBottomSheetView: View {
                         SideMenuOptionHeaderCell(option: option)
                     }
                 } else if option == .calendarSetting {
-                    Button(action: { isShowAlert.toggle() }) {
+                    Button(action: {
+                        withAnimation() {
+                            self.showCalendarSheet = false
+                            self.showCalendarSetting = true
+                        }
+                    }) {
                         SettingSheetCell(option: option)
                     }
                 } else if option == .calendarReminderHidden {
@@ -44,7 +51,5 @@ struct CalendarSettingBottomSheetView: View {
         .alert(isPresented: $isShowAlert) {
             Alert(title: Text(""), message: Text("次回アップデート予定です。アップデートをお待ちください。"), dismissButton: .destructive(Text("OK")))
         }
-
     }
-    
 }

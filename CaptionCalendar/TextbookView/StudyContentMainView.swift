@@ -44,11 +44,6 @@ struct StudyContentMainView: View {
                                     proxytop.scrollTo(currentTab.replacingOccurrences(of: " TAP", with: ""), anchor: .topTrailing)
                                 }
                             }
-//                            Button(action: {
-//
-//                            }, label: {
-//
-//                            })
                         }
                     }.padding(.horizontal, 38)
                         .onChange(of: currentTab) { _ in

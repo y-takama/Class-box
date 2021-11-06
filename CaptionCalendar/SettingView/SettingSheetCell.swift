@@ -20,8 +20,6 @@ struct SettingSheetCell: View {
             Spacer()
         }
         .frame(width: UIScreen.main.bounds.width-50,height: 45)
-        .foregroundColor(Color("TextColor"))
-//        .background(Color.red)
     }
 }
 

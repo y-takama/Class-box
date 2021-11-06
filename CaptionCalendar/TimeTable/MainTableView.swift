@@ -11,6 +11,7 @@ struct MainTableView: View {
     @Binding var showTimeTableSheet: Bool
     @State private var showingNotification = true
     @ObservedObject var viewModel = MainTableViewModel()
+    let ts6setting: Setting
     var user: User
     var body: some View {
         ZStack {
@@ -21,7 +22,7 @@ struct MainTableView: View {
                             .frame(height: (getScreenBounds().width/3)*9/16 + 10,
                                    alignment: .center)
                     }
-                    TimeTableView(user: user)
+                    TimeTableView(ts6setting: ts6setting, user: user)
                 }
             }
             if user.usedTmetable! {

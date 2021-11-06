@@ -21,7 +21,6 @@ class ChatViewModel: ObservableObject {
         guard let uid = AuthViewModel.shared.userSession?.uid else { return }
         COLLECTION_USERS.document(uid).collection("bloakList").getDocuments { snapshot, _ in
             guard let blockUser = snapshot?.documents.map({ $0.documentID }) else { return }
-//            print("DEBUG1  :\(blockUser)")
             if blockUser.isEmpty {
                 let query = COLLECTION_MESSAGES.document(uid).collection(self.user.id!)
                 query.addSnapshotListener { snapshot, error in
@@ -38,9 +37,27 @@ class ChatViewModel: ObservableObject {
                     }
                 }
             } else {
+//                if blockUser.contains(self.user.uid!) {
+//                } else {
+//                    let query = COLLECTION_MESSAGES.document(uid).collection(self.user.id!)
+//                    query.addSnapshotListener { snapshot, error in
+//                        guard let changes = snapshot?.documentChanges.filter({ $0.type == .added }) else { return }
+//                        changes.forEach { change in
+//                            let messageData = change.document.data()
+//                            guard let fromId = messageData["fromId"] as? String else { return }
+//                            COLLECTION_USERS.document(fromId).getDocument { snapshot, _ in
+//                                guard let data = snapshot?.data() else { return }
+//                                let user = User(dictionary: data)
+//                                self.messages.append(Message(user: user, dictionary: messageData))
+//                                self.messages.sort(by: { $0.timestamp.dateValue() > $1.timestamp.dateValue() })
+//                            }
+//                        }
+//                    }
+//                }
                 if blockUser.firstIndex(of: self.user.id!) != nil {
-//                    print("DEBUG2  :true")
                 } else {
+//                    print("www\(blockUser)")
+//                    print("www\(self.user.id!)")
                     let query = COLLECTION_MESSAGES.document(uid).collection(self.user.id!)
                     query.addSnapshotListener { snapshot, error in
                         guard let changes = snapshot?.documentChanges.filter({ $0.type == .added }) else { return }

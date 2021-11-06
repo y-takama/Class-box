@@ -6,90 +6,68 @@
 //
 
 import SwiftUI
+
 struct TimetableSetingView: View {
+    @Binding var showTimetableSetting: Bool
+    @ObservedObject var setting = SettingModel(setting: Setting(dictionary: [:]))
     let user: User
-    @State private var showingAlert = false
-    @State private var isShowAlert = false
-    @State private var isShowChangeUserStatusAlert = false
-    @State private var isShowPrivacyPolicy = false
-    @State private var isShowTermsOfService = false
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 5) {
-                    ForEach(SettingViewModel.allCases, id: \.self) { option in
-                        if option == .profile {
-//                            NavigationLink(
-//                                destination: ProfileView(),
-//                                label: {
-//                                    SettingSheetView(option: option)
-//                                })
-                        } else if option == .tab {
-                            Button(action: { isShowAlert.toggle() }) {
-                                SettingSheetCell(option: option)
-                            }
-                            
-                        } else if option == .announce {
-                            Button(action: { isShowAlert.toggle() }) {
-                                SettingSheetCell(option: option)
-                            }
-                        } else if option == .security {
-                            Button(action: { isShowAlert.toggle() }) {
-                                SettingSheetCell(option: option)
-                            }
-                        } else if option == .privacyPolicy {
-                            Button(action: { isShowPrivacyPolicy.toggle() }) {
-                                SettingSheetCell(option: option)
-                            }
-                            .fullScreenCover(isPresented: $isShowPrivacyPolicy) {
-                                safari(urlString: "https://www.caption-service.com")
-                            }
-                        } else if option == .termsOfService {
-                            Button(action: { isShowTermsOfService.toggle() }) {
-                                SettingSheetCell(option: option)
-                            }
-                            .fullScreenCover(isPresented: $isShowTermsOfService) {
-                                safari(urlString: "https://caption-service.com/terms.html")
-                            }
-                        } else if option == .userstatus {
-                            if user.userStats != "student" {
-                                Button(action: { isShowChangeUserStatusAlert.toggle() }) {
-                                    SettingSheetCell(option: option)
-                                }
-                            }
+        VStack(spacing: 15) {
+            Rectangle()
+                .fill(.gray)
+                .frame(width: 80, height: 6)
+                .cornerRadius(3)
+                .clipped()
+            
+            HStack(spacing: 16) {
+                Image(systemName: "square.grid.3x3.topleft.filled")
+                    .font(.system(size: 18))
+                    .frame(width: 25, alignment: .leading)
+                Text("6限を表示する")
+                    .font(.system(size: 15))
+                    .bold()
+                    .frame(width: getScreenBounds().width - 170, alignment: .leading)
+                Toggle("", isOn: $setting.ctsetting.timatable_show_6thperiod)
+                    .onChange(of: setting.ctsetting.timatable_show_6thperiod) { _ in
+                        if showTimetableSetting {
+                            changetimetable()
                         }
                     }
-                    Divider()
-                }
-                .alert(isPresented: $isShowChangeUserStatusAlert) {
-                    Alert(title: Text("ログアウト"),
-                          message: Text("ログアウトしてもよろしいてすか？"),
-                          primaryButton: .cancel(Text("Calcel")),
-                          secondaryButton: .default(Text("OK"),
-                                                    action: {
-                                                        AuthViewModel.shared.signOut()
-                                                    }))
-                }
-                .frame(width: UIScreen.main.bounds.width-40,
-                       alignment: .top)
-                
+                .frame(alignment: .trailing)
             }
-            .alert(isPresented: $isShowAlert) {
-                Alert(title: Text(""), message: Text("次回アップデート予定です。アップデートをお待ちください。"), dismissButton: .destructive(Text("OK")))
-            }
+            .frame(width: getScreenBounds().width-50)
+            .padding(.top, 20)
             
-            .navigationBarItems(trailing: backButton)
-            .navigationBarTitleDisplayMode(.inline)
+            HStack(spacing: 16) {
+                Image(systemName: "person")
+                    .font(.system(size: 18))
+                    .frame(width: 25)
+                Text("Reminderを表示する")
+                    .font(.system(size: 15))
+                    .bold()
+                    .frame(width: getScreenBounds().width - 170, alignment: .leading)
+                Toggle(isOn: $setting.crsetting.calendar_reminder) {
+                }.frame(alignment: .trailing)
+            }.frame(width: getScreenBounds().width-50)
         }
+        .padding(.bottom,(UIApplication.shared.windows.last?.safeAreaInsets.bottom)! + 10)
+        .padding(.top, 20)
+        .frame(width: UIScreen.main.bounds.width)
+        .background(Color("TintColor"))
+        .cornerRadius(25)
+//        .onAppear() {
+//            setting.fetchCalendarTimetablesSetting()
+//        }
     }
-    var backButton: some View {
-        Button(action: {
-            mode.wrappedValue.dismiss()
-        }, label: {
-            Image(systemName: "multiply.circle.fill")
-                .font(.title3)
-                .foregroundColor(Color("TextColor"))
-        })
+    func changetimetable() {
+        guard let user = AuthViewModel.shared.currentUser else { return }
+        COLLECTION_USERS.document(user.uid!).collection("setting").document("timatable_show_6thperiod").setData(["timatable_show_6thperiod": setting.ctsetting.timatable_show_6thperiod]) { _ in
+//            setting.fetchCalendarTimetablesSetting()
+            print("ggggggggggg")
+        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//            self.showTimeTableSheet = false
+//        }
     }
 }
